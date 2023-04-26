@@ -1,0 +1,9 @@
+<form method="post" action="{% url 'payment' %}">
+    {% csrf_token %}
+    <input type="hidden" name="amount" value="1">
+    <input type="hidden" name="currency" value="978">
+    <input type="hidden" name="clientIpAddr" value="{{ request.META.HTTP_X_FORWARDED_FOR|default:request.META.REMOTE_ADDR }}">
+    <input type="hidden" name="description" value="Payment for test order">
+    <input type="hidden" name="lang" value="en">
+    <input type="submit" value="Pay Now">
+  </form>

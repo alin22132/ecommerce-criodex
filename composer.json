@@ -1,0 +1,5 @@
+{
+    "require": {
+        "maib/maibapi": "3.0"
+    }
+}

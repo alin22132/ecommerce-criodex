@@ -1,0 +1,305 @@
+{% extends 'ecom/homebase.html' %}
+{% load static %}
+{% block content %}
+
+{% if redirect_to %}
+<script>
+  location.replace("{{redirect_to}}")
+</script>
+{% endif %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style media="screen">
+  .button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+
+#navbar {
+  background-color: #1C1C1C;
+  height: 123px;
+}
+
+
+.navbar-input {
+  padding: 11px 5px;
+  border-radius: 2px 0 0 2px;
+  border: 0 none;
+  outline: 0 none;
+  font-size: 15px;
+  color: #1C1C1C;
+  background-color: #F1F1F1
+}
+
+.navbar-button {
+  background-color: #F1F1F1;
+  border: 1px solid #F1F1F1;
+  border-radius: 0 2px 2px 0;
+  color: #ffffff;
+  padding: 10px 0;
+  height: 43px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-button:hover{
+  background-color: #808080;
+  border: 0px solid #808080;
+  color: #fff;
+}
+
+.cart-button {
+  background-color: #82B7DC;
+  border: none;
+  border-radius: 20px;
+  color: #1C1C1C;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  letter-spacing: 0.5px;
+  padding: 0 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cart-button:hover {
+  background-color: #3466AA;
+  text-decoration: none;
+  color: #fff;
+}
+
+.item-number {
+  border-radius: 3px;
+  background-color: #82B7DC;
+  height: 20px;
+  padding: 3px 6px;
+  font-weight: 500;
+  display: inline-block;
+  color: #1C1C1C;
+  line-height: 12px;
+  margin-left: 10px;
+}
+
+.item-number:empty:after {
+  content: "0";
+}
+
+.item-number::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid #82B7DC;
+  position: absolute;
+  margin-left: -6px;
+  margin-top: 4px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button2 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.btn-success {
+  color: #fff;
+  text-decoration: none;
+  padding: 1px;
+  border-radius: 25px;
+  background-color: #60bf6d;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+  outline: none;
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+  color: #fff;
+  background-color: #3b9656;
+}
+
+.btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+  background-image:none;
+}
+
+.btn-success.disabled, .btn-success[disabled], fieldset[disabled] .btn-success, .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .btn-success.disabled.active, .btn-success[disabled].active, fieldset[disabled] .btn-success.active {
+  background-color: #93e0a6;
+}
+
+.btn-danger1 {
+  color: #fff;
+  text-decoration: none;
+  padding: 1px;
+  border-radius: 25px;
+  background-color: #ffa0a0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+  outline: none;
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  box-sizing: border-box  
+}
+
+.btn-danger {
+  color: #fff;
+  text-decoration: none;
+  padding: 1px;
+  border-radius: 25px;
+  background-color: #ffa0a0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+  outline: none;
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  box-sizing: border-box  
+}
+
+
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+  color: #fff;
+  background-color: #e67878;
+}
+
+.btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+  background-image:none;
+}
+
+.btn-danger.disabled, .btn-danger[disabled], fieldset[disabled] .btn-danger, .btn-danger.disabled:hover, .btn-danger[disabled]:hover, fieldset[disabled] .btn-danger:hover, .btn-danger.disabled:focus, .btn-danger[disabled]:focus, fieldset[disabled] .btn-danger:focus, .btn-danger.disabled:active, .btn-danger[disabled]:active, fieldset[disabled] .btn-danger:active, .btn-danger.disabled.active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger.active {
+  background-color: #ffc5c5;
+}
+
+
+
+</style>
+<link rel="icon" type="image/x-icon" href="/static/images/logou.png">
+</head>
+<br><br><br><br>
+
+<div class="container">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h6 style="text-align:center;" class="panel-title">My Cart</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Action</th>
+
+        </tr>
+      </thead>
+      {% for p in products %}
+  {% if p %}
+
+      <tr>
+        <td> {{p.name}}</td>
+        <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="50px" width="50px" /></td>
+        <td>$ {{p.price}}</td>
+        <td>{{p.description}}</td>
+
+        <td><a class="btn btn-danger btn-xs" href="{% url 'remove-from-cart' p.id  %}?next_page={{request.path}}"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+      </tr>
+      {%else%}
+      <br><br><br>
+      <h1>no products</h1>
+      {% endif %}
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<br><br><br>
+<div style="text-align: center;">
+  <button class="btn btn-danger1 btn-lg">Total ${{total}}</button>
+  <a href="/customer-address"><button class="btn btn-success btn-lg" ><span>Purchase </span></button></a>
+</div>
+
+
+<br><br><br><br><br>
+{% endblock content %}
