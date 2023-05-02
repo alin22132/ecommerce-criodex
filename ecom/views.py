@@ -1,19 +1,20 @@
-import sys
-from urllib import request
-
-from django.shortcuts import render, redirect, reverse
+import requests
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import Group
+from django.core.mail import send_mail
+from django.db.models import Sum
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect
 
 from maib_gateway.maib_client import MaibClient
 from . import forms, models
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.mail import send_mail
-from django.contrib.auth.models import Group
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib import messages
-from django.conf import settings
-from django.shortcuts import render
-import requests
-from django.shortcuts import render, redirect
+from .logger import logger
+from .models import Product, OrderItem
+from django.shortcuts import get_object_or_404
+from .models import Product, CartItem
 
 
 def home_view(request):
@@ -239,37 +240,34 @@ def search_view(request):
 
 
 # any one can add product to cart, no need of signin
+
+from django.contrib.auth.models import User
+from .models import Customer
+
+
 def add_to_cart_view(request, pk):
-    products = models.Product.objects.all()
+    product = get_object_or_404(Product, pk=pk)
+    customer = request.user.customer
 
-    # for cart counter, fetching products ids added by customer from cookies
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        counter = product_ids.split('|')
-        product_count_in_cart = len(set(counter))
+    # get all CartItem objects for this customer and product combination
+    cart_items = CartItem.objects.filter(customer=customer, product=product)
+
+    if cart_items.exists():
+        # if there are existing CartItem objects, add up their quantities
+        quantity = cart_items.aggregate(Sum('quantity'))['quantity__sum'] or 0
+        # increase the total quantity by 1
+        quantity += 1
+        # update the quantity of the first CartItem object
+        cart_item = cart_items.first()
+        cart_item.quantity = quantity
+        cart_item.save()
     else:
-        product_count_in_cart = 1
+        # if there are no existing CartItem objects, create a new one
+        CartItem.objects.create(customer=customer, product=product)
 
-    response = render(request, 'ecom\index.html',
-                      {'products': products, 'product_count_in_cart': product_count_in_cart})
-
-    # adding product id to cookies
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        if product_ids == "":
-            product_ids = str(pk)
-        else:
-            product_ids = str(product_ids) + "|" + str(pk)
-        response.set_cookie('product_ids', product_ids)
-
-    else:
-        product_ids = pk
-        response.set_cookie('product_ids', pk)
-
-    product = models.Product.objects.get(id=pk)
     messages.info(request, product.name + ' added to cart successfully!')
 
-    return response
+    return redirect('/#')
 
 
 global total1
@@ -277,67 +275,50 @@ global total1
 
 # for checkout of cart
 def cart_view(request):
-    # for cart counter
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        counter = product_ids.split('|')
-        product_count_in_cart = len(set(counter))
-    else:
-        product_count_in_cart = 0
-
-    # fetching product details from db whose id is present in cookie
-    products = None
+    customer = request.user.customer
+    cart_items = CartItem.objects.filter(customer=customer)
+    products = []
     total = 0
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        if product_ids != "":
-            product_id_in_cart = product_ids.split('|')
-            products = models.Product.objects.all().filter(id__in=product_id_in_cart)
 
-            # for total price shown in cart
-            for p in products:
-                total = total + p.price
-    response = HttpResponse("Cookie")
-    response.set_cookie('cookie_total', total)
-    return render(request, 'ecom/cart.html',
-                  {'products': products, 'total': total, 'product_count_in_cart': product_count_in_cart})
+    for cart_item in cart_items:
+        product = cart_item.product
+        product.quantity = cart_item.quantity
+        product.total = product.price * product.quantity
+        products.append(product)
+        total += product.total
+
+    product_count_in_cart = len(cart_items)
+
+    customer = request.user.customer
+    cart_items = CartItem.objects.filter(customer=customer)
+    product_count_in_cart = sum(cart_item.quantity for cart_item in cart_items)
+
+    return render(request, 'ecom/cart.html', {
+        'products': products,
+        'total': total,
+        'product_count_in_cart': product_count_in_cart,
+    })
 
 
 def remove_from_cart_view(request, pk):
-    # for counter in cart
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        counter = product_ids.split('|')
-        product_count_in_cart = len(set(counter))
-    else:
-        product_count_in_cart = 0
+    product = get_object_or_404(Product, pk=pk)
+    customer = request.user.customer
 
-    # removing product id from cookie
-    total = 0
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        product_id_in_cart = product_ids.split('|')
-        product_id_in_cart = list(set(product_id_in_cart))
-        product_id_in_cart.remove(str(pk))
-        products = models.Product.objects.all().filter(id__in=product_id_in_cart)
-        # for total price shown in cart after removing product
-        for p in products:
-            total = total + p.price
+    # get the CartItem object for this customer and product combination
+    cart_item = CartItem.objects.filter(customer=customer, product=product).first()
 
-        #  for update coookie value after removing product id in cart
-        value = ""
-        for i in range(len(product_id_in_cart)):
-            if i == 0:
-                value = value + product_id_in_cart[0]
-            else:
-                value = value + "|" + product_id_in_cart[i]
-        response = render(request, 'ecom/cart.html',
-                          {'products': products, 'total': total, 'product_count_in_cart': product_count_in_cart,
-                           'redirect_to': request.GET['next_page']})
-        if value == "":
-            response.delete_cookie('product_ids')
-        response.set_cookie('product_ids', value)
-        return response
+    if cart_item:
+        # decrease the quantity of the CartItem by 1
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+            messages.success(request, product.name + ' quantity reduced by 1 in the cart!')
+        else:
+            # if the quantity is 1, remove the entire CartItem object
+            cart_item.delete()
+            messages.success(request, product.name + ' removed from cart successfully!')
+
+    return redirect(request.GET.get('next', 'cart'))
 
 
 def send_feedback_view(request):
@@ -357,12 +338,9 @@ def send_feedback_view(request):
 @user_passes_test(is_customer)
 def customer_home_view(request):
     products = models.Product.objects.all()
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        counter = product_ids.split('|')
-        product_count_in_cart = len(set(counter))
-    else:
-        product_count_in_cart = 0
+    customer = request.user.customer
+    cart_items = CartItem.objects.filter(customer=customer)
+    product_count_in_cart = sum(cart_item.quantity for cart_item in cart_items)
     return render(request, 'ecom/customer_home.html',
                   {'products': products, 'product_count_in_cart': product_count_in_cart})
 
@@ -370,31 +348,42 @@ def customer_home_view(request):
 # shipment address before placing order
 @login_required(login_url='customerlogin')
 def customer_address_view(request):
+    products1 = [item.product for item in CartItem.objects.filter(customer=request.user.customer)]
     product_in_cart = False
+    customer = request.user.customer
+    cart_items = CartItem.objects.filter(customer=customer)
+    products = []
     total = 0
-    if 'product_ids' in request.COOKIES:
-        product_ids = request.COOKIES['product_ids']
-        if product_ids != "":
-            product_in_cart = True
-            product_id_in_cart = product_ids.split('|')
-            products = models.Product.objects.filter(id__in=product_id_in_cart)
-            total = sum([p.price for p in products])
+
+    for cart_item in cart_items:
+        product = cart_item.product
+        product.quantity = cart_item.quantity
+        product.total = product.price * product.quantity
+        products.append(product)
+        total += product.total
+
+    product_count_in_cart = len(cart_items)
+
+    customer = request.user.customer
+    cart_items = CartItem.objects.filter(customer=customer)
+    product_count_in_cart = sum(cart_item.quantity for cart_item in cart_items)
 
     addressForm = forms.AddressForm()
     if request.method == 'POST':
         addressForm = forms.AddressForm(request.POST)
-        if addressForm.is_valid():
-            email = addressForm.cleaned_data['Email']
-            mobile = addressForm.cleaned_data['Mobile']
-            address = addressForm.cleaned_data['Address']
-            response = render(request, 'ecom/payment.html', {'total': total})
-            response.set_cookie('email', email)
-            response.set_cookie('mobile', mobile)
-            response.set_cookie('address', address)
-            return response
+        logger.info('Post received')
+        # if addressForm.is_valid(): # TODO: Fix
+        logger.info('Adress is valid')
+        # email = addressForm.cleaned_data['Email']
+        # mobile = addressForm.cleaned_data['Mobile']
+        # address = addressForm.cleaned_data['Address']
+        # TODO: Redo (nam idee ce sa fac , parca merge asa ca tat ii drept) imi pare ca nu o sa trimita date la admin
+        return handle_view(request)
+        logger.info('Adress is not valid')
 
     return render(request, 'ecom/customer_address.html',
-                  {'addressForm': addressForm, 'total': total, 'product_in_cart': product_in_cart})
+                  {'products1': products1, 'addressForm': addressForm, 'total': total,
+                   'product_in_cart': product_in_cart, 'product_count_in_cart': product_count_in_cart})
 
 
 # here we are just directing to this view...actually we have to check whther `payment` is successful or not
@@ -482,7 +471,6 @@ def my_order_view(request):
 import io
 from xhtml2pdf import pisa
 from django.template.loader import get_template
-from django.template import Context
 from django.http import HttpResponse
 
 
@@ -594,28 +582,42 @@ def redirect_to_website(request):
 
 def handle_view(request):
     if request.method == 'POST':
-        amount = request.POST.get('total')
-        currency = '978'
-        requestip = request.META.get('')
-        if requestip:
-            ip = requestip.split(',')[0]
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        description = 'testing'
-        language='en'
-        MaibClient()
-    return redirect(url)
+        logger.info('hanlde started')
+        # TODO✓: Make this work based on Order ID instead of hardcode amount
+        customer = request.user.customer
+        cart_items = CartItem.objects.filter(customer=customer)
+        products = []
+        total = 0
+        description = 'testing '
+
+        for cart_item in cart_items:
+            product = cart_item.product
+            product.quantity = cart_item.quantity
+            product.total = product.price * product.quantity
+            products.append(product)
+            total += product.total
+            description += f"{product.name}, "  # TODO✓: Maybe description based on order
+
+        amount = total
+        currency = '978'  # EUR PAHODU
+        language = request.COOKIES.get('language',
+                                       'en')  # Default to English if no cookie is set TODO✓: Get from cookies ?
+        logger.info(
+            f"language : {language} | description : {description} | amount : {total} | currency : {currency} |sent|")
+        redirect_url = MaibClient().register_sms_transaction(amount,
+                                                             currency,
+                                                             description,
+                                                             language=language)
+        logger.info(f'redirect to {redirect_url}')
+        return redirect(redirect_url)
+    return redirect('failed')  # HANDLE
 
 
 def payment_callback(request):
-    if request.method == 'POST':
-        # Retrieve the transaction ID and error message from the POST data
-        transaction_id = request.POST.get('TRANSACTION_ID') #bagal in baza de date
-        error_message = request.POST.get('error')
-        # Process the transaction and error message as needed
-        # ...
-        # Return a response to the payment API indicating success or failure
-        if not error_message:
-            return render('ecom/Succesfull.html')
-        else:
-            return render('ecom/failed.html')
+    return render(request, 'ecom/callback.html')
+    # Retrieve the transaction ID and error message from the POST data
+    # transaction_id = request.POST.get('TRANSACTION_ID')  # bagal in baza de date
+    # error_message = request.POST.get('error')
+    # Process the transaction and error message as needed
+    # ...
+    # Return a response to the payment API indicating success or failure

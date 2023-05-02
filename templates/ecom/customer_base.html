@@ -16,39 +16,55 @@ body {
 }
 
 #navbar {
-  background-color: #000000;
-  color: white;
+  background-image: url('static/images/v6.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 123px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .row1 {
     padding-top: 10px;
-    padding-right: 50px
+    padding-right: 5px;
+    padding-left: 26%
 }
 
 .row2 {
-    padding-bottom: 20px
+    padding-bottom: 20px;
+    padding-left: 26%
 }
 
 .navbar-input {
-  padding: 11px 16px;
+  padding: 11px 5px;
   border-radius: 2px 0 0 2px;
   border: 0 none;
   outline: 0 none;
   font-size: 15px;
-  color:#000
+  color: #1C1C1C;
+  background-color: #F1F1F1
 }
 
 .navbar-button {
-  background-color: #0c8fc1;
-  border: 1px solid #0c8fc1;
+  background-color: #F1F1F1;
+  border: 1px solid #F1F1F1;
   border-radius: 0 2px 2px 0;
   color: #ffffff;
   padding: 10px 0;
   height: 43px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
+
+.navbar-button:hover{
+  background-color: #808080;
+  border: 0px solid #808080;
+  color: #fff;
+}
+
 .cart-button {
-  background-color: #82B7DC;
+  background-color: #306844;
   border: none;
   border-radius: 20px;
   color: #1C1C1C;
@@ -68,23 +84,22 @@ body {
 }
 
 .cart-button:hover {
-  background-color: #3466AA;
+  background-color: rgba(48,104,68, 0.8);
   text-decoration: none;
   color: #fff;
 }
 
-
 .cart-svg {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-    margin-right: 8px
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  fill: #fff;
+  color: black
 }
 
 .item-number {
-  border-radius: 3px;
-  background-color: #82B7DC;
+  border-radius: 0px;
+  background-color: #306844;
   height: 20px;
   padding: 3px 6px;
   font-weight: 500;
@@ -105,12 +120,11 @@ body {
   height: 0;
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  border-left: 6px solid #82B7DC;
+  border-left: 6px solid transparent;
   position: absolute;
   margin-left: -6px;
   margin-top: 4px;
 }
-
 
 .upper-links {
     display: inline-block;
@@ -125,43 +139,18 @@ body {
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 0px
-}
-
-.dropdown:hover {
-    background-color: #fff
-}
-
-.dropdown:hover .links {
-    color: #000
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block
-}
-
-.dropdown .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    display: none;
-    background-color: #fff;
-    color: #333;
-    left: 0px;
-    border: 0;
-    border-radius: 0;
-    box-shadow: 0 4px 8px -3px #555454;
-    margin: 0;
-    padding: 0px
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0px;
+  margin-top: 10px;
 }
 
 .links {
   color: #fff;
   text-decoration: none;
-  padding: 10px;
+  padding: 9px;
   border-radius: 25px;
-  background-color: #82B7DC;
+  background-color: transparent;
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
   display: inline-block;
@@ -172,6 +161,8 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border: none;
   outline: none;
+  width: 170px;
+  text-align: center;
 }
 .links1 {
   color: #fff;
@@ -193,7 +184,7 @@ body {
 
 
 .links:hover {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.5);
   color: #3466aa;
 }
 
@@ -203,6 +194,47 @@ body {
   text-decoration: none;
 }
 
+.dropdown:hover .links {
+  color: black;
+  background-color: rgba(48,104,68, 0.8);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  width: 170px;
+  align: center
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  display: none;
+  background-color: #fff;
+  color: #333;
+  left: 0px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  padding: 0px;
+  align: center;
+  width: 570px
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align: center
+}
+
+.dropdown-menu a:hover {
+  background-color: #f2f2f2;
+}
+
+
 .profile-links {
     font-size: 12px;
     font-family: 'Roboto', sans-serif;
@@ -210,7 +242,7 @@ body {
     box-sizing: border-box;
     display: block;
     padding: 0 11px;
-    line-height: 23px
+    line-height: 10px
 }
 
 .profile-li {
@@ -218,7 +250,10 @@ body {
 }
 
 .largenav {
-    display: none
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5px;
 }
 
 .smallnav {
@@ -305,28 +340,65 @@ body {
         margin: 0px
     }
 }
+
+.logou {
+  display: block;
+  max-width: 70%;
+  height: 70%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  padding-top: 10px
+}
+
+.col-sm-3 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 55px
+}
+
+.col-md-12 {
+position: relative;
+min-height: 1px;
+padding-right: 0px;
+padding-left: 0px
+}
+
+
 </style>
+<link rel="icon" type="image/x-icon" href="/static/images/logou.png">
 </head>
 <body>
-<div id="navbar">
+  {%if request.user.is_authenticated%}
+    {% include "ecom/customer_navbar.html" %}
+  {%else%}
+  <div id="navbar">
     <div class="container">
-        <div class="row row1">
-            <ul class="largenav pull-right">
 
-                <li class="upper-links"><a class="links" href="/my-order">Track Orders</a></li>
-                <li class="upper-links"><a class="links" href="/my-profile">Profile</a></li>
-                <li class="upper-links"><a class="links" href="/logout">Logout</a></li>
-                
+            <ul class="largenav pull-right">
+              <li class="upper-links dropdown"><a class="links" href="">Login/Sign Up</a>
+                  <ul class="dropdown-menu">
+                      <li class="profile-li"><a class="profile-links" href="/customerlogin">Login</a></li>
+                      <li class="profile-li"><a class="profile-links" href="/customersignup">Sign Up</a></li>
+                  </ul>
+              </li>
+
+
             </ul>
-        </div>
-        <div class="row row2">
+
+        <div>
             <div class="col-sm-3">
-                <h2 style="margin:0px;"><a style="text-decoration:none; color:white;" href="/"><span class="largenav">C R I O D E X</span></a></h2>
+              <a href="/">
+              <img class="logou" src="static/images/logou.png">
+              </a>
             </div>
+
 
             <div class="navbar-search smallsearch col-sm-7 col-xs-11">
               <form  action="/search" method="get">
-                <div class="row"> <input class="navbar-input col-xs-11" value="{% if search_text %}{{ search_text }}{% endif %}" type="search" placeholder="Search for Products, Brands and more" name="query" id="query">
+                <div class="row"> <input class="navbar-input col-xs-11" type="search" value="{% if search_text %}{{ search_text }}{% endif %}" placeholder="Search for Products, Brands and more" name="query" id="query">
                   <button class="navbar-button col-xs-1" type="submit">
                     <svg width="15px" height="15px">
                             <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
@@ -337,18 +409,22 @@ body {
             </div>
 
 
-
             <div class="cart1 largenav col-sm-2">
               <a class="cart-button" href="/cart">
-                <img src="static/images/cart-icon1.png" width="16" height="16">
+                <img src="{% static 'images/cart-icon1.png' %}" width="18px" height="18px">
                 {% if product_count_in_cart > 0 %}
                   <span class="item-number">{{ product_count_in_cart }}</span>
                 {% endif %}
               </a>
             </div>
+
+
+
         </div>
     </div>
 </div>
+  {%endif%}
+
 <!-- content start-->
 {% block content %}
 

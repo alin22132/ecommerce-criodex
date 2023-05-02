@@ -184,6 +184,59 @@
       cursor: pointer
   }
 
+ .language-select {
+  position: relative;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+}
+
+.language-select select {
+  display: inline-block;
+  padding: 10px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #111;
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: cornflowerblue;
+  background-image: linear-gradient(to bottom, cornflowerblue, deepskyblue);
+  background-repeat: no-repeat;
+  background-position: center right 10px;
+  color: #000;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.language-select select:focus {
+  outline: none;
+  border-color: #06c;
+}
+
+.language-select select::-ms-expand {
+  display: none;
+}
+
+.language-select select option {
+  font-size: 14px;
+}
+
+.language-select::before {
+  content: '\f107';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: #06c;
+  pointer-events: none;
+}
+
+
+
   @media screen and (min-width: 768px) {
       .largenav {
           display: block
@@ -240,6 +293,13 @@
                         <span class="item-number">{{ product_count_in_cart }}</span>
                       {% endif %}
                     </a>
+                              <div class="language-select">
+  <select id="language" name="language">
+    <option value="ro">RO</option>
+    <option value="en">EN</option>
+    <option value="ru">RU</option>
+  </select>
+</div>
             </div>
         </div>
     </div>
@@ -247,6 +307,27 @@
 
 
     <script>
+        function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  // Get the dropdown element
+  var languageSelect = document.getElementById("language");
+
+  // Add an event listener to the dropdown element
+  languageSelect.addEventListener("change", function() {
+    // Get the selected value of the dropdown
+    var selectedValue = this.value;
+
+    // Set the cookie with the selected value
+    setCookie("language", selectedValue, 30);
+  });
     $(document).ready(function(){
 
     function openNav() {
@@ -264,7 +345,6 @@
     });
     </script>
 
-
-
+    </div>
   </body>
 </html>

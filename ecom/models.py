@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profile_pic/CustomerProfilePic/', null=True, blank=True)
@@ -54,3 +53,22 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class OrderItem(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, null=True)
+    quantity = models.PositiveIntegerField(default=1)
+    order = models.ForeignKey('Orders', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name}"
+
+
+class CartItem(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name} - {self.customer.get_name}"
+

@@ -141,3 +141,53 @@ EMAIL_HOST_PASSWORD = 'xyz'  # host email password required
 EMAIL_RECEIVING_USER = ['to@gmail.com']  # email on which you will receive messages sent from website
 
 CERT_DIR = os.path.join(BASE_DIR, 'api', 'cert')
+
+IS_TEST = os.environ.get('TEST_MODE', True)
+
+HOST = os.environ.get('SERVER_HOST', '127.0.0.1')
+
+LOGGER_PATH = os.path.join(BASE_DIR, 'logs')
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "filters": {
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "filters": ["require_debug_true"],
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "file": {
+            "level": "DEBUG",
+            "formatter": "verbose",
+            "class": "logging.FileHandler",
+            "filename": f"{LOGGER_PATH}",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "project": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+        },
+    },
+}

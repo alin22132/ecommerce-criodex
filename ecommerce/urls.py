@@ -50,5 +50,6 @@ urlpatterns = [
     path('redirect/', views.redirect_to_website, name='redirect_to_website'),
     # path('handle/', views.handle_view, name='handle_view')
     path('payment_callback', views.payment_callback, name='payment_callback'),
+    path('callback', views.payment_callback, name='callback'),
 
 ]
