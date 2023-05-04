@@ -2,6 +2,14 @@
 {% load static %}
 {% block content %}
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="../../static/css/style.css">
 
 <link rel="icon" type="image/x-icon" href="/static/images/logou.png">
   <style media="screen">
@@ -337,7 +345,7 @@ body {
 /* Create three equal columns that floats next to each other */
 .column {
   float: left;
-  width: 33.33%;
+  width: 25%;
   padding: 10px;
   height: 300px; /* Should be removed. Only for demonstration */
 }
@@ -372,7 +380,7 @@ img {
   height: 35%;
   width: 100%;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
   text-align: center;
 }
 
@@ -425,29 +433,236 @@ img {
 .slide-3 {
   background-image: url("{% static 'images/banner3.jpg' %}");
 }
+
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+}
+
+.slider-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 100%;
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slider-wrapper img {
+  width: 33.333%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.prev-slide, .next-slide {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.prev-slide:hover, .next-slide:hover {
+  background: #333;
+}
+.imag{
+    width: 3rem;
+    height: 3rem;
+
+
+}
+
+.bt{
+    width: 4.5rem;
+    height: 4.5rem;
+    transition: all .2s linear;
+    background: #f5f5f5;
+    border-radius: 0.5rem;
+    margin-left: 0.3rem;
+
+        cursor: pointer;
+    box-sizing: border-box;
+
+}
+
+.img3{
+    height: 0rem;
+}
+
+.prev-slide, .next-slide {
+  height: 4rem;
+  width: 5.5rem;
+  line-height: 4.5rem;
+  text-align: center;
+  background: #f5f5f5;
+  color: #222;
+  cursor: pointer;
+  font-size: 1.8rem;
+  margin-left: 0.3rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.prev-slide:hover, .next-slide:hover {
+  background-color: #222;
+  color: #f5f5f5;
+}
+
+.prev-slide .fa-arrow-left, .next-slide .fa-arrow-right {
+  color: #222;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.prev-slide:hover .fa-arrow-left, .next-slide:hover .fa-arrow-right {
+  color: #f5f5f5;
+}
+
+.footer{
+
+}
+
+.slider-wrapper img:hover + .slider-controls {
+  visibility: visible;
+}
+
+.slider:hover .slider-controls {
+  bottom: 40px;
+}
+
+.slider-controls {
+  position: absolute;
+  bottom: -40px; /* hide the controls by default */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: bottom 0.2s ease-out; /* add transition for smooth animation */
+}
+
+.footer .credit {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 3rem;
+  padding: 1rem;
+  border-top: 0.2rem solid #222;
+  padding-top: 3rem;
+  color: #777;
+}
+
+.footer .credit span {
+  color: #e84393;
+}
+
+.hr1 {
+  margin: 20px auto;
+  height: 1px;
+  border: none;
+  background-color: #333;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
   </style>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="slider-container">
-      <div class="menu">
-        <label for="slide-dot-1"></label>
-        <label for="slide-dot-2"></label>
-        <label for="slide-dot-3"></label>
-      </div>
-      
-      <input id="slide-dot-1" type="radio" name="slides" checked>
-        <div class="slide slide-1"></div>
-      
-      <input id="slide-dot-2" type="radio" name="slides">
-        <div class="slide slide-2"></div>
-      
-      <input id="slide-dot-3" type="radio" name="slides">
-        <div class="slide slide-3"></div>
-    </div>
+    <div class="slider">
+  <div class="slider-wrapper">
+    <img src="static/images/slide1.webp" alt="Slide 1">
+    <img src="static/images/content-img-2.png" alt="Slide 2">
+    <img src="static/images/content-img-3.png" alt="Slide 3">
+  </div>
+  <div class="slider-controls">
+    <button class="prev-slide"><div class="fas fa-arrow-left" style="width: 3rem"></div></button>
+    <button class="next-slide"><div class="fas fa-arrow-right" style="width: 3rem"></div></button>
   </div>
 </div>
+   <script>
+const slider = document.querySelector('.slider');
+const wrapper = slider.querySelector('.slider-wrapper');
+const prevBtn = slider.querySelector('.prev-slide');
+const nextBtn = slider.querySelector('.next-slide');
+const slideWidth = slider.clientWidth / 3;
+let position = 0;
 
+function moveSlider() {
+  wrapper.style.transform = `translateX(-${position}px)`;
+}
+
+function prevSlide() {
+  if (position > 0) {
+    position -= slideWidth;
+    moveSlider();
+  }
+}
+
+function nextSlide() {
+  if (position < slideWidth * 2) {
+    position += slideWidth;
+  } else {
+    position = 0;
+  }
+  moveSlider();
+}
+
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+let intervalId = setInterval(nextSlide, 3000);
+
+
+      </script>
+ <br>
+      <br>
+      <br>
+      <center>
+      <img src="static/images/shop1 .png" class="imagineshop">
+      </center>
+      <section class="category">
+
+        <a href="indexCosmetics.html" class="box">
+            <img src="/static/images/category-1.png" alt="">
+            <p>cosmetics</p>
+        </a>
+
+        <a href="#" class="box">
+            <img src="/static/images/category-2.png" alt="">
+            <p>makeup</p>
+        </a>
+
+        <a href="#" class="box">
+            <img src="/static/images/category-3.png" alt="">
+            <p>powder</p>
+        </a>
+
+        <a href="#" class="box">
+            <img src="/static/images/category-4.png" alt="">
+            <p>lotions</p>
+        </a>
+
+        <a href="#" class="box">
+            <img src="/static/images/category-5.png" alt="">
+            <p>lipstick</p>
+        </a>
+
+        <a href="#" class="box">
+            <img src="/static/images/category-6.png" alt="">
+            <p>mascara</p>
+        </a>
+    </section>
+    <br>
+    <hr class="hr1">
 
   {%if products%}
   <h3 style="text-align:center; color:#3E454C;">{{word}}</h3>
@@ -492,7 +707,7 @@ img {
       </div>
       </div>
 <!-- card1 end -->
-{% if forloop.counter|divisibleby:"3" %}
+{% if forloop.counter|divisibleby:"4" %}
     </div>
     <div class="row">
           <br><br><br><br><br>

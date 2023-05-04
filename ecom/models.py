@@ -72,3 +72,13 @@ class CartItem(models.Model):
     def __str__(self):
         return f"{self.quantity} x {self.product.name} - {self.customer.get_name}"
 
+"""
+class AllOrders(models.Model):
+    transaction_id = models.PositiveIntegerField('TRANSACTION_ID', on_delete=models.CASCADE())
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.ForeignKey(CartItem, default=1)
+
+    def __str__(self):
+        return f"{self.transaction_id} {self.customer} {self.product} {self.quantity}"
+"""

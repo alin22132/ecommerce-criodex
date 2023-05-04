@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+{% load static %}
   <head>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet"  href="{% static '/css/style.css' %}">
+
     <link rel="icon" type="image/x-icon" href="/static/images/logou.png">
     <meta charset="utf-8">
     <title>C R I O D E X</title>
@@ -250,60 +260,73 @@
           margin: 0px
       }
   }
+
+  a {
+  text-decoration: none;
+}
+  .no-underline {
+  text-decoration: none;
+}
+
+
+
 </style>
 
 
 </head>
 
-  <body>
-    <div id="navbar">
-        <div class="container">
-            <div class="row row1">
-                <ul class="largenav pull-right">
+  <body class="">
 
-                    <li class="upper-links"><a class="links" href="/my-order">Track Orders</a></li>
-                    <li class="upper-links"><a class="links" href="/my-profile">Profile</a></li>
-                      <li class="upper-links"><a class="links" href="/logout">Logout</a></li>
-                  
-                </ul>
-            </div>
-            <div class="row row2">
-                <div class="col-sm-3">
-                    <h2 style="margin:0px;"><a style="text-decoration:none; color:white;" href="/"><span class="largenav">C R I O D E X</span></a></h2>
-                </div>
+    <!-- header section starts  -->
+   <header class="header">
+        <a href="/#" class="logo"> <img src="/static/images/logou.png" style="max-width: 450px" alt=""></a>
 
+        <form action="/search" class="search-form" method="get">
+            <input class="navbar-input" type="search" id="search-box" value="{% if search_text %}{{ search_text }}{% endif %}" placeholder="search here..." name="query" id="query">
+            <button type="submit" class="">
+                <label for="search-box" class="fas fa-search" type="submit"></label>
+            </button>
+        </form>
 
-                <div class="navbar-search smallsearch col-sm-7 col-xs-11">
-                  <form  action="/search" method="get">
-                    <div class="row"> <input class="navbar-input col-xs-11" type="search" placeholder="Search for Products, Brands and more" name="query" id="query">
-                      <button class="navbar-button col-xs-1" type="submit">
-                        <svg width="15px" height="15px">
-                                <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
-                        </svg>
-                      </button>
-                    </div>
-                  </form>
-                </div>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars menu-btn"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            {% if request.user.is_authenticated %}
+                      <a href="/my-profile" class="fas fa-user"></a>
+              {% else %}
+            <a href="/customerlogin" class="fas fa-user"></a>
+              {% endif %}
 
 
-                <div class="cart1 largenav col-sm-2">
-                    <a class="cart-button" href="/cart">
-                      <img src="static/images/cart-icon1.png" width="16" height="16">
-                      {% if product_count_in_cart > 0 %}
-                        <span class="item-number">{{ product_count_in_cart }}</span>
-                      {% endif %}
-                    </a>
-                              <div class="language-select">
-  <select id="language" name="language">
-    <option value="ro">RO</option>
-    <option value="en">EN</option>
-    <option value="ru">RU</option>
-  </select>
-</div>
-            </div>
+            {% if request.user.is_authenticated %}
+                      <a href="/cart" class="fas fa-shopping-cart"><span></span> {{ product_count_in_cart }}</a>
+              {% else %}
+              <a href="/customerlogin" class="fas fa-shopping-cart"><span id="cart-counter"></span></a>
+              {% endif %}
+            <a href="/logout" class="fas fa-sign-out-alt"></a>
         </div>
-    </div>
-    
+
+    </header>
+
+    <!-- navbar section  -->
+
+<script>
+$(document).ready(function(){
+
+function openNav() {
+document.getElementById("mySidenav").style.width = "70%";
+
+document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+document.getElementById("mySidenav").style.width = "0";
+document.body.style.backgroundColor = "rgba(0,0,0,0)";
+}
+
+
+});
+</script>
 
 
     <script>

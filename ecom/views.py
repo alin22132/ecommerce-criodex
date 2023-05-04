@@ -247,7 +247,7 @@ from .models import Customer
 
 def add_to_cart_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    customer = request.user.customer
+    customer = request.user.customer  # TODO: anonymus user cant add to cart handle that
 
     # get all CartItem objects for this customer and product combination
     cart_items = CartItem.objects.filter(customer=customer, product=product)
@@ -554,6 +554,10 @@ def contactus_view(request):
     return render(request, 'ecom/contactus.html', {'form': sub})
 
 
+# _---------------------------------------------------------------------------------_
+# _------------------------ PAYMENT VIEWS HANDLING STARTS --------------------------_
+# _---------------------------------------------------------------------------------_
+
 def date_range(request):
     if request.method == 'POST':
         start_date = request.POST.get('start_date')
@@ -614,6 +618,9 @@ def handle_view(request):
 
 
 def payment_callback(request):
+    #   if request.method == "POST":
+    #        if request.
+    # TODO: make the payment_callback view handle the callback (DOCUMENTATION GITHUB/MAIBAPI) also look JSON in views
     return render(request, 'ecom/callback.html')
     # Retrieve the transaction ID and error message from the POST data
     # transaction_id = request.POST.get('TRANSACTION_ID')  # bagal in baza de date
