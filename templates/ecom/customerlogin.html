@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
 
         <!-- custom css file link  -->
-        <link rel="stylesheet"  href="{% static '/css/style.css' %}">
 
     <link rel="icon" type="image/x-icon" href="/static/images/logou.png">
     <meta charset="utf-8">
@@ -150,6 +149,23 @@ a.socialIcon:hover,
     transition: all 0.8s;
     transition: all 0.8s
 }
+.centered-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+.centered-link a {
+  color: #F68B1E;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.centered-link a:hover {
+  text-decoration: underline;
+}
+
     </style>
   </head>
   <body>
@@ -176,9 +192,22 @@ a.socialIcon:hover,
         </div>
     </div>
 </div>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
+    <style>
+        .centered-link{
+            margin-top: 470px;
+        }
+        @media only screen and (max-width: 768px) {
+            .box{
+                position: initial;
+            }
+            .centered-link{
+                margin-top: 20px;
+            }
+        }
+    </style>
+
+<center class="centered-link">Or if you don't have an account <a href="/customersignup">Sign Up</a></center>
+
 {% include "ecom/footer.html" %}
   </body>
 </html>

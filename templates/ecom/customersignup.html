@@ -47,7 +47,8 @@
     text-align: center;
     border: 2px solid #ffffff;
     padding: 10px 10px;
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
     outline: none;
     color: white;
     border-radius: 24px;
@@ -152,6 +153,24 @@ a.socialIcon:hover,
     transition: all 0.8s;
     transition: all 0.8s
 }
+  /* Additional Styles for Responsiveness */
+      @media (max-width: 767px) {
+        .box {
+          margin-top: 50px;
+            position: initial;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .box {
+          padding: 20px;
+        }
+
+        .box input[type="text"],
+        .box input[type="password"] {
+          max-width: 200px;
+        }
+      }
     </style>
   </head>
   <body>

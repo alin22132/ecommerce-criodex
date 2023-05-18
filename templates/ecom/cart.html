@@ -10,6 +10,7 @@
 {% endif %}
 
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
@@ -17,9 +18,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
 
         <!-- custom css file link  -->
-        <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/style.css?v=12">
 
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <style media="screen">
@@ -261,8 +262,170 @@
   background-color: #ffc5c5;
 }
 
+    @media only screen and (max-width: 768px) {
+        .search-form{
+            width: 140px;
+            padding-right: 100px;
+        }
+        .logo-img{
+            content: url('/static/images/logou.png');
+        }
+        }
+          a.fas2 {
+              margin-right: 2rem;
+          }
+          .navbar-input{
+              width: 100px;
+          }
 
 
+           @media only screen and (max-width: 768px) {
+               a.fas2{
+                   margin-right: 2rem;
+               }
+      a.logo{
+          height: 50px;
+      }
+
+      .search-form{
+          height: 36px;
+      }
+
+      .fa-search{
+          background: white;
+      }
+      .iul{
+          background: white;
+      }
+      .header .search-form {
+    display: block;
+    top: 0%;
+    position: relative;
+    width: 120px;
+          height: 36px;
+  }
+  .navbar-input {
+    width: 72px;
+  }
+  .search-form {
+    width: 50px;
+  }
+  .search-form {
+    display: block;
+  }
+
+  /* Design parameters */
+  .header .search-form {
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-input {
+    font-size: 14px;
+    color: #666666;
+    padding: 5px;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  .navbar-input::placeholder {
+    color: #bbbbbb;
+      content: "CACA";
+  }
+      a.fas1{
+          margin-right: 2rem;
+      }
+    .search-form {
+      width: 100px;
+
+    }
+      .marla{
+          margin-right: 10px;
+      }
+    #search-btn {
+      display: block;
+      cursor: pointer;
+    }
+    .small-search-form {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      width: 80%;
+      max-width: 300px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+    .small-search-form input[type="search"] {
+      width: 140px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .small-search-form button[type="submit"] {
+      display: block;
+      width: 140px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .navbar-input{
+        height: 2rem;
+    }
+    .search-form{
+        height: 36px;
+    }
+    .icons{
+        width: 48%;
+    }
+    .header{
+        height: 9rem;
+    }
+    .header {
+    padding: 2.5rem 1rem;
+    height: 9rem;
+}
+    .search-form{
+        width: 160px;
+        height: 36px;
+    }
+    .navbar-input{
+        font-size: 1.6rem;
+        width: 100%;
+    }
+    .search-form{
+
+    }
+    .header .search-form label{
+        font-size: 1.7rem;
+    }
+    .header .search-form a{
+        font-size: 100rem;
+    }
+    .logo-img{
+        padding-bottom: 10px;
+    }
+  }
+  .logo img{
+      height: 6.6rem;
+  }
+  .search-form{
+      width: 100px;
+  }
+    .navbar-input{
+        width: 100%;
+    }
 </style>
 <link rel="icon" type="image/x-icon" href="/static/images/logou.png">
 </head>
@@ -271,6 +434,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+    <div class="smalls">
       <table class="table">
         <thead>
           <tr>
@@ -285,12 +449,12 @@
           {% for p in products %}
           <tr>
             <td>{{ p.name }}</td>
-              <td><img src="{% static p.product_image.url %}"></td>
+              <td><img src="{% static p.product_image.url %}" class="imagein2"></td>
             <td>{{ p.price }}</td>
             <td>{{ p.quantity }}</td>
             <td>{{ p.total}}</td>
 
-          <td><a href="{% url 'remove-from-cart' p.id %}" class="btn btn-danger btn-sm">X</a></td>
+          <td><a href="{% url 'remove-from-cart' p.id %}" class="btn btn-danger btn-sm"><div class="ics">X</div></a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -299,7 +463,33 @@
       <a href="{% url 'customer-address' %}" class="cart-button">Checkout   </a>
     </div>
   </div>
+  </div>
 </div>
+    <style>
+            @media only screen and (max-width: 768px) {
+               .table {
+    font-size: 50%;
+                 }
+                .imagein2{
+                    width: 10rem;
+                }
+                .btn-danger{
+                    width: 5rem;
+                    height: 2rem;
+                }
+                .ics{
+                    width: 20px;
+                    height: 20px;
+                    margin-bottom: 20px;
+                }
+                a{
+                    font-size: 1rem; !important;
+                }
+                .nu{
+                    font-size: 1rem;
+                }
+            }
+    </style>
 <br><br><br>
 <div style="text-align: center;">
 

@@ -1,0 +1,114 @@
+Post received
+Adress is not valid
+INFO 2023-04-26 15:26:28,855 views 24532 14232 Post received
+INFO 2023-04-26 15:26:28,857 views 24532 14232 Adress is not valid
+INFO 2023-04-26 15:27:02,478 views 14056 21000 Post received
+INFO 2023-04-26 15:27:02,478 views 14056 21000 Adress is valid
+INFO 2023-04-26 15:27:28,111 views 22544 22856 Post received
+INFO 2023-04-26 15:27:28,111 views 22544 22856 Adress is valid
+INFO 2023-04-26 15:27:28,111 views 22544 22856 hanlde started
+INFO 2023-04-26 16:17:29,135 views 3984 23944 Post received
+INFO 2023-04-26 16:17:29,135 views 3984 23944 Adress is valid
+INFO 2023-04-26 16:17:29,135 views 3984 23944 hanlde started
+INFO 2023-04-26 16:17:29,277 maib_client 3984 23944 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-04-26 16:17:40,805 views 3984 23944 Post received
+INFO 2023-04-26 16:17:40,805 views 3984 23944 Adress is valid
+INFO 2023-04-26 16:17:40,805 views 3984 23944 hanlde started
+INFO 2023-04-26 16:17:40,906 maib_client 3984 23944 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-04-26 17:47:51,777 views 24828 21368 Post received
+INFO 2023-04-26 17:47:51,777 views 24828 21368 Adress is valid
+INFO 2023-04-26 17:47:51,777 views 24828 21368 hanlde started
+INFO 2023-04-26 17:47:51,980 maib_client 24828 21368 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-04-27 10:23:36,320 views 24828 27992 Post received
+INFO 2023-04-27 10:23:36,320 views 24828 27992 Adress is valid
+INFO 2023-04-27 10:23:36,320 views 24828 27992 hanlde started
+INFO 2023-04-27 10:23:36,645 maib_client 24828 27992 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-04-28 12:05:23,445 views 14176 20216 son incarcat
+INFO 2023-04-28 12:06:06,107 views 4436 5976 son incarcat
+INFO 2023-04-28 12:06:42,863 views 15924 14852 son incarcat
+INFO 2023-04-28 12:06:42,863 views 15924 14852 nu merge {product_count_in_cart}
+INFO 2023-04-28 12:07:29,090 views 9168 1072 son incarcat
+INFO 2023-04-28 12:07:29,090 views 9168 1072 nu merge 0
+INFO 2023-04-28 12:18:13,919 views 13916 12704 son incarcat
+INFO 2023-04-28 12:18:13,920 views 13916 12704 nu merge 0
+INFO 2023-04-28 12:18:18,184 views 13916 12704 son incarcat
+INFO 2023-04-28 12:18:18,184 views 13916 12704 nu merge 0
+INFO 2023-04-28 12:24:11,208 views 12552 3292 son incarcat
+INFO 2023-04-28 12:24:15,295 views 12552 3292 nu merge 0
+INFO 2023-04-28 12:25:20,602 views 12552 13380 son incarcat
+INFO 2023-04-28 12:25:20,602 views 12552 13380 nu merge 0
+INFO 2023-04-28 12:26:49,903 views 12552 13380 son incarcat
+INFO 2023-04-28 12:26:49,903 views 12552 13380 nu merge 0
+INFO 2023-04-28 12:27:45,963 views 12552 13380 son incarcat
+INFO 2023-04-28 12:27:45,964 views 12552 13380 nu merge 0
+INFO 2023-04-28 12:30:17,696 views 12552 13380 son incarcat
+INFO 2023-04-28 12:30:17,697 views 12552 13380 nu merge 0
+INFO 2023-04-28 12:49:09,231 views 22348 4992 son incarcat
+INFO 2023-04-28 12:50:58,055 views 2900 22480 son incarcat
+INFO 2023-04-28 13:02:51,002 views 2636 21016 son incarcat
+INFO 2023-04-28 13:02:51,002 views 2636 21016 nu merge 0
+INFO 2023-04-28 17:17:40,156 views 23408 21632 Post received
+INFO 2023-04-28 17:17:40,156 views 23408 21632 Adress is valid
+INFO 2023-04-28 17:17:40,157 views 23408 21632 hanlde started
+INFO 2023-04-28 17:24:51,990 views 7292 20924 Post received
+INFO 2023-04-28 17:24:51,991 views 7292 20924 Adress is valid
+INFO 2023-04-28 17:24:51,991 views 7292 20924 hanlde started
+INFO 2023-04-28 17:25:02,075 views 7292 20924 Post received
+INFO 2023-04-28 17:25:02,075 views 7292 20924 Adress is valid
+INFO 2023-04-28 17:25:02,075 views 7292 20924 hanlde started
+INFO 2023-04-28 17:25:20,823 views 1512 20572 Post received
+INFO 2023-04-28 17:25:20,823 views 1512 20572 Adress is valid
+INFO 2023-04-28 17:25:20,823 views 1512 20572 hanlde started
+INFO 2023-04-28 17:25:23,428 views 1512 20572 Post received
+INFO 2023-04-28 17:25:23,428 views 1512 20572 Adress is valid
+INFO 2023-04-28 17:25:23,428 views 1512 20572 hanlde started
+INFO 2023-04-28 17:25:51,506 views 18216 21424 Post received
+INFO 2023-04-28 17:25:51,506 views 18216 21424 Adress is valid
+INFO 2023-04-28 17:25:51,506 views 18216 21424 hanlde started
+INFO 2023-04-28 17:27:06,660 views 22124 6620 Post received
+INFO 2023-04-28 17:27:06,661 views 22124 6620 Adress is valid
+INFO 2023-04-28 17:27:06,661 views 22124 6620 hanlde started
+INFO 2023-04-28 17:27:06,662 views 22124 6620 itemele : testingLeu 2 TROL, leu, 
+INFO 2023-04-28 17:27:07,046 maib_client 22124 6620 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-04-28 17:30:30,695 views 24336 17468 Post received
+INFO 2023-04-28 17:30:30,695 views 24336 17468 Adress is valid
+INFO 2023-04-28 17:30:30,695 views 24336 17468 hanlde started
+INFO 2023-04-28 17:30:30,697 views 24336 17468 itemele : testing Leu 2 TROL, leu, 
+INFO 2023-04-28 17:30:30,697 views 24336 17468 pretul total este 100
+INFO 2023-04-28 17:30:30,951 maib_client 24336 17468 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-04-28 17:53:36,885 views 16568 16628 Post received
+INFO 2023-04-28 17:53:36,885 views 16568 16628 Adress is valid
+INFO 2023-04-28 17:53:36,885 views 16568 16628 hanlde started
+INFO 2023-04-28 17:53:36,887 views 16568 16628 language : en | description : testing Leu 2 TROL, leu,  | amount : 100 | currency : 978 |sent|
+INFO 2023-04-28 17:53:36,985 maib_client 16568 16628 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-04-28 19:10:16,269 views 11348 15504 Post received
+INFO 2023-04-28 19:10:16,269 views 11348 15504 Adress is valid
+INFO 2023-04-28 19:10:16,269 views 11348 15504 hanlde started
+INFO 2023-04-28 19:10:16,272 views 11348 15504 language : en | description : testing Leu 2 TROL, leu,  | amount : 130 | currency : 978 |sent|
+INFO 2023-04-28 19:10:16,512 maib_client 11348 15504 Got response from maib 200, error: unregistered merchant. IP: 178.175.168.104
+
+INFO 2023-05-02 16:36:32,826 views 20424 10636 Post received
+INFO 2023-05-02 16:36:32,826 views 20424 10636 Adress is valid
+INFO 2023-05-02 16:36:32,826 views 20424 10636 hanlde started
+INFO 2023-05-02 16:36:32,828 views 20424 10636 language : en | description : testing Leu 2 TROL, leu,  | amount : 140 | currency : 978 |sent|
+INFO 2023-05-02 16:36:33,047 maib_client 20424 10636 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-05-02 17:10:38,168 views 20424 21952 Post received
+INFO 2023-05-02 17:10:38,168 views 20424 21952 Adress is valid
+INFO 2023-05-02 17:10:38,168 views 20424 21952 hanlde started
+INFO 2023-05-02 17:10:38,170 views 20424 21952 language : en | description : testing Leu 2 TROL, leu,  | amount : 140 | currency : 978 |sent|
+INFO 2023-05-02 17:10:38,428 maib_client 20424 21952 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-05-08 21:31:21,676 views 27192 22168 Post received
+INFO 2023-05-08 21:31:21,677 views 27192 22168 Adress is valid
+INFO 2023-05-08 21:31:21,677 views 27192 22168 hanlde started
+INFO 2023-05-08 21:31:21,678 views 27192 22168 language : ru | description : testing Leu 2 TROL, alabalaoportaalaca,  | amount : 40 | currency : 978 |sent|
+INFO 2023-05-08 21:31:21,903 maib_client 27192 22168 Got response from maib 200, error: unregistered merchant. IP: 178.175.168.104
+
