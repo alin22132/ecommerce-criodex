@@ -54,6 +54,5 @@ urlpatterns = [
     path('payment_callback/', views.payment_callback, name='payment_callback'),
     path('callback/', views.payment_callback, name='callback'),
     path('products/category/<str:category>/', views.products_by_category, name='products_by_category'),
-    path('callback', RedirectView.as_view(url='/callback/'))
 
 ]
