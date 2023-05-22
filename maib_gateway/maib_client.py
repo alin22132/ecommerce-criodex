@@ -1,5 +1,5 @@
 import requests
-
+import json
 from ecom.logger import logger
 from ecommerce.settings import IS_TEST, HOST
 from maib_gateway.constants import MAIB_LIVE_BASE_URI, MAIB_TEST_BASE_URI, MAIB_TEST_CERT_KEY_URL, \
@@ -40,7 +40,7 @@ class MaibClient:
             **self.default_request_args
         )
         logger.info(f"Got response from maib {data.status_code}, {data.text}")
-        return f"{self.reidrect_url}?trans_id={data.json()['transaction_id']}"
+        return f"{self.reidrect_url}?trans_id={data.json.JSONDecoder()['transaction_id']}"
 
     # TODO✓: Implement other methods, same approach
 
