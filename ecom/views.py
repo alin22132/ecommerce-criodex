@@ -16,6 +16,7 @@ from .logger import logger
 from .models import Product, OrderItem
 from django.shortcuts import get_object_or_404
 from .models import Product, CartItem
+from maib_gateway.maib_client import MaibClient
 
 
 def home_view(request):
@@ -614,8 +615,7 @@ def handle_view(request):
         lang = request.COOKIES.get('language', 'en')  # Default to English if no language cookie is set
 
         # Register the SMS transaction and obtain the TRANSACTION_ID
-        registerSmsTransaction = MaibClient().register_sms_transaction(amount, currency, clientIpAddr, description,
-                                                                       lang)
+        registerSmsTransaction = MaibClient().register_sms_transaction(amount, currency, clientIpAddr, description, lang)
         sms_transaction_id = registerSmsTransaction.get("TRANSACTION_ID")
 
         if sms_transaction_id:
