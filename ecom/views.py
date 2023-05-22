@@ -1,3 +1,5 @@
+import json
+
 import requests
 from django.conf import settings
 from django.contrib import messages
@@ -561,31 +563,6 @@ def contactus_view(request):
 # _------------------------ PAYMENT VIEWS HANDLING STARTS --------------------------_
 # _---------------------------------------------------------------------------------_
 
-def date_range(request):
-    if request.method == 'POST':
-        start_date = request.POST.get('start_date')
-        end_date = request.POST.get('end_date')
-
-        # Make a request to the API with the given start and end dates
-        response = requests.post('https://example.com/api', data={'start_date': start_date, 'end_date': end_date})
-
-        # Check if the request was successful and display the response
-        if response.status_code == 200:
-            try:
-                data = response.json()
-                context = {'data': data}
-                return render(request, 'results.html', context)
-            except json.JSONDecodeError as e:
-                error_msg = f"Error: Failed to decode JSON response - {str(e)}"
-                context = {'error_msg': error_msg}
-                return render(request, 'error.html', context)
-        else:
-            error_msg = f"Error: {response.status_code} - {response.text}"
-            context = {'error_msg': error_msg}
-            return render(request, 'error.html', context)
-
-    return render(request, 'date_range.html')
-
 
 def redirect_to_website(request):
     if request.method == "POST":
@@ -615,10 +592,11 @@ def handle_view(request):
         lang = request.COOKIES.get('language', 'en')  # Default to English if no language cookie is set
 
         # Register the SMS transaction and obtain the TRANSACTION_ID
-        registerSmsTransaction = MaibClient().register_sms_transaction(amount, currency, clientIpAddr, description, lang)
-        sms_transaction_id = registerSmsTransaction.get("TRANSACTION_ID")
+        register_sms_transaction = MaibClient().register_sms_transaction(amount, currency, description,
+                                                                         lang)
+        sms_transaction_id = register_sms_transaction.get["TRANSACTION_ID"]
 
-        if sms_transaction_id:
+        if sms_transaction_id.status_code == 200:
             sms_redirect_url = f"{MAIB_TEST_REDIRECT_URL}?trans_id={sms_transaction_id}"
             return redirect(sms_redirect_url)
         else:
