@@ -597,6 +597,7 @@ def handle_view(request):
         sms_transaction_id = register_sms_transaction.get["TRANSACTION_ID"]
 
         if sms_transaction_id.status_code == 200:
+            sms_transaction_id = json.JSONDecoder(sms_transaction_id)
             sms_redirect_url = f"{MAIB_TEST_REDIRECT_URL}?trans_id={sms_transaction_id}"
             return redirect(sms_redirect_url)
         else:
