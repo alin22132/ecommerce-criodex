@@ -25,6 +25,7 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='product_image/', null=True, blank=True)
     price = models.PositiveIntegerField()
     description = models.CharField(max_length=40)
+    category = models.CharField(max_length=40, default='others')
 
     def __str__(self):
         return self.name
@@ -71,6 +72,7 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name} - {self.customer.get_name}"
+
 
 """
 class AllOrders(models.Model):

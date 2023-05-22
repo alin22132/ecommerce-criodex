@@ -154,6 +154,7 @@ def admin_add_product_view(request):
     return render(request, 'ecom/admin_add_products.html', {'productForm': productForm})
 
 
+# TODO: Make the sort buttons on main page sort by cattegory or make a category finder type shit.
 @login_required(login_url='adminlogin')
 def delete_product_view(request, pk):
     product = models.Product.objects.get(id=pk)
@@ -568,9 +569,14 @@ def date_range(request):
 
         # Check if the request was successful and display the response
         if response.status_code == 200:
-            data = response.json()
-            context = {'data': data}
-            return render(request, 'results.html', context)
+            try:
+                data = response.json()
+                context = {'data': data}
+                return render(request, 'results.html', context)
+            except json.JSONDecodeError as e:
+                error_msg = f"Error: Failed to decode JSON response - {str(e)}"
+                context = {'error_msg': error_msg}
+                return render(request, 'error.html', context)
         else:
             error_msg = f"Error: {response.status_code} - {response.text}"
             context = {'error_msg': error_msg}
@@ -628,3 +634,11 @@ def payment_callback(request):
     # Process the transaction and error message as needed
     # ...
     # Return a response to the payment API indicating success or failure
+
+
+# category Search
+
+def products_by_category(request, category):
+    products = Product.objects.filter(category=category)
+    context = {'products': products}
+    return render(request, 'products_by_category.html', context)

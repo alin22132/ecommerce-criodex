@@ -112,3 +112,15 @@ INFO 2023-05-08 21:31:21,677 views 27192 22168 hanlde started
 INFO 2023-05-08 21:31:21,678 views 27192 22168 language : ru | description : testing Leu 2 TROL, alabalaoportaalaca,  | amount : 40 | currency : 978 |sent|
 INFO 2023-05-08 21:31:21,903 maib_client 27192 22168 Got response from maib 200, error: unregistered merchant. IP: 178.175.168.104
 
+INFO 2023-05-22 10:40:27,013 views 2332 17168 Post received
+INFO 2023-05-22 10:40:27,014 views 2332 17168 Adress is valid
+INFO 2023-05-22 10:40:27,014 views 2332 17168 hanlde started
+INFO 2023-05-22 10:40:27,015 views 2332 17168 language : ru | description : testing alabalaoportaalaca,  | amount : 5 | currency : 978 |sent|
+INFO 2023-05-22 10:40:27,330 maib_client 2332 17168 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-05-22 10:41:45,273 views 2860 17200 Post received
+INFO 2023-05-22 10:41:45,273 views 2860 17200 Adress is valid
+INFO 2023-05-22 10:41:45,273 views 2860 17200 hanlde started
+INFO 2023-05-22 10:41:45,274 views 2860 17200 language : ru | description : testing alabalaoportaalaca,  | amount : 5 | currency : 978 |sent|
+INFO 2023-05-22 10:41:45,393 maib_client 2860 17200 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+

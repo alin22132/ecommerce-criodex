@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name=''),
@@ -51,5 +52,6 @@ urlpatterns = [
     # path('handle/', views.handle_view, name='handle_view')
     path('payment_callback/', views.payment_callback, name='payment_callback'),
     path('callback/', views.payment_callback, name='callback'),
+    path('products/category/<str:category>/', views.products_by_category, name='products_by_category')
 
 ]
