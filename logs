@@ -124,3 +124,15 @@ INFO 2023-05-22 10:41:45,273 views 2860 17200 hanlde started
 INFO 2023-05-22 10:41:45,274 views 2860 17200 language : ru | description : testing alabalaoportaalaca,  | amount : 5 | currency : 978 |sent|
 INFO 2023-05-22 10:41:45,393 maib_client 2860 17200 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
 
+INFO 2023-05-22 10:59:29,257 views 2860 5020 Post received
+INFO 2023-05-22 10:59:29,257 views 2860 5020 Adress is valid
+INFO 2023-05-22 10:59:29,257 views 2860 5020 hanlde started
+INFO 2023-05-22 10:59:29,258 views 2860 5020 language : ru | description : testing alabalaoportaalaca,  | amount : 5 | currency : 978 |sent|
+INFO 2023-05-22 10:59:29,361 maib_client 2860 5020 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-05-22 11:02:11,542 views 2860 5020 Post received
+INFO 2023-05-22 11:02:11,542 views 2860 5020 Adress is valid
+INFO 2023-05-22 11:02:11,542 views 2860 5020 hanlde started
+INFO 2023-05-22 11:02:11,543 views 2860 5020 language : ru | description : testing alabalaoportaalaca,  | amount : 5 | currency : 978 |sent|
+INFO 2023-05-22 11:02:11,645 maib_client 2860 5020 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+

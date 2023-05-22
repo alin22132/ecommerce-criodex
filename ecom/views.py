@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 
+from maib_gateway.constants import MAIB_TEST_REDIRECT_URL
 from maib_gateway.maib_client import MaibClient
 from . import forms, models
 from .logger import logger
@@ -592,13 +593,12 @@ def redirect_to_website(request):
 
 def handle_view(request):
     if request.method == 'POST':
-        logger.info('hanlde started')
-        # TODO✓: Make this work based on Order ID instead of hardcode amount
+        logger.info('handle started')
         customer = request.user.customer
         cart_items = CartItem.objects.filter(customer=customer)
         products = []
         total = 0
-        description = 'testing '
+        description = 'testing'
 
         for cart_item in cart_items:
             product = cart_item.product
@@ -606,20 +606,26 @@ def handle_view(request):
             product.total = product.price * product.quantity
             products.append(product)
             total += product.total
-            description += f"{product.name}, "  # TODO✓: Maybe description based on order
+            description += f", {product.name}"
 
         amount = total
-        currency = '978'  # EUR PAHODU
-        language = request.COOKIES.get('language',
-                                       'en')  # Default to English if no cookie is set TODO✓: Get from cookies ?
-        logger.info(
-            f"language : {language} | description : {description} | amount : {total} | currency : {currency} |sent|")
-        redirect_url = MaibClient().register_sms_transaction(amount,
-                                                             currency,
-                                                             description,
-                                                             language=language)
-        logger.info(f'redirect to {redirect_url}')
-        return redirect(redirect_url)
+        currency = '978'  # EUR (ISO 4217 code for Euro)
+        clientIpAddr = request.META.get('REMOTE_ADDR', '')  # Get client IP address
+        lang = request.COOKIES.get('language', 'en')  # Default to English if no language cookie is set
+
+        # Register the SMS transaction and obtain the TRANSACTION_ID
+        registerSmsTransaction = MaibClient().register_sms_transaction(amount, currency, clientIpAddr, description,
+                                                                       lang)
+        sms_transaction_id = registerSmsTransaction.get("TRANSACTION_ID")
+
+        if sms_transaction_id:
+            sms_redirect_url = f"{MAIB_TEST_REDIRECT_URL}?trans_id={sms_transaction_id}"
+            return redirect(sms_redirect_url)
+        else:
+            error_msg = "Error: Failed to obtain TRANSACTION_ID"
+            context = {'error_msg': error_msg}
+            return render(request, 'error.html', context)
+
     return redirect('failed')  # HANDLE
 
 
