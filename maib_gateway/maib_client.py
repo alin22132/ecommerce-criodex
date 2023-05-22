@@ -40,7 +40,8 @@ class MaibClient:
             **self.default_request_args
         )
         logger.info(f"Got response from maib {data.status_code}, {data.text}")
-        return f"{self.reidrect_url}?trans_id={data.json.JSONDecoder()['transaction_id']}"
+        transaction_id = data.text.split(":")[1].strip()
+        return f"{self.reidrect_url}?trans_id={transaction_id}"
 
     # TODO✓: Implement other methods, same approach
 
