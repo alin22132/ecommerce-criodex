@@ -10,6 +10,7 @@ from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
 
 from maib_gateway.constants import MAIB_TEST_REDIRECT_URL
 from maib_gateway.maib_client import MaibClient
@@ -627,17 +628,16 @@ def handle_view(request):
     return redirect('failed')  # HANDLE
 
 
+@csrf_protect
 def payment_callback(request):
-    #   if request.method == "POST":
-    #        if request.
-    # TODO: make the payment_callback view handle the callback (DOCUMENTATION GITHUB/MAIBAPI) also look JSON in views
+    if request.method == "POST":
+        # Retrieve the transaction ID and error message from the POST data
+        transaction_id = request.POST.get('TRANSACTION_ID')
+        error_message = request.POST.get('error')
+        # Process the transaction and error message as needed
+        # ...
+        # Return a response to the payment API indicating success or failure
     return render(request, 'ecom/callback.html')
-    # Retrieve the transaction ID and error message from the POST data
-    # transaction_id = request.POST.get('TRANSACTION_ID')  # bagal in baza de date
-    # error_message = request.POST.get('error')
-    # Process the transaction and error message as needed
-    # ...
-    # Return a response to the payment API indicating success or failure
 
 
 # category Search
