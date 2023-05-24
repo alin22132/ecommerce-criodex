@@ -10,9 +10,10 @@ from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
-from maib_gateway.constants import MAIB_TEST_REDIRECT_URL
+from maib_gateway.constants import MAIB_TEST_REDIRECT_URL, MAIB_TEST_BASE_URI, MAIB_TEST_CERT_URL, \
+    MAIB_TEST_CERT_KEY_URL
 from maib_gateway.maib_client import MaibClient
 from . import forms, models
 from .logger import logger
@@ -628,16 +629,63 @@ def handle_view(request):
     return redirect('failed')  # HANDLE
 
 
-@csrf_protect
+@csrf_exempt
 def payment_callback(request):
+    TRANSACTION_LIFESPAN = 10  # Lifespan of trans_id in minutes
     if request.method == "POST":
         # Retrieve the transaction ID and error message from the POST data
         transaction_id = request.POST.get('TRANSACTION_ID')
         error_message = request.POST.get('error')
+
         # Process the transaction and error message as needed
         # ...
-        # Return a response to the payment API indicating success or failure
-    return render(request, 'ecom/callback.html')
+
+        # Verify transaction status with Maib API
+        transaction_status = verify_transaction(transaction_id)
+
+        if transaction_status == 'SUCCESS':
+            # Payment success logic
+            return HttpResponse('Payment Successful')
+        elif transaction_status == 'PENDING':
+            # Transaction still pending, check again after additional time
+            return HttpResponse('Transaction Pending')
+        else:
+            # Payment failure logic
+            return HttpResponse('Payment Failed')
+
+    return HttpResponse('Invalid Request')
+
+
+def verify_transaction(transaction_id):
+    TRANSACTION_LIFESPAN = 10  # Lifespan of trans_id in minutes
+    # Perform transaction verification with Maib API
+    url = f"{MAIB_TEST_BASE_URI}/verify_transaction"
+    params = {
+        'trans_id': transaction_id
+    }
+
+    try:
+        response = requests.get(url, params=params, cert=(MAIB_TEST_CERT_URL, MAIB_TEST_CERT_KEY_URL), verify=True, timeout=30)
+        if response.status_code == 200:
+            data = response.json()
+            status = data.get('status')
+
+            if status == 'SUCCESS':
+                return 'SUCCESS'
+            elif status == 'PENDING':
+                # Check if transaction lifespan has exceeded
+                if data.get('time_elapsed') >= TRANSACTION_LIFESPAN:
+                    return 'TIMEOUT'
+                else:
+                    return 'PENDING'
+            else:
+                return 'FAILED'
+
+    except requests.RequestException as e:
+        # Handle request exception
+        return 'FAILED'
+
+    return 'FAILED'
 
 
 # category Search
