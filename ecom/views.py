@@ -639,9 +639,10 @@ def payment_callback(request):
 
         # Process the transaction and error message as needed
         # ...
-
+        logger.info("Transaction id: " + transaction_id)
         # Verify transaction status with Maib API
-        transaction_status = verify_transaction(transaction_id)
+        transaction_status = MaibClient.get_transaction_result(transaction_id)
+        logger.info(transaction_status)
 
         if transaction_status == 'SUCCESS':
             # Payment success logic
@@ -654,40 +655,6 @@ def payment_callback(request):
             return HttpResponse('Payment Failed')
 
     return HttpResponse('Invalid Request')
-
-
-def verify_transaction(transaction_id):
-    TRANSACTION_LIFESPAN = 10  # Lifespan of trans_id in minutes
-    # Perform transaction verification with Maib API
-    url = f"{MAIB_TEST_BASE_URI}/verify_transaction"
-    params = {
-        'trans_id': transaction_id
-    }
-
-    try:
-        response = requests.get(url, params=params, cert=(MAIB_TEST_CERT_URL, MAIB_TEST_CERT_KEY_URL), verify=True, timeout=30)
-        logger.info('Transaction verify started response: |')
-        logger.info(response)
-        if response.status_code == 200:
-            data = response.json()
-            status = data.get('status')
-
-            if status == 'SUCCESS':
-                return 'SUCCESS'
-            elif status == 'PENDING':
-                # Check if transaction lifespan has exceeded
-                if data.get('time_elapsed') >= TRANSACTION_LIFESPAN:
-                    return 'TIMEOUT'
-                else:
-                    return 'PENDING'
-            else:
-                return 'FAILED'
-
-    except requests.RequestException as e:
-        # Handle request exception
-        return 'FAILED'
-
-    return 'FAILED'
 
 
 # category Search
