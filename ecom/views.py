@@ -644,5 +644,8 @@ def payment_callback(request):
 
 def products_by_category(request, category):
     products = Product.objects.filter(category=category)
-    context = {'products': products}
-    return render(request, 'products_by_category.html', context)
+    context = {
+        'products': products,
+        'word': category.capitalize(),  # For displaying the selected category as a heading
+    }
+    return render(request, 'ecom/products.html', context)

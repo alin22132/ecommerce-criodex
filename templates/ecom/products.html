@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.scss' %}">
     <link rel="stylesheet" href="../../static/css/style.css?v=12">
 
      <script src="https://cdn.jsdelivr.net/npm/i18next@20.3.4/dist/umd/i18next.min.js"></script>
@@ -659,7 +660,322 @@
 </head>
 {% if request.user.is_authenticated %}
     {% include "ecom/customer_navbar.html" %}
-{% else %}
+        <!-- header section starts  -->
+    <style>
+        .search-form{
+            width: 530px;
+        }
+
+        @media only screen and (max-width: 768px) {
+        .search-form{
+            width: 140px;
+            padding-right: 100px;
+        }
+        }
+    </style>
+
+<style>
+.navbar-input::placeholder{
+    content: "Sracas";
+}
+.iul{
+    background: #f5f5f5;
+}
+.fa-search{
+    background: #f5f5f5;
+}
+a.fas1{
+        margin-right: 7rem;
+    font-size: 20px;
+    color: hotpink;
+}
+.marla{
+    margin-right: 100px;
+}
+.header .search-form{
+    width: 40%;
+}
+.navbar-input{
+    width: 100%;
+}
+  @media only screen and (max-width: 768px) {
+      .icons{
+          font-size: 1rem;
+      }
+
+      .search-form{
+          height: 36px;
+      }
+        .logo img{
+            content: url('/static/images/logou.png');
+        }
+      .fa-search{
+          background: white;
+      }
+      .iul{
+          background: white;
+      }
+      .header .search-form {
+    display: block;
+    top: 0%;
+    position: relative;
+    width: 160px;
+          height: 36px;
+  }
+  .navbar-input {
+    width: 72px;
+  }
+  .search-form {
+    width: 120px;
+  }
+  .search-form {
+    display: block;
+  }
+
+  /* Design parameters */
+  .header .search-form {
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-input {
+    font-size: 14px;
+    color: #666666;
+    padding: 5px;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  .navbar-input::placeholder {
+    color: #bbbbbb;
+      content: "CACA";
+  }
+      a.fas1{
+          margin-right: 0px;
+      }
+    .search-form {
+      width: 100px;
+
+    }
+      .marla{
+          margin-right: 10px;
+      }
+    #search-btn {
+      display: block;
+      cursor: pointer;
+    }
+    .small-search-form {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      width: 80%;
+      max-width: 300px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+    .small-search-form input[type="search"] {
+      width: 140px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .small-search-form button[type="submit"] {
+      display: block;
+      width: 140px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+.header {
+    padding: 2.5rem 1rem;
+}
+  .logo img{
+      height: 6.6rem;
+  }
+
+</style>
+  <div class="slider">
+  <div class="slider-wrapper">
+  <img src="{% static 'images/slide1.webp' %}" alt="Slide 1">
+    <img src="{% static 'images/content-img-2.png' %}" alt="Slide 2">
+    <img src="{% static 'images/content-img-3.png' %}" alt="Slide 3">
+  </div>
+  <div class="slider-controls">
+    <button class="prev-slide"><div class="fas fa-arrow-left" style="width: 3rem"></div></button>
+    <button class="next-slide"><div class="fas fa-arrow-right" style="width: 3rem"></div></button>
+  </div>
+</div>
+   <script>
+const slider = document.querySelector('.slider');
+const wrapper = slider.querySelector('.slider-wrapper');
+const prevBtn = slider.querySelector('.prev-slide');
+const nextBtn = slider.querySelector('.next-slide');
+const slideWidth = slider.clientWidth / 3;
+let position = 0;
+
+function moveSlider() {
+  wrapper.style.transform = `translateX(-${position}px)`;
+}
+
+function prevSlide() {
+  if (position > 0) {
+    position -= slideWidth;
+    moveSlider();
+  }
+}
+
+function nextSlide() {
+  if (position < slideWidth * 2) {
+    position += slideWidth;
+  } else {
+    position = 0;
+  }
+  moveSlider();
+}
+
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+let intervalId = setInterval(nextSlide, 3000);
+
+
+      </script>
+    <br>
+    <br>
+    <br>
+    <center>
+    </center>
+    <style>
+
+#changingWord {
+    color: pink;
+    background: linear-gradient(pink, #AA336A);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: color 0.5s ease;
+    font-size: 60px;
+}
+
+#changingWord {
+    color: #ffb6c1 ;
+    transition: color 0.5s ease;
+}
+
+#changingWord.darken {
+    color: #23050e;
+}
+
+
+    </style>
+    <script>
+// JavaScript
+window.addEventListener('scroll', function() {
+    var changingWord = document.getElementById('changingWord');
+    var scrollPosition = window.scrollY;
+
+    // Adjust the rate of color change by multiplying scrollPosition with a factor
+    var darkenFactor = 0.03;
+    var darkenValue = scrollPosition * darkenFactor;
+
+    if (darkenValue > 255) {
+        darkenValue = 255; // Ensure the maximum darkening value is 255
+    }
+
+    var darkenedColor = darkenColor('pink', darkenValue);
+    changingWord.style.color = darkenedColor;
+});
+
+function darkenColor(color, value) {
+    var hex = color.replace('#', '');
+
+    var r = parseInt(hex.substr(0, 2), 16) - value;
+    var g = parseInt(hex.substr(2, 2), 16) - value;
+    var b = parseInt(hex.substr(4, 2), 16) - value;
+
+    // Ensure the darkened RGB values are within the valid range
+    r = r < 0 ? 0 : r;
+    g = g < 0 ? 0 : g;
+    b = b < 0 ? 0 : b;
+
+    var darkenedHex = '#' + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
+    return darkenedHex;
+}
+
+
+    </script>
+    <section class="category">
+
+    {% load i18n %}
+        <a href="{% url 'products-by-category' 'others' %}" class="box">
+            <img src="/static/images/category-1.png" alt="">
+            <p class="p23">{% trans "Others" %}</p>
+        </a>
+
+        <a href="{% url 'products-by-category' 'makeup' %}" class="box">
+            <img src="/static/images/category-2.png" alt="">
+            <p class="p23">makeup</p>
+        </a>
+
+        <a href="{% url 'products-by-category' 'powder' %}" class="box">
+            <img src="/static/images/category-3.png" alt="">
+            <p class="p23">powder</p>
+        </a>
+
+        <a href="{% url 'products-by-category' 'lotions' %}" class="box">
+            <img src="/static/images/category-4.png" alt="">
+            <p class="p23">lotions</p>
+        </a>
+
+        <a href="{% url 'products-by-category' 'lipstick' %}" class="box">
+            <img src="/static/images/category-5.png" alt="">
+            <p class="p23">lipstick</p>
+        </a>
+
+        <a href="{% url 'products-by-category' 'parfume' %}" class="box">
+            <img src="/static/images/category-67.png" alt="">
+            <p class="p23">Parfume</p>
+        </a>
+
+
+    <style>
+        .p23 {
+            text-align: center;
+        }
+    </style>
+    </section>
+    <br>
+    <center>
+    <h3 class="section-title" id="sectionTitle">
+    <span id="changingWord">{{ word }}</span>
+</h3>
+</center>
+    <br>
+    <hr class="hr1">
+    <style>
+    .hr1 {
+  margin: 20px auto;
+  height: 1px;
+  border: none;
+  background-color: #333;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+    </style>
+{% else %}# TODO REZOLVA SUKA
 
     <!-- header section starts  -->
 
@@ -680,19 +996,348 @@
             padding-right: 100px;
         }
         }
+
+          .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1900px; /* make the container wider */
+    margin: 0 auto; /* center the container */
+      background-color: whitesmoke;
+  }
+    html{
+        background-color: whitesmoke;
+    }
+  .card {
+    width: calc(25% - 20px);
+    margin-bottom: 40px;
+    max-width: 380px; /* make the card wider */
+  }
+       @media (min-width: 768px) {
+            .row::before,
+            .row::after {
+                content: "";
+                display: table;
+            }
+
+            .row::after {
+                clear: both;
+            }
+
+            .column {
+                float: left;
+            }
+        }
+
+        .card-info {
+            padding: 10px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .card-price {
+            font-size: 16px;
+        }
+        @media (max-width: 768px) {
+            .product-container {
+                width: 100%;
+            }
+        }
+
+        .product-container {
+            width: 450px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -20px;
+            height: 45rem;
+        }
+
+        .column {
+            width: 25%;
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-title {
+            margin: 0 0 10px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .card-description {
+            margin: 0 0 15px;
+            font-size: 16px;
+            text-align: justify;
+        }
+
+        .card-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .btn-add-to-cart {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #ff6b6b;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-add-to-cart:hover {
+            background-color: #ff5252;
+        }
+
+        .section-title {
+            margin-top: 50px;
+            text-align: center;
+            color: #3E454C;
+            font-size: 32px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            margin: 0 -10px;
+        }
+
+        .column {
+            width: calc(25% - 20px);
+            margin: 0 10px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            position: relative;
+        }
+
+        .card-image img {
+            display: block;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-title {
+            margin: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #3E454C;
+        }
+
+        .card-description {
+            margin: 0;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #6F7377;
+            line-height: 1.4;
+        }
+
+        .card-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-size: 24px;
+            color: #3E454C;
+        }
+
+        .btn-add-to-cart {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: #3E454C;
+
+        color
+
+        @media only screen and (max-width: 600px) {
+            /* Adjust font sizes for smaller screens */
+            h3 {
+                font-size: 24px;
+            }
+
+            .card-title {
+                font-size: 18px;
+            }
+
+            .card-description {
+                font-size: 14px;
+            }
+
+            .price {
+                font-size: 18px;
+            }
+
+            .btn-add-to-cart {
+                font-size: 16px;
+            }
+
+            /* Adjust card layout for smaller screens */
+            .row {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .column {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .card-image {
+                height: 300px;
+            }
+
+            .card-info {
+                padding: 20px;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .column {
+            flex: 1;
+            padding: 0 15px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #3E454C;
+        }
+
+        .card-image {
+            position: relative;
+            height: 0;
+            padding-top: 100%;
+        }
+
+        .card-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #3E454C;
+        }
+
+        .card-description {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.4;
+        }
+
+        .card-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #3E454C;
+        }
+  @media (max-width: 767px) {
+    .card {
+      width: 100%;
+    }
+  }
+
+  .break {
+    flex-basis: 100%;
+    height: 0;
+  }
     </style>
-
-  <form action="/search" class="search-form" method="get">
-    <input class="navbar-input" type="search" id="search-box"
-           value="{% if search_text %}{{ search_text }}{% endif %}"  placeholder="Search..." name="query"
-           id="query" style="width: 100%">
-    <button type="submit" class="iul">
-      <label for="search-box" class="fas fa-search"></label>
-    </button>
-  </form>
-
-
-
 
   <div class="icons">
     <a id="menu-btn" class="nu fas fa-bars menu-btn"></a>
@@ -908,8 +1553,66 @@ let intervalId = setInterval(nextSlide, 3000);
     <br>
     <br>
     <center>
-        <img src="/static/images/shop1 .png" class="imagineshop">
     </center>
+    <style>
+
+#changingWord {
+    color: pink;
+    background: linear-gradient(pink, #AA336A);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: color 0.5s ease;
+    font-size: 60px;
+}
+
+#changingWord {
+    color: #ffb6c1 ;
+    transition: color 0.5s ease;
+}
+
+#changingWord.darken {
+    color: #23050e;
+}
+
+
+    </style>
+    <script>
+// JavaScript
+window.addEventListener('scroll', function() {
+    var changingWord = document.getElementById('changingWord');
+    var scrollPosition = window.scrollY;
+
+    // Adjust the rate of color change by multiplying scrollPosition with a factor
+    var darkenFactor = 0.03;
+    var darkenValue = scrollPosition * darkenFactor;
+
+    if (darkenValue > 255) {
+        darkenValue = 255; // Ensure the maximum darkening value is 255
+    }
+
+    var darkenedColor = darkenColor('pink', darkenValue);
+    changingWord.style.color = darkenedColor;
+});
+
+function darkenColor(color, value) {
+    var hex = color.replace('#', '');
+
+    var r = parseInt(hex.substr(0, 2), 16) - value;
+    var g = parseInt(hex.substr(2, 2), 16) - value;
+    var b = parseInt(hex.substr(4, 2), 16) - value;
+
+    // Ensure the darkened RGB values are within the valid range
+    r = r < 0 ? 0 : r;
+    g = g < 0 ? 0 : g;
+    b = b < 0 ? 0 : b;
+
+    var darkenedHex = '#' + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
+    return darkenedHex;
+}
+
+
+    </script>
     <section class="category">
 
     {% load i18n %}
@@ -943,13 +1646,19 @@ let intervalId = setInterval(nextSlide, 3000);
             <p class="p23">Parfume</p>
         </a>
 
+
     <style>
         .p23 {
             text-align: center;
         }
     </style>
-
     </section>
+    <br>
+    <center>
+    <h3 class="section-title" id="sectionTitle">
+    <span id="changingWord">{{ word }}</span>
+</h3>
+</center>
     <br>
     <hr class="hr1">
     <style>
@@ -965,9 +1674,36 @@ let intervalId = setInterval(nextSlide, 3000);
 {% endif %}
 
 <!-- content start-->
-{% block content %}
-
-{% endblock content %}
+{% if products %}
+  <div class="card-container">
+    {% for p in products %}
+      <div class="card">
+        <div class="card-image">
+          <img src="{% static p.product_image.url %}" alt="product pic">
+        </div>
+        <div class="card-info">
+          <h3 class="card-title">{{ p.name }}</h3>
+          <p class="card-description">{{ p.description }}</p>
+          <div class="card-price">
+            <span class="price">${{ p.price }}</span>
+            {% if request.user.is_authenticated %}
+              <a class="btn-add-to-cart" href="{% url 'add-to-cart' p.id %}">
+            {% else %}
+              <a class="btn-add-to-cart" href="/customerlogin">
+            {% endif %}
+              <i class="fa fa-shopping-cart"></i> Add to cart
+            </a>
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:"4" %}
+        <div class="break"></div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% else %}
+  <h3 class="section-title" style="text-align:center; color:#3E454C; text-decoration: none">No Search Found</h3>
+{% endif %}
 
 <!-- content end-->
 <br><br><br>

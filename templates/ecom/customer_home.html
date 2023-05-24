@@ -1479,36 +1479,43 @@ let intervalId = setInterval(nextSlide, 3000);
       <img src="/static/images/shop1 .png" class="imagineshop">
       </center>
       <section class="category">
-        <a href="indexCosmetics.html" class="box">
+      {% load i18n %}
+        <a href="{% url 'products-by-category' 'others' %}" class="box">
             <img src="/static/images/category-1.png" alt="">
-            <p class="p213">cosmetics</p>
+            <p class="p23">{% trans "Others" %}</p>
         </a>
 
-        <a href="#" class="box">
+        <a href="{% url 'products-by-category' 'makeup' %}" class="box">
             <img src="/static/images/category-2.png" alt="">
-            <p class="p213">Others</p>
+            <p class="p23">makeup</p>
         </a>
 
-        <a href="#" class="box">
+        <a href="{% url 'products-by-category' 'powder' %}" class="box">
             <img src="/static/images/category-3.png" alt="">
-            <p class="p213">powder</p>
+            <p class="p23">powder</p>
         </a>
 
-        <a href="#" class="box">
+        <a href="{% url 'products-by-category' 'lotions' %}" class="box">
             <img src="/static/images/category-4.png" alt="">
-            <p class="p213">lotions</p>
+            <p class="p23">lotions</p>
         </a>
 
-        <a href="#" class="box">
+        <a href="{% url 'products-by-category' 'lipstick' %}" class="box">
             <img src="/static/images/category-5.png" alt="">
-            <p  class="p213">lipstick</p>
+            <p class="p23">lipstick</p>
         </a>
 
-        <a href="#" class="box">
+        <a href="{% url 'products-by-category' 'parfume' %}" class="box">
             <img src="/static/images/category-67.png" alt="">
-            <p class="p213">Parfume</p>
+            <p class="p23">Parfume</p>
         </a>
+
     </section>
+    <style>
+    .p23{
+        text-align: center;
+    }
+    </style>
     <br>
     <hr class="hr1">
 
@@ -1781,7 +1788,7 @@ let intervalId = setInterval(nextSlide, 3000);
         }
 
                 a.fas2{
-            margin-right: 7rem;
+            margin-right: 10rem;
         }
 
         .a-size {
