@@ -639,9 +639,10 @@ def payment_callback(request):
 
         # Process the transaction and error message as needed
         # ...
-        logger.info("Transaction id: " + transaction_id)
+        logger.info('Transaction id: ' + transaction_id)
         # Verify transaction status with Maib API
-        transaction_status = MaibClient.get_transaction_result(transaction_id)
+        #transaction_status = MaibClient.get_transaction_result(transaction_id)
+        transaction_status = 'Succes'
         logger.info(transaction_status)
 
         if transaction_status == 'SUCCESS':
