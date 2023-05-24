@@ -625,6 +625,7 @@ def handle_view(request):
                                                              description,
                                                              language=language)
         logger.info(f'redirect to {redirect_url}')
+
         return redirect(redirect_url)
     return redirect('failed')  # HANDLE
 
@@ -633,15 +634,16 @@ def handle_view(request):
 def payment_callback(request):
     TRANSACTION_LIFESPAN = 10  # Lifespan of trans_id in minutes
     if request.method == "POST":
+        logger.info(f'Request Body: {request.body}')
         # Retrieve the transaction ID and error message from the POST data
         transaction_id = request.POST.get('TRANSACTION_ID')
         error_message = request.POST.get('error')
 
         # Process the transaction and error message as needed
         # ...
-        logger.info('Transaction id: ' + transaction_id)
+        logger.info(f'Transaction id:  {transaction_id}')
         # Verify transaction status with Maib API
-        #transaction_status = MaibClient.get_transaction_result(transaction_id)
+        # transaction_status = MaibClient.get_transaction_result(transaction_id)
         transaction_status = 'Succes'
         logger.info(transaction_status)
 
