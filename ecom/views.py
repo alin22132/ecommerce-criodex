@@ -635,16 +635,19 @@ def payment_callback(request):
     TRANSACTION_LIFESPAN = 10  # Lifespan of trans_id in minutes
     if request.method == "POST":
         logger.info(f'Request Body: {request.body}')
-        # Retrieve the transaction ID and error message from the POST data
-        transaction_id = request.POST.get('TRANSACTION_ID')
-        error_message = request.POST.get('error')
 
-        # Process the transaction and error message as needed
-        # ...
-        logger.info(f'Transaction id:  {transaction_id}')
-        # Verify transaction status with Maib API
-        # transaction_status = MaibClient.get_transaction_result(transaction_id)
-        transaction_status = 'Succes'
+        if 'error' in request.body.decode('utf-8'):
+            logger.error('Error')
+            return HttpResponse('Error occured during transaction ask a staff member')
+
+        request_body = request.body.decode('utf-8')
+
+        trans_id = request_body.split('=')[1]
+
+        logger.info(f'Transaction ID: {trans_id}')
+
+        transaction_status = MaibClient.get_transaction_result(trans_id)
+
         logger.info(transaction_status)
 
         if transaction_status == 'SUCCESS':
