@@ -666,6 +666,8 @@ def verify_transaction(transaction_id):
 
     try:
         response = requests.get(url, params=params, cert=(MAIB_TEST_CERT_URL, MAIB_TEST_CERT_KEY_URL), verify=True, timeout=30)
+        logger.info('Transaction verify started response: |')
+        logger.info(response)
         if response.status_code == 200:
             data = response.json()
             status = data.get('status')
