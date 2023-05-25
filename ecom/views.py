@@ -642,7 +642,7 @@ def payment_callback(request):
 
         request_body = request.body.decode('utf-8')
 
-        trans_id = request_body.split('=')[1]
+        trans_id = request_body.split('=')[1].split('%')[0]
 
         logger.info(f'Transaction ID: {trans_id}')  # TODO: look get_transaction_id_result must give a return i guess
 
