@@ -86,6 +86,7 @@ class MaibClient:
             ),
             **self.default_request_args
         )
+        return data
 
     def close_day(self):
         data = requests.post(

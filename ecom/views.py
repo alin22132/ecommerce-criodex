@@ -644,7 +644,7 @@ def payment_callback(request):
 
         trans_id = request_body.split('=')[1]
 
-        logger.info(f'Transaction ID: {trans_id}')  # TODO: look get_trasnaction_id_result must give a return i guess
+        logger.info(f'Transaction ID: {trans_id}')  # TODO: look get_transaction_id_result must give a return i guess
 
         transaction_status = MaibClient.get_transaction_result(trans_id)
 
