@@ -645,7 +645,7 @@ def payment_callback(request):
 
         trans_id = request_body.split('=')[1].split('%')[0]
 
-        logger.info(f'Transaction ID: {trans_id}')  # TODO: look get_transaction_id_result must give a return i guess
+        logger.info(f'Transaction ID: {trans_id}')  # TODO✓: look get_transaction_id_result must give a return i guess
 
         transaction_status = MaibClient().get_transaction_result(trans_id)
         transaction_status = transaction_status.status_code
@@ -674,10 +674,11 @@ def payment_callback(request):
             # Schedule the task to run after 5 minutes
             timer = Timer(5 * 60, check_transaction_status)
             timer.start()
-
+            logger.info(f'dupa if trebuie sa fie pending 2 {transaction_status}')
             return HttpResponse('Transaction Pending')
         else:
             # Payment failure logic
+            logger.info(f'dupa if trebuie sa fie failed {transaction_status}')
             return HttpResponse('Payment Failed')
 
 
