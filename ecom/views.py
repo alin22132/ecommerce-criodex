@@ -1,4 +1,5 @@
 import json
+from threading import Timer
 
 import requests
 from django.conf import settings
@@ -646,21 +647,36 @@ def payment_callback(request):
 
         logger.info(f'Transaction ID: {trans_id}')  # TODO: look get_transaction_id_result must give a return i guess
 
-        transaction_status = MaibClient.get_transaction_result(trans_id)
+        transaction_status = MaibClient().get_transaction_result(trans_id)
 
         logger.info(transaction_status)
 
-        if transaction_status == 'SUCCESS':
+        if transaction_status == '200':
             # Payment success logic
             return HttpResponse('Payment Successful')
-        elif transaction_status == 'PENDING':
+        elif transaction_status == '116' or transaction_status == '000':
             # Transaction still pending, check again after additional time
+            def check_transaction_status():
+                transaction_status = MaibClient().get_transaction_result(trans_id)
+
+                if transaction_status == '200':
+                    # Payment success logic
+                    return HttpResponse('Payment Successful')
+                elif transaction_status in ['FAILED', 'DECLINED']:
+                    # Payment failure logic
+                    return HttpResponse('Payment Failed')
+                else:
+                    # Transaction still pending, check again after additional time
+                    return HttpResponse('Transaction Pending')
+
+            # Schedule the task to run after 5 minutes
+            timer = Timer(5 * 60, check_transaction_status)
+            timer.start()
+
             return HttpResponse('Transaction Pending')
         else:
             # Payment failure logic
             return HttpResponse('Payment Failed')
-
-    return HttpResponse('Invalid Request')
 
 
 # category Search
