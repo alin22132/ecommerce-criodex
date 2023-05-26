@@ -1,3 +1,4 @@
+import ipaddress
 import json
 from threading import Timer
 
@@ -25,6 +26,8 @@ from maib_gateway.maib_client import MaibClient
 
 
 def home_view(request):
+    client_ip = request.META.get('REMOTE_ADDR')
+    logger.info(f'Client connected from IP: {client_ip}')
     products = models.Product.objects.all()
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
