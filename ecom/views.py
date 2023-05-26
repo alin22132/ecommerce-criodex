@@ -396,51 +396,40 @@ def customer_address_view(request):
 
 # here we are just directing to this view...actually we have to check whther `payment` is successful or not
 # then only this view should be accessed
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Customer, Product, Orders
+
+
+@login_required(login_url='customerlogin')
 @login_required(login_url='customerlogin')
 def payment_success_view(request):
-    # Here we will place order | after successful payment
-    # we will fetch customer  mobile, address, Email
-    # we will fetch product id from cookies then respective details from db
-    # then we will create order objects and store in db
-    # after that we will delete cookies because after order placed...cart should be empty
     customer = models.Customer.objects.get(user_id=request.user.id)
     products = None
-    email = None
-    mobile = None
-    address = None
     total_price = 0
+
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
         if product_ids != "":
             product_id_in_cart = product_ids.split('|')
-            products = models.Product.objects.all().filter(id__in=product_id_in_cart)
-            # Here we get products list that will be ordered by one customer at a time
-            for product in products:
-                total_price += product.price
+            products = models.Product.objects.filter(id__in=product_id_in_cart)
+            total_price = products.aggregate(Sum('price'))['price__sum'] or 0
 
-    # Do something with the total_price, e.g. save it as the profit
-    # ...
-
-    return render(request, 'payment_success.html',
-                  {'customer': customer, 'products': products, 'total_price': total_price})
-
-    # these things can be change so accessing at the time of order...
-    if 'email' in request.COOKIES:
-        email = request.COOKIES['email']
-    if 'mobile' in request.COOKIES:
-        mobile = request.COOKIES['mobile']
-    if 'address' in request.COOKIES:
-        address = request.COOKIES['address']
-
-    # here we are placing number of orders as much there is a products
-    # suppose if we have 5 items in cart and we place order....so 5 rows will be created in orders table
-    # there will be lot of redundant data in orders table...but its become more complicated if we normalize it
+    # Create the order and store it in the database
+    orders = []
     for product in products:
-        models.Orders.objects.get_or_create(customer=customer, product=product, status='Pending', email=email,
-                                            mobile=mobile, address=address)
+        order = models.Orders.objects.create(
+            customer=customer,
+            product=product,
+            status='Pending',
+            email=request.COOKIES.get('email'),
+            mobile=request.COOKIES.get('mobile'),
+            address=request.COOKIES.get('address')
+        )
+        orders.append(order)
 
-    # after order placed cookies should be deleted
-    response = render(request, 'ecom/payment_success.html')
+    # Clear the cart cookies
+    response = render(request, 'payment_success.html', {'customer': customer, 'orders': orders, 'total_price': total_price})
     response.delete_cookie('product_ids')
     response.delete_cookie('email')
     response.delete_cookie('mobile')
@@ -592,6 +581,8 @@ def date_range(request):
     return render(request, 'date_range.html')
 
 
+# TODO: make the close day function work , via linux bash script ,or idk.
+
 def redirect_to_website(request):
     if request.method == "POST":
         return render('ecom/failed.html')
@@ -661,9 +652,10 @@ def payment_callback(request):
             def check_transaction_status():
                 transaction_status = MaibClient().get_transaction_result(trans_id)
 
-                if transaction_status == '200':
+                if transaction_status == 200:
                     # Payment success logic
                     return HttpResponse('Payment Successful')
+
                 elif transaction_status in ['FAILED', 'DECLINED']:
                     # Payment failure logic
                     return HttpResponse('Payment Failed')

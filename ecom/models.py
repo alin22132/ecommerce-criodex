@@ -74,6 +74,24 @@ class CartItem(models.Model):
         return f"{self.quantity} x {self.product.name} - {self.customer.get_name}"
 
 
+class Payment(models.Model):
+    STATUS_CHOICES = [
+        ('SUCCESS', 'Success'),
+        ('PENDING', 'Pending'),
+        ('FAILED', 'Failed'),
+        ('DECLINED', 'Declined'),
+    ]
+    transaction_id = models.PositiveIntegerField(unique=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    amount = models.PositiveIntegerField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Payment #{self.transaction_id} - {self.customer.user.username}"
+
+
 """
 class AllOrders(models.Model):
     transaction_id = models.PositiveIntegerField('TRANSACTION_ID', on_delete=models.CASCADE())
