@@ -648,10 +648,12 @@ def payment_callback(request):
         logger.info(f'Transaction ID: {trans_id}')  # TODO: look get_transaction_id_result must give a return i guess
 
         transaction_status = MaibClient().get_transaction_result(trans_id)
+        transaction_status = transaction_status.status_code
 
         logger.info(transaction_status)
 
         if transaction_status == '200':
+            logger.info(f'dupa if trebuie sa fie succesful {transaction_status}')
             # Payment success logic
             return HttpResponse('Payment Successful')
         elif transaction_status == '116' or transaction_status == '000':
