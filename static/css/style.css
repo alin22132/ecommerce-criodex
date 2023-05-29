@@ -1169,5 +1169,6 @@ a.nu{
 @media only screen and (max-width: 600px) {
   .logo img{
     padding-left: 0px;
+    height: 6.6rem;
   }
 }

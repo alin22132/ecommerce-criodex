@@ -100,7 +100,7 @@ section{
   z-index: 1000;
 
   .logo img{
-    height: 4rem;
+    height: 6.6rem;
   }
 
   .search-form{
@@ -1026,5 +1026,11 @@ section{
   .navbar-button {
     height: 45px;
     padding: 12px 0;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .logo img{
+    padding-left: 0px;
+    height: 6.6rem;
   }
 }
