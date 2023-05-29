@@ -118,7 +118,7 @@ section {
 }
 @media (max-width: 767px) {
   .logo img{
-    padding-left: 10px;
+    padding-left: 0px;
   }
   }
 
@@ -1165,4 +1165,9 @@ a.nu{
 }
 .logo img{
   padding-left: 10rem;
+}
+@media only screen and (max-width: 600px) {
+  .logo img{
+    padding-left: 0px;
+  }
 }

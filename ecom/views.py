@@ -406,7 +406,7 @@ from .models import Customer, Product, Orders
 
 @login_required(login_url='customerlogin')
 @login_required(login_url='customerlogin')
-def payment_success_view(request):
+def payment_success_view(request):  # TODO: Look here to payment_succes_view after the payment
     customer = models.Customer.objects.get(user_id=request.user.id)
     products = None
     total_price = 0
@@ -626,7 +626,7 @@ def handle_view(request):
 
 
 @csrf_exempt
-def payment_callback(request):
+def payment_callback(request):  # TODO: store in database the transaction then go to the payment_succesfull view.
     TRANSACTION_LIFESPAN = 10  # Lifespan of trans_id in minutes
     if request.method == "POST":
         logger.info(f'Request Body: {request.body}')
@@ -646,7 +646,7 @@ def payment_callback(request):
 
         logger.info(transaction_status)
 
-        if transaction_status == '200':
+        if transaction_status == 200:
             logger.info(f'dupa if trebuie sa fie succesful {transaction_status}')
             # Payment success logic
             return HttpResponse('Payment Successful')
