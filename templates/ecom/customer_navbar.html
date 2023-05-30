@@ -1,531 +1,557 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 {% load static %}
-  <head>
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
 
-        <!-- custom css file link  -->
-        <link rel="stylesheet"  href="{% static '/css/style.css' %}">
-      <link rel="stylesheet" href="../../static/css/style.css?v=13">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="../../static/css/style.css?v=13">
 
     <link rel="icon" type="image/x-icon" href="/static/images/logo-bun.png">
     <meta charset="utf-8">
     <title>C R I O D E X</title>
 
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-  <!-- jQuery library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
-  <style>
-  body {
-    background-color: #f7f7f7;
-  }
-
-
-
-  #navbar {
-    background-color: #000000;
-    color: white;
-}
-
-  .row1 {
-      padding-top: 10px;
-      padding-right: 50px
-  }
-
-  .row2 {
-      padding-bottom: 20px
-  }
-
-  .navbar-input {
-    padding: 11px 16px;
-    border-radius: 2px 0 0 2px;
-    border: 0 none;
-    outline: 0 none;
-    font-size: 15px;
-    color:#000
-}
-
-  .navbar-button {
-    background-color: #0c8fc1;
-    border: 1px solid #0c8fc1;
-    border-radius: 0 2px 2px 0;
-    color: #ffffff;
-    padding: 10px 0;
-    height: 43px;
-    cursor: pointer;
-  }
-
-  .cart-button {
-    /* background-color: #bfbfbf; */
-    background-color: #0c8fc1;
-    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 23%), inset 1px 1px 0 0 hsl(0deg 0% 100% / 20%);
-    padding: 10px 0;
-    text-align: center;
-    height: 41px;
-    border-radius: 2px;
-    font-weight: 500;
-    width: 120px;
-    display: inline-block;
-    color: #FFFFFF;
-    text-decoration: none;
-    color: inherit;
-    border: none;
-    outline: none;
-}
-
-  .cart-button:hover {
-      text-decoration: none;
-      color: #fff;
-      cursor: pointer
-  }
-
-  .cart-svg {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      vertical-align: middle;
-      margin-right: 8px
-  }
-
-  .item-number {
-    border-radius: 3px;
-    background-color: rgb(207 37 37 / 92%);
-    height: 20px;
-    padding: 3px 6px;
-    font-weight: 500;
-    display: inline-block;
-    color: #fff;
-    line-height: 12px;
-    margin-left: 10px;
-}
-.item-number:empty:after{
-    content:"0"
-  }
-
-  .upper-links {
-      display: inline-block;
-      padding: 0 11px;
-      line-height: 23px;
-      font-family: 'Roboto', sans-serif;
-      letter-spacing: 0;
-      color: inherit;
-      border: none;
-      outline: none;
-      font-size: 12px
-  }
-
-  .dropdown {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 0px
-  }
-
-  .dropdown:hover {
-      background-color: #fff
-  }
-
-  .dropdown:hover .links {
-      color: #000
-  }
-
-  .dropdown:hover .dropdown-menu {
-      display: block
-  }
-
-  .dropdown .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      display: none;
-      background-color: #fff;
-      color: #333;
-      left: 0px;
-      border: 0;
-      border-radius: 0;
-      box-shadow: 0 4px 8px -3px #555454;
-      margin: 0;
-      padding: 0px
-  }
-
-  .links {
-      color: #fff;
-      text-decoration: none
-  }
-
-  .links:hover {
-      color: #fff;
-      text-decoration: none
-  }
-
-  .profile-links {
-      font-size: 12px;
-      font-family: 'Roboto', sans-serif;
-      border-bottom: 1px solid #e9e9e9;
-      box-sizing: border-box;
-      display: block;
-      padding: 0 11px;
-      line-height: 23px
-  }
-
-  .profile-li {
-      padding-top: 2px
-  }
-
-  .largenav {
-      display: none
-  }
-
-  .smallnav {
-      display: block
-  }
-
-  .smallsearch {
-      margin-left: 15px;
-      margin-top: 15px
-  }
-
-  .menu {
-      cursor: pointer
-  }
-
- .language-select {
-  position: relative;
-  display: inline-block;
-  font-family: Arial, sans-serif;
-}
-
-.language-select select {
-  display: inline-block;
-  padding: 10px;
-  margin: 0;
-  font-size: 16px;
-  font-weight: bold;
-  border: 2px solid #111;
-  border-radius: 5px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: cornflowerblue;
-  background-image: linear-gradient(to bottom, cornflowerblue, deepskyblue);
-  background-repeat: no-repeat;
-  background-position: center right 10px;
-  color: #000;
-  font-style: normal;
-  font-weight: 400;
-}
-
-.language-select select:focus {
-  outline: none;
-  border-color: #06c;
-}
-
-.language-select select::-ms-expand {
-  display: none;
-}
-
-.language-select select option {
-  font-size: 14px;
-}
-
-.language-select::before {
-  content: '\f107';
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-family: FontAwesome;
-  font-size: 16px;
-  color: #06c;
-  pointer-events: none;
-}
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
 
 
+        #navbar {
+            background-color: #000000;
+            color: white;
+        }
 
-  @media screen and (min-width: 768px) {
-      .largenav {
-          display: block
-      }
+        .row1 {
+            padding-top: 10px;
+            padding-right: 50px
+        }
 
-      .smallnav {
-          display: none
-      }
+        .row2 {
+            padding-bottom: 20px
+        }
 
-      .smallsearch {
-          margin: 0px
-      }
-  }
+        .navbar-input {
+            padding: 11px 16px;
+            border-radius: 2px 0 0 2px;
+            border: 0 none;
+            outline: 0 none;
+            font-size: 15px;
+            color: #000
+        }
 
-  a {
-  text-decoration: none;
-}
-  .no-underline {
-  text-decoration: none;
-}
+        .navbar-button {
+            background-color: #0c8fc1;
+            border: 1px solid #0c8fc1;
+            border-radius: 0 2px 2px 0;
+            color: #ffffff;
+            padding: 10px 0;
+            height: 43px;
+            cursor: pointer;
+        }
+
+        .cart-button {
+            /* background-color: #bfbfbf; */
+            background-color: #0c8fc1;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 23%), inset 1px 1px 0 0 hsl(0deg 0% 100% / 20%);
+            padding: 10px 0;
+            text-align: center;
+            height: 41px;
+            border-radius: 2px;
+            font-weight: 500;
+            width: 120px;
+            display: inline-block;
+            color: #FFFFFF;
+            text-decoration: none;
+            color: inherit;
+            border: none;
+            outline: none;
+        }
+
+        .cart-button:hover {
+            text-decoration: none;
+            color: #fff;
+            cursor: pointer
+        }
+
+        .cart-svg {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 8px
+        }
+
+        .item-number {
+            border-radius: 3px;
+            background-color: rgb(207 37 37 / 92%);
+            height: 20px;
+            padding: 3px 6px;
+            font-weight: 500;
+            display: inline-block;
+            color: #fff;
+            line-height: 12px;
+            margin-left: 10px;
+        }
+
+        .item-number:empty:after {
+            content: "0"
+        }
+
+        .upper-links {
+            display: inline-block;
+            padding: 0 11px;
+            line-height: 23px;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 0;
+            color: inherit;
+            border: none;
+            outline: none;
+            font-size: 12px
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 0px
+        }
+
+        .dropdown:hover {
+            background-color: #fff
+        }
+
+        .dropdown:hover .links {
+            color: #000
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block
+        }
+
+        .dropdown .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            display: none;
+            background-color: #fff;
+            color: #333;
+            left: 0px;
+            border: 0;
+            border-radius: 0;
+            box-shadow: 0 4px 8px -3px #555454;
+            margin: 0;
+            padding: 0px
+        }
+
+        .links {
+            color: #fff;
+            text-decoration: none
+        }
+
+        .links:hover {
+            color: #fff;
+            text-decoration: none
+        }
+
+        .profile-links {
+            font-size: 12px;
+            font-family: 'Roboto', sans-serif;
+            border-bottom: 1px solid #e9e9e9;
+            box-sizing: border-box;
+            display: block;
+            padding: 0 11px;
+            line-height: 23px
+        }
+
+        .profile-li {
+            padding-top: 2px
+        }
+
+        .largenav {
+            display: none
+        }
+
+        .smallnav {
+            display: block
+        }
+
+        .smallsearch {
+            margin-left: 15px;
+            margin-top: 15px
+        }
+
+        .menu {
+            cursor: pointer
+        }
+
+        .language-select {
+            position: relative;
+            display: inline-block;
+            font-family: Arial, sans-serif;
+        }
+
+        .language-select select {
+            display: inline-block;
+            padding: 10px;
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #111;
+            border-radius: 5px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: cornflowerblue;
+            background-image: linear-gradient(to bottom, cornflowerblue, deepskyblue);
+            background-repeat: no-repeat;
+            background-position: center right 10px;
+            color: #000;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        .language-select select:focus {
+            outline: none;
+            border-color: #06c;
+        }
+
+        .language-select select::-ms-expand {
+            display: none;
+        }
+
+        .language-select select option {
+            font-size: 14px;
+        }
+
+        .language-select::before {
+            content: '\f107';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-family: FontAwesome;
+            font-size: 16px;
+            color: #06c;
+            pointer-events: none;
+        }
 
 
+        @media screen and (min-width: 768px) {
+            .largenav {
+                display: block
+            }
 
-</style>
+            .smallnav {
+                display: none
+            }
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+            .smallsearch {
+                margin: 0px
+            }
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .no-underline {
+            text-decoration: none;
+        }
+
+
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-  <body class="">
+<body class="">
 
-    <!-- header section starts  -->
-   <header class="header">
-        <a href="/#" class="logo"><img class="logo-img" alt="Logo"></a>
+<!-- header section starts  -->
+<header class="header">
+    <a href="/#" class="logo"><img class="logo-img" alt="Logo"></a>
 
-          <style>
+    <style>
         .logo-img {
-  width: 100%;
-  height: 100%;
-}
-          .logo-img {
-    content: url('/static/images/logo-bun.png');
-  }
-        .header .search-form{
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-img {
+            content: url('/static/images/logo-bun.png');
+        }
+
+        .header .search-form {
             width: 40%;
             height: 5rem;
 
         }
-        .header{
+
+        .header {
             padding: 2.5rem 1rem;
         }
 
 
+        @media only screen and (max-width: 768px) {
+            .search-form {
+                width: 140px;
+                padding-right: 100px;
+            }
+
+            .logo-img {
+                content: url('/static/images/logou.png');
+            }
+        }
+
+        a.fas2 {
+            margin-right: 0px;
+        }
+
+        .navbar-input {
+            width: 100%;
+        }
+
 
         @media only screen and (max-width: 768px) {
-        .search-form{
-            width: 140px;
-            padding-right: 100px;
+            a.logo {
+                height: 50px;
+            }
+
+            .search-form {
+                height: 36px;
+            }
+
+            .fa-search {
+                background: white;
+            }
+
+            .iul {
+                background: white;
+            }
+
+            .header .search-form {
+                display: block;
+                top: 0%;
+                position: relative;
+                width: 120px;
+            }
+
+            .navbar-input {
+                width: 72px;
+            }
+
+            .search-form {
+                width: 50px;
+            }
+
+            .search-form {
+                display: block;
+            }
+
+            /* Design parameters */
+            .header .search-form {
+                background-color: #ffffff;
+                border: none;
+                box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+                padding: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .navbar-input {
+                font-size: 14px;
+                color: #666666;
+                padding: 5px;
+                border: none;
+                outline: none;
+                width: 100%;
+            }
+
+            .navbar-input::placeholder {
+                color: #bbbbbb;
+                content: "CACA";
+            }
+
+            a.fas1 {
+                margin-right: 0rem;
+            }
+
+            .search-form {
+                width: 100px;
+
+            }
+
+            .marla {
+                margin-right: 10px;
+            }
+
+            #search-btn {
+                display: block;
+                cursor: pointer;
+            }
+
+            .small-search-form {
+                display: none;
+                position: absolute;
+                top: 50px;
+                right: 10px;
+                width: 80%;
+                max-width: 300px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                z-index: 999;
+            }
+
+            .small-search-form input[type="search"] {
+                width: 140px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+            .small-search-form button[type="submit"] {
+                display: block;
+                width: 140px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                background-color: #4CAF50;
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+            .navbar-input {
+                width: 1000px;
+            }
         }
-        .logo-img{
-            content: url('/static/images/logou.png');
+
+        .header {
+            padding: 2.5rem 1rem;
         }
+
+        .logo img {
+            height: 6.6rem;
         }
-          a.fas2 {
-              margin-right: 0px;
-          }
-          .navbar-input{
-              width: 100%;
-          }
 
-
-           @media only screen and (max-width: 768px) {
-      a.logo{
-          height: 50px;
-      }
-
-      .search-form{
-          height: 36px;
-      }
-
-      .fa-search{
-          background: white;
-      }
-      .iul{
-          background: white;
-      }
-      .header .search-form {
-    display: block;
-    top: 0%;
-    position: relative;
-    width: 120px;
-  }
-  .navbar-input {
-    width: 72px;
-  }
-  .search-form {
-    width: 50px;
-  }
-  .search-form {
-    display: block;
-  }
-
-  /* Design parameters */
-  .header .search-form {
-    background-color: #ffffff;
-    border: none;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .navbar-input {
-    font-size: 14px;
-    color: #666666;
-    padding: 5px;
-    border: none;
-    outline: none;
-    width: 100%;
-  }
-  .navbar-input::placeholder {
-    color: #bbbbbb;
-      content: "CACA";
-  }
-      a.fas1{
-          margin-right: 0rem;
-      }
-    .search-form {
-      width: 100px;
-
-    }
-      .marla{
-          margin-right: 10px;
-      }
-    #search-btn {
-      display: block;
-      cursor: pointer;
-    }
-    .small-search-form {
-      display: none;
-      position: absolute;
-      top: 50px;
-      right: 10px;
-      width: 80%;
-      max-width: 300px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      z-index: 999;
-    }
-    .small-search-form input[type="search"] {
-      width: 140px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    .small-search-form button[type="submit"] {
-      display: block;
-      width: 140px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #4CAF50;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .navbar-input{
-        width: 1000px;
-    }
-  }
-.header {
-    padding: 2.5rem 1rem;
-}
-  .logo img{
-      height: 6.6rem;
-  }
-  .search-form{
-      width: 100px;
-  }
+        .search-form {
+            width: 100px;
+        }
     </style>
 
-  <form action="/search" class="search-form" method="get">
-    <input class="navbar-input" type="search" id="search-box"
-           value="{% if search_text %}{{ search_text }}{% endif %}"  placeholder="Search..." name="query"
-           id="query">
-    <button type="submit" class="iul">
-      <label for="search-box" class="fas fa-search fas3" style="margin-bottom: 0px"></label>
-    </button>
-  </form>
+    <form action="/search" class="search-form" method="get">
+        <input class="navbar-input" type="search" id="search-box"
+               value="{% if search_text %}{{ search_text }}{% endif %}" placeholder="Search..." name="query"
+               id="query">
+        <button type="submit" class="iul">
+            <label for="search-box" class="fas fa-search fas3" style="margin-bottom: 0px"></label>
+        </button>
+    </form>
 
-        <div class="icons">
+    <div class="icons">
 
-            {% if request.user.is_authenticated %}
-                <a href="/cart" class="fas fa-shopping-cart" style="
-    text-decoration: none;" ><span>{{ product_count_in_cart }}</span></a>
-              {% else %}
-              <a href="/customerlogin" class="fas fa-shopping-cart" style="
+        {% if request.user.is_authenticated %}
+            <a href="/cart" class="fas fa-shopping-cart" style="
+    text-decoration: none;">
+                {% if 'cart' in request.session and request.session.cart|length > 0 %}
+                    {{ request.session.cart|length }}
+                {% endif %}
+            </a>
+        {% else %}
+            <a href="/customerlogin" class="fas fa-shopping-cart" style="
     text-decoration: none;"><span id="cart-counter"></span></a>
-              {% endif %}
-            {% if request.user.is_authenticated %}
-                      <a href="/my-profile" class="fas fa-user"></a>
-              {% else %}
+        {% endif %}
+        {% if request.user.is_authenticated %}
+            <a href="/my-profile" class="fas fa-user"></a>
+        {% else %}
             <a href="/customerlogin" class="fas fa-user"></a>
-              {% endif %}
+        {% endif %}
 
-            <a href="/logout" class="fas fa-sign-out-alt fas2" style="
+        <a href="/logout" class="fas fa-sign-out-alt fas2" style="
     text-decoration: none;"></a>
-        </div>
+    </div>
 
-    </header>
+</header>
 
-    <!-- navbar section  -->
+<!-- navbar section  -->
 <style>
-    .icons{
+    .icons {
         text-decoration: none;
     }
 </style>
 <script>
-$(document).ready(function(){
+    $(document).ready(function () {
 
-function openNav() {
-document.getElementById("mySidenav").style.width = "70%";
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "70%";
 
-document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
 
-function closeNav() {
-document.getElementById("mySidenav").style.width = "0";
-document.body.style.backgroundColor = "rgba(0,0,0,0)";
-}
-
-
-});
-</script>
-
-
-    <script>
-        function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-  }
-
-  // Get the dropdown element
-  var languageSelect = document.getElementById("language");
-
-  // Add an event listener to the dropdown element
-  languageSelect.addEventListener("change", function() {
-    // Get the selected value of the dropdown
-    var selectedValue = this.value;
-
-    // Set the cookie with the selected value
-    setCookie("language", selectedValue, 30);
-  });
-    $(document).ready(function(){
-
-    function openNav() {
-    document.getElementById("mySidenav").style.width = "70%";
-
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    }
-
-    function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.body.style.backgroundColor = "rgba(0,0,0,0)";
-    }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
 
 
     });
-    </script>
+</script>
 
-    </div>
-  </body>
+
+<script>
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // Get the dropdown element
+    var languageSelect = document.getElementById("language");
+
+    // Add an event listener to the dropdown element
+    languageSelect.addEventListener("change", function () {
+        // Get the selected value of the dropdown
+        var selectedValue = this.value;
+
+        // Set the cookie with the selected value
+        setCookie("language", selectedValue, 30);
+    });
+    $(document).ready(function () {
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "70%";
+
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
+
+
+    });
+</script>
+
+</div>
+</body>
 </html>

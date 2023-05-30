@@ -145,3 +145,92 @@ INFO 2023-05-29 11:13:19,708 views 14968 19196 Client connected from IP: 127.0.0
 INFO 2023-05-29 11:18:01,895 views 3792 3016 Client connected from IP: 127.0.0.1
 INFO 2023-05-29 11:32:48,331 views 3792 12688 Client connected from IP: 127.0.0.1
 INFO 2023-05-29 11:33:00,878 views 3792 12688 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 15:02:10,729 views 22768 2508 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 15:02:12,239 views 22768 2508 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 15:02:14,739 views 22768 2508 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:28:40,253 views 18656 4320 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:28:55,758 views 18656 4320 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:29:04,885 views 18656 4320 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:29:06,059 views 18656 4320 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:29:35,863 views 18656 4320 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:30:42,321 views 10724 13072 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:30:45,946 views 10724 13072 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:30:59,573 views 22492 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:31:00,562 views 22492 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:31:21,073 views 22492 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:31:28,235 views 22492 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:34:12,022 views 22492 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:34:13,502 views 22492 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:43:46,639 views 9948 24392 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:46:17,770 views 24452 716 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:46:19,471 views 24452 716 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 16:46:21,464 views 24452 716 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:19:11,530 views 9796 23648 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:24:03,973 views 24456 9912 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:24:09,040 views 24456 9912 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:24:10,406 views 24456 9912 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:27:45,933 views 10380 23164 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:27:52,045 views 10380 23164 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:27:53,509 views 10380 23164 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:28:04,276 views 10380 23164 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:28:25,968 views 10380 23164 Post received
+INFO 2023-05-29 17:28:25,968 views 10380 23164 Adress is valid
+INFO 2023-05-29 17:28:25,968 views 10380 23164 hanlde started
+INFO 2023-05-29 17:28:25,969 views 10380 23164 language : ru | description : testing alabalaoportaalaca,  | amount : 10 | currency : 978 |sent|
+INFO 2023-05-29 17:28:26,268 maib_client 10380 23164 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-05-29 17:28:26,269 views 10380 23164 redirect to https://maib.ecommerce.md:21443/ecomm/ClientHandler?trans_id=unregistered merchant. IP
+INFO 2023-05-29 17:28:38,462 views 10380 23164 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:29:22,199 views 10380 23164 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:31:13,731 views 10380 23164 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:33:09,978 views 7968 4320 Client connected from IP: 127.0.0.1
+INFO 2023-05-29 17:33:10,308 views 7968 4320 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:11:53,039 views 21284 21340 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:12:00,556 views 21284 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:12:52,265 views 21284 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:14:39,688 views 21284 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:14:47,930 views 21284 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:16:44,332 views 21284 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:16:51,127 views 21284 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:16:58,423 views 21284 20640 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:23:33,207 views 21284 15604 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:23:38,612 views 21284 15604 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:23:56,092 views 21284 15604 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:24:23,433 views 21284 15604 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:24:29,113 views 21284 15604 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:25:27,024 views 21284 15604 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:32:03,058 views 21284 14884 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:34:11,356 views 21284 11408 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 12:34:16,572 views 21284 21872 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:15:42,658 views 21284 7504 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:15:45,939 views 21284 7504 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:15:46,347 views 21284 7504 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:15:48,447 views 21284 7504 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:15:52,001 views 21284 7504 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:15:53,017 views 21284 7504 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:45:22,188 views 20788 15716 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:45:23,895 views 20788 15716 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:45:29,219 views 20788 15716 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:45:34,535 views 20788 15716 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:45:35,600 views 20788 15716 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:01,013 views 15720 8500 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:02,275 views 15720 8500 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:07,569 views 15720 8500 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:15,009 views 15720 6696 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:16,056 views 15720 6696 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:20,245 views 15720 8500 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:24,687 views 15720 8500 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:32,452 views 15720 8500 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:35,946 views 15720 8500 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:50:38,279 views 15720 8500 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:52:13,537 views 15720 6696 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:52:14,805 views 15720 6696 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:52:16,605 views 15720 6696 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:53:14,930 views 15720 6696 Client connected from IP: 127.0.0.1
+INFO 2023-05-30 13:53:52,428 views 15720 6696 Post received
+INFO 2023-05-30 13:53:52,428 views 15720 6696 Adress is valid
+INFO 2023-05-30 13:53:52,428 views 15720 6696 hanlde started
+INFO 2023-05-30 13:53:52,429 views 15720 6696 language : ru | description : testing alabalaoportaalaca,  | amount : 10 | currency : 978 |sent|
+INFO 2023-05-30 13:53:52,921 maib_client 15720 6696 Got response from maib 200, error: unregistered merchant. IP: 37.233.8.99
+
+INFO 2023-05-30 13:53:52,921 views 15720 6696 redirect to https://maib.ecommerce.md:21443/ecomm/ClientHandler?trans_id=unregistered merchant. IP

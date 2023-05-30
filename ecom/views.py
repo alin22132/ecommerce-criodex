@@ -1,4 +1,21 @@
-import ipaddress
+import json
+from threading import Timer
+
+import requests
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import Group
+from django.core.mail import send_mail
+from django.db.models import Sum
+from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
+
+from . import forms, models
+from .logger import logger
+from django.shortcuts import get_object_or_404
+from .models import CartItem
+from maib_gateway.maib_client import MaibClient
 import json
 from threading import Timer
 
@@ -11,18 +28,12 @@ from django.core.mail import send_mail
 from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 
-from maib_gateway.constants import MAIB_TEST_REDIRECT_URL, MAIB_TEST_BASE_URI, MAIB_TEST_CERT_URL, \
-    MAIB_TEST_CERT_KEY_URL
 from maib_gateway.maib_client import MaibClient
 from . import forms, models
 from .logger import logger
-from .models import Product, OrderItem
-from django.shortcuts import get_object_or_404
-from .models import Product, CartItem
-from maib_gateway.maib_client import MaibClient
+from .models import CartItem
 
 
 def home_view(request):
@@ -252,29 +263,27 @@ def search_view(request):
 
 # any one can add product to cart, no need of signin
 
-from django.contrib.auth.models import User
-from .models import Customer
-
 
 def add_to_cart_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    customer = request.user.customer  # TODO: anonymus user cant add to cart handle that
 
-    # get all CartItem objects for this customer and product combination
-    cart_items = CartItem.objects.filter(customer=customer, product=product)
+    # Check if the 'cart' session key exists
+    if 'cart' not in request.session:
+        request.session['cart'] = {}
 
-    if cart_items.exists():
-        # if there are existing CartItem objects, add up their quantities
-        quantity = cart_items.aggregate(Sum('quantity'))['quantity__sum'] or 0
-        # increase the total quantity by 1
-        quantity += 1
-        # update the quantity of the first CartItem object
-        cart_item = cart_items.first()
-        cart_item.quantity = quantity
-        cart_item.save()
+    cart = request.session['cart']
+
+    # Increment the quantity for the product in the session cart
+    if str(product.pk) in cart:
+        cart[str(product.pk)]['quantity'] += 1
     else:
-        # if there are no existing CartItem objects, create a new one
-        CartItem.objects.create(customer=customer, product=product)
+        # Add the product to the session cart
+        cart[str(product.pk)] = {
+            'product': product.name,
+            'quantity': 1,
+        }
+
+    request.session.modified = True  # Save changes to the session
 
     messages.info(request, product.name + ' added to cart successfully!')
 
@@ -286,48 +295,52 @@ global total1
 
 # for checkout of cart
 def cart_view(request):
-    customer = request.user.customer
-    cart_items = CartItem.objects.filter(customer=customer)
-    products = []
-    total = 0
+    if 'cart' in request.session:
+        cart = request.session['cart']
+        products = []
+        total = 0
 
-    for cart_item in cart_items:
-        product = cart_item.product
-        product.quantity = cart_item.quantity
-        product.total = product.price * product.quantity
-        products.append(product)
-        total += product.total
+        for product_id, item_data in cart.items():
+            product = get_object_or_404(Product, pk=int(product_id))
+            quantity = item_data['quantity']
+            product.quantity = quantity
+            product.total = product.price * quantity
+            products.append(product)
+            total += product.total
 
-    product_count_in_cart = len(cart_items)
+        product_count_in_cart = sum(item_data['quantity'] for item_data in cart.values())
 
-    customer = request.user.customer
-    cart_items = CartItem.objects.filter(customer=customer)
-    product_count_in_cart = sum(cart_item.quantity for cart_item in cart_items)
+        return render(request, 'ecom/cart.html', {
+            'products': products,
+            'total': total,
+            'product_count_in_cart': product_count_in_cart,
+        })
 
-    return render(request, 'ecom/cart.html', {
-        'products': products,
-        'total': total,
-        'product_count_in_cart': product_count_in_cart,
-    })
+    return render(request, 'ecom/cart.html')
 
 
 def remove_from_cart_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    customer = request.user.customer
 
-    # get the CartItem object for this customer and product combination
-    cart_item = CartItem.objects.filter(customer=customer, product=product).first()
+    # Check if the 'cart' session key exists
+    if 'cart' in request.session:
+        cart = request.session['cart']
 
-    if cart_item:
-        # decrease the quantity of the CartItem by 1
-        if cart_item.quantity > 1:
-            cart_item.quantity -= 1
-            cart_item.save()
+        # Decrement the quantity for the product in the session cart
+        if str(product.pk) in cart:
+            cart[str(product.pk)]['quantity'] -= 1
+
+            # Remove the product from the session cart if the quantity becomes 0
+            if cart[str(product.pk)]['quantity'] <= 0:
+                del cart[str(product.pk)]
+
+            request.session.modified = True  # Save changes to the session
+
             messages.success(request, product.name + ' quantity reduced by 1 in the cart!')
         else:
-            # if the quantity is 1, remove the entire CartItem object
-            cart_item.delete()
-            messages.success(request, product.name + ' removed from cart successfully!')
+            messages.error(request, product.name + ' is not in the cart!')
+    else:
+        messages.error(request, 'Cart is empty!')
 
     return redirect(request.GET.get('next', 'cart'))
 
@@ -348,12 +361,17 @@ def send_feedback_view(request):
 @login_required(login_url='customerlogin')
 @user_passes_test(is_customer)
 def customer_home_view(request):
-    products = models.Product.objects.all()
+    products = Product.objects.all()
     customer = request.user.customer
+
+    # Retrieve the cart items for the customer
     cart_items = CartItem.objects.filter(customer=customer)
-    product_count_in_cart = sum(cart_item.quantity for cart_item in cart_items)
-    return render(request, 'ecom/customer_home.html',
-                  {'products': products, 'product_count_in_cart': product_count_in_cart})
+    product_count_in_cart = cart_items.aggregate(Sum('quantity'))['quantity__sum'] or 0
+
+    return render(request, 'ecom/customer_home.html', {
+        'products': products,
+        'product_count_in_cart': product_count_in_cart
+    })
 
 
 # shipment address before placing order
@@ -401,7 +419,7 @@ def customer_address_view(request):
 # then only this view should be accessed
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Customer, Product, Orders
+from .models import Product
 
 
 @login_required(login_url='customerlogin')
@@ -432,7 +450,8 @@ def payment_success_view(request):  # TODO: Look here to payment_succes_view aft
         orders.append(order)
 
     # Clear the cart cookies
-    response = render(request, 'payment_success.html', {'customer': customer, 'orders': orders, 'total_price': total_price})
+    response = render(request, 'payment_success.html',
+                      {'customer': customer, 'orders': orders, 'total_price': total_price})
     response.delete_cookie('product_ids')
     response.delete_cookie('email')
     response.delete_cookie('mobile')

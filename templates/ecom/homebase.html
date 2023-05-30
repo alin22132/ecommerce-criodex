@@ -702,10 +702,18 @@
       <a href="/customerlogin" class="nu fas fa-user"></a>
     {% endif %}
     {% if request.user.is_authenticated %}
-      <a href="/cart" class="nu fas1 fa-shopping-cart marla`"><span id="cart-counter"></span></a>
-    {% else %}
-      <a href="/customerlogin" class="nu fas fa-shopping-cart fas1"><span id="cart-counter"></span></a>
-    {% endif %}
+    <a href="/cart" class="nu fas1 fa-shopping-cart marla">
+        {% if product_count_in_cart > 0 %}
+            <span class="item-number">{{ product_count_in_cart }}</span>
+        {% endif %}
+    </a>
+{% else %}
+    <a href="/cart" class="nu fas fa-shopping-cart fas1">
+        {% if 'cart' in request.session and request.session.cart|length > 0 %}
+            <span class="item-number">{{ request.session.cart|length }}</span>
+        {% endif %}
+    </a>
+{% endif %}
   </div>
 
 </header>
