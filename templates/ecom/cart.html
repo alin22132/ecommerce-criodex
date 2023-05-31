@@ -99,34 +99,12 @@
   color: #FFFFFF;
 }
 
-.item-number {
-  border-radius: 3px;
-  background-color: #82B7DC;
-  height: 20px;
-  padding: 3px 6px;
-  font-weight: 500;
-  display: inline-block;
-  color: #1C1C1C;
-  line-height: 12px;
-  margin-left: 10px;
-}
+
 
 .item-number:empty:after {
   content: "0";
 }
 
-.item-number::before {
-  content: "";
-  display: inline-block;
-  width: 0;
-  height: 0;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-left: 6px solid #82B7DC;
-  position: absolute;
-  margin-left: -6px;
-  margin-top: 4px;
-}
 
 .button span {
   cursor: pointer;
@@ -466,6 +444,31 @@
   </div>
 </div>
     <style>
+    .item-number {
+    position: absolute;
+    background-color: #f4f4f4; /* Pale color */
+    margin-left: -6px;
+    margin-top: 3px;
+    color: #e7c0c8; /* Light pink */
+    padding: 3px 6px;
+    border-radius: 55%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.item-number.pink {
+    color: black; /* Pink */
+}
+.item-number.grey {
+    color: #b7b7b7; /* Grey */
+}
+
+.item-number.dark-grey {
+    color: #666666; /* Dark grey */
+}
+    .imagein2{
+        width: 250px;
+        height: 250px;
+    }
             @media only screen and (max-width: 768px) {
                .table {
     font-size: 50%;

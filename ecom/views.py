@@ -263,7 +263,6 @@ def search_view(request):
 
 # any one can add product to cart, no need of signin
 
-
 def add_to_cart_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
@@ -283,6 +282,10 @@ def add_to_cart_view(request, pk):
             'quantity': 1,
         }
 
+    # Calculate the total quantity of all products in the cart
+    total_quantity = sum(item['quantity'] for item in cart.values())
+
+    request.session['total_quantity'] = total_quantity
     request.session.modified = True  # Save changes to the session
 
     messages.info(request, product.name + ' added to cart successfully!')
@@ -334,6 +337,10 @@ def remove_from_cart_view(request, pk):
             if cart[str(product.pk)]['quantity'] <= 0:
                 del cart[str(product.pk)]
 
+            # Calculate the total quantity of all products in the cart
+            total_quantity = sum(item['quantity'] for item in cart.values())
+
+            request.session['total_quantity'] = total_quantity
             request.session.modified = True  # Save changes to the session
 
             messages.success(request, product.name + ' quantity reduced by 1 in the cart!')

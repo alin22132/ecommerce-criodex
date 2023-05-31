@@ -606,23 +606,22 @@
                         {% if request.user.is_authenticated %}
                             <a href="/cart" class="nu fas1 fa-shopping-cart marla">
                                 {% if product_count_in_cart > 0 %}
-                                    <span class="item-number">{{ product_count_in_cart }}</span>
+                                    <span class="item-number">{{ request.session.total_quantity }}</span>
                                 {% endif %}
                             </a>
                         {% else %}
                             <a href="/cart" class="nu fas fa-shopping-cart fas1">
                                 {% if 'cart' in request.session and request.session.cart|length > 0 %}
-                                    <span class="item-number">{{ request.session.cart|length }}</span>
+                                    <span class="item-number">{{ request.session.total_quantity }}</span>
                                 {% endif %}
                             </a>
                         {% endif %}
                     </a>
                 </div>
-
-
             </div>
         </div>
     </div>
+
 {% endif %}
 
 <!-- content start-->
@@ -777,6 +776,29 @@
 
     });
 </script>
+<style>
+      .item-number {
+    position: absolute;
+    background-color: #f4f4f4; /* Pale color */
+    margin-left: -6px;
+    margin-top: 3px;
+    color: #e7c0c8; /* Light pink */
+    padding: 3px 6px;
+    border-radius: 55%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.item-number.pink {
+    color: black; /* Pink */
+}
+.item-number.grey {
+    color: #b7b7b7; /* Grey */
+}
+
+.item-number.dark-grey {
+    color: #666666; /* Dark grey */
+}
+</style>
 
 </body>
 </html>
