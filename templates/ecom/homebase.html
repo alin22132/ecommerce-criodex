@@ -125,6 +125,8 @@
             color: #1C1C1C;
             line-height: 12px;
             margin-left: 10px;
+            font-size: 10px;
+            height: 16px;
         }
 
         .item-number:empty:after {
@@ -660,236 +662,7 @@
 {% if request.user.is_authenticated %}
     {% include "ecom/customer_navbar.html" %}
 {% else %}
-
-    <!-- header section starts  -->
-
-   <header class="header">
-  <a href="/#" class="logo">
-    <img src="/static/images/logo-bun.png" style="max-width: 450px" alt="">
-  </a>
-
-
-    <style>
-        .search-form{
-            width: 530px;
-        }
-
-        @media only screen and (max-width: 768px) {
-        .search-form{
-            width: 140px;
-            padding-right: 100px;
-        }
-        }
-    </style>
-
-  <form action="/search" class="search-form" method="get">
-    <input class="navbar-input" type="search" id="search-box"
-           value="{% if search_text %}{{ search_text }}{% endif %}"  placeholder="Search..." name="query"
-           id="query" style="width: 100%">
-    <button type="submit" class="iul">
-      <label for="search-box" class="fas fa-search"></label>
-    </button>
-  </form>
-
-
-
-
-  <div class="icons">
-    <a id="menu-btn" class="nu fas fa-bars menu-btn"></a>
-    {% if request.user.is_authenticated %}
-      <a href="/my-profile" class="nu fas fa-user"></a>
-    {% else %}
-      <a href="/customerlogin" class="nu fas fa-user"></a>
-    {% endif %}
-    {% if request.user.is_authenticated %}
-    <a href="/cart" class="nu fas1 fa-shopping-cart marla">
-        {% if product_count_in_cart > 0 %}
-            <span class="item-number">{{ product_count_in_cart }}</span>
-        {% endif %}
-    </a>
-{% else %}
-    <a href="/cart" class="nu fas fa-shopping-cart fas1">
-        {% if 'cart' in request.session and request.session.cart|length > 0 %}
-             <span class="item-number cart-number appear pink">{{ request.session.total_quantity }}</span>
-        {% endif %}
-    </a>
-{% endif %}
-  </div>
-<style>
-.item-number {
-    position: absolute;
-    background-color: #f4f4f4; /* Pale color */
-    margin-left: -6px;
-    margin-top: 3px;
-    color: #e7c0c8; /* Light pink */
-    padding: 3px 6px;
-    border-radius: 55%;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.item-number.pink {
-    color: black; /* Pink */
-}
-.item-number.grey {
-    color: #b7b7b7; /* Grey */
-}
-
-.item-number.dark-grey {
-    color: #666666; /* Dark grey */
-}
-
-</style>
-</header>
-
-<style>
-.navbar-input::placeholder{
-    content: "Sracas";
-}
-.iul{
-    background: #f5f5f5;
-}
-.fa-search{
-    background: #f5f5f5;
-}
-a.fas1{
-        margin-right: 7rem;
-    font-size: 20px;
-    color: hotpink;
-}
-.marla{
-    margin-right: 100px;
-}
-.header .search-form{
-    width: 40%;
-}
-.navbar-input{
-    width: 100%;
-}
-  @media only screen and (max-width: 768px) {
-      .icons{
-          font-size: 1rem;
-      }
-      .logo img{
-          padding-left: 0px;
-      }
-
-      .search-form{
-          height: 36px;
-      }
-        .logo img{
-            content: url('/static/images/logou.png');
-        }
-      .fa-search{
-          background: white;
-      }
-      .iul{
-          background: white;
-      }
-      .header .search-form {
-    display: block;
-    top: 0%;
-    position: relative;
-    width: 160px;
-          height: 36px;
-  }
-  .navbar-input {
-    width: 72px;
-  }
-  .search-form {
-    width: 120px;
-  }
-  .search-form {
-    display: block;
-  }
-
-  /* Design parameters */
-  .header .search-form {
-    background-color: #ffffff;
-    border: none;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .navbar-input {
-    font-size: 14px;
-    color: #666666;
-    padding: 5px;
-    border: none;
-    outline: none;
-    width: 100%;
-  }
-  .navbar-input::placeholder {
-    color: #bbbbbb;
-      content: "CACA";
-  }
-      a.fas1{
-          margin-right: 0px;
-      }
-    .search-form {
-      width: 100px;
-
-    }
-      .marla{
-          margin-right: 10px;
-      }
-    #search-btn {
-      display: block;
-      cursor: pointer;
-    }
-    .small-search-form {
-      display: none;
-      position: absolute;
-      top: 50px;
-      right: 10px;
-      width: 80%;
-      max-width: 300px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      z-index: 999;
-    }
-    .small-search-form input[type="search"] {
-      width: 140px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    .small-search-form button[type="submit"] {
-      display: block;
-      width: 140px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #4CAF50;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  }
-.header {
-    padding: 2.5rem 1rem;
-}
-  .logo img{
-      height: 6.6rem;
-  }
-
-</style>
-
-
-    <!-- navbar section  -->
-
-    <nav class="navbar">
-        <div id="close-navbar" class="fas fa-times"></div>
-        <a href="#home">home</a>
-        <a href="#shop">shop</a>
-        <a href="#gallery">gallery</a>
-        <a href="#team">team</a>
-        <a href="#arrivals">arrivals</a>
-        <a href="#blogs">blogs</a>
-    </nav>
+    {% include "ecom/navbar.html" %}
 
 
   <div class="slider">
@@ -995,6 +768,8 @@ let intervalId = setInterval(nextSlide, 3000);
     margin-left: 20rem;
     margin-right: 20rem;
 }
+
+
     </style>
 {% endif %}
 

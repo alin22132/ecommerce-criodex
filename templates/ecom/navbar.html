@@ -87,33 +87,9 @@
         fill: #fff;
     }
 
-    .item-number {
-        border-radius: 3px;
-        background-color: #00bfff;
-        height: 20px;
-        padding: 3px 6px;
-        font-weight: 500;
-        display: inline-block;
-        color: #fff;
-        line-height: 12px;
-        margin-left: 10px;
-    }
 
     .item-number:empty:after {
         content: "0";
-    }
-
-    .item-number::before {
-        content: "";
-        display: inline-block;
-        width: 0;
-        height: 0;
-        border-top: 6px solid transparent;
-        border-bottom: 6px solid transparent;
-        border-left: 6px solid #00bfff;
-        position: absolute;
-        margin-left: -6px;
-        margin-top: 4px;
     }
 
     .upper-links {
@@ -432,25 +408,54 @@
 
 
     <div class="icons">
-        <a id="menu-btn" class="fas fa-bars menu-btn"></a>
-        {% if request.user.is_authenticated %}
-            <a href="/my-profile" class="fas fa-user"></a>
-        {% else %}
-            <a href="/customerlogin" class="fas fa-user"></a>
+    <a id="menu-btn" class="nu fas fa-bars menu-btn"></a>
+    {% if request.user.is_authenticated %}
+      <a href="/my-profile" class="nu fas fa-user"></a>
+    {% else %}
+      <a href="/customerlogin" class="nu fas fa-user"></a>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+    <a href="/cart" class="nu fas1 fa-shopping-cart marla">
+        {% if product_count_in_cart > 0 %}
+            <span class="item-number">{{ product_count_in_cart }}</span>
         {% endif %}
-        {% if request.user.is_authenticated %}
-            <a href="/cart" class="fas1 fa-shopping-cart marla"><span id="cart-counter"></span></a>
-        {% else %}
-            <a href="/customerlogin" class="fas fa-shopping-cart fas1"><span id="cart-counter"></span></a>
+    </a>
+{% else %}
+    <a href="/cart" class="nu fas fa-shopping-cart fas1">
+        {% if 'cart' in request.session and request.session.cart|length > 0 %}
+             <span class="item-number cart-number appear pink">{{ request.session.total_quantity }}</span>
         {% endif %}
-    </div>
+    </a>
+{% endif %}
+  </div>
+<style>
+.item-number {
+    position: absolute;
+    background-color: #f4f4f4; /* Pale color */
+    margin-left: -6px;
+    margin-top: 3px;
+    color: #e7c0c8; /* Light pink */
+    padding: 3px 6px;
+    border-radius: 55%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.item-number.pink {
+    color: black; /* Pink */
+}
+.item-number.grey {
+    color: #b7b7b7; /* Grey */
+}
+
+.item-number.dark-grey {
+    color: #666666; /* Dark grey */
+}
+
+</style>
 
 </header>
 
 <style>
-    .navbar-input::placeholder {
-        content: "Sracas";
-    }
 
     .iul {
         background: #f5f5f5;

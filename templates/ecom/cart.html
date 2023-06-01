@@ -1,79 +1,1123 @@
-{% extends 'ecom/homebase.html' %}
 {% load static %}
 {% block content %}
 
+    {% if redirect_to %}
+        <script>
+            location.replace("{{redirect_to}}")
+        </script>
+    {% endif %}
 
-{% if redirect_to %}
-<script>
-  location.replace("{{redirect_to}}")
-</script>
-{% endif %}
-
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
         <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
 
         <!-- custom css file link  -->
-    <link rel="stylesheet" href="../../static/css/style.css?v=12">
+        <link rel="stylesheet" href="../../static/css/style.css?v=12">
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<style media="screen">
-  .button {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #f4511e;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
-
-
-#navbar {
-  background-color: #1C1C1C;
-  height: 123px;
-}
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"
+              id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <style media="screen">
+            .button {
+                display: inline-block;
+                border-radius: 4px;
+                background-color: #f4511e;
+                border: none;
+                color: #FFFFFF;
+                text-align: center;
+                font-size: 28px;
+                padding: 20px;
+                width: 200px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin: 5px;
+            }
 
 
-.navbar-input {
-  padding: 11px 5px;
-  border-radius: 2px 0 0 2px;
-  border: 0 none;
-  outline: 0 none;
-  font-size: 15px;
-  color: #1C1C1C;
-  background-color: #F1F1F1
-}
+            #navbar {
+                background-color: #1C1C1C;
+                height: 123px;
+            }
 
-.navbar-button {
-  background-color: #F1F1F1;
-  border: 1px solid #F1F1F1;
-  border-radius: 0 2px 2px 0;
-  color: #ffffff;
-  padding: 10px 0;
-  height: 43px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
 
-.navbar-button:hover{
-  background-color: #808080;
-  border: 0px solid #808080;
-  color: #fff;
-}
+            .navbar-input {
+                padding: 11px 5px;
+                border-radius: 2px 0 0 2px;
+                border: 0 none;
+                outline: 0 none;
+                font-size: 15px;
+                color: #1C1C1C;
+                background-color: #F1F1F1
+            }
 
-.cart-button {
+            .navbar-button {
+                background-color: #F1F1F1;
+                border: 1px solid #F1F1F1;
+                border-radius: 0 2px 2px 0;
+                color: #ffffff;
+                padding: 10px 0;
+                height: 43px;
+                cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+            .navbar-button:hover {
+                background-color: #808080;
+                border: 0px solid #808080;
+                color: #fff;
+            }
+
+            .cart-button {
+                background-color: #E6E6E6;
+                border: none;
+                border-radius: 20px;
+                color: #5F5F5F;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                font-weight: 500;
+                height: 40px;
+                letter-spacing: 0.5px;
+                padding: 0 20px;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+            .cart-button:hover {
+                background-color: #FFC0CB;
+                text-decoration: none;
+                color: #FFFFFF;
+            }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+            .button2 {
+                background-color: white;
+                color: black;
+                border: 2px solid #008CBA;
+            }
+
+            .button2:hover {
+                background-color: #008CBA;
+                color: white;
+            }
+
+            .btn-success {
+                color: #fff;
+                text-decoration: none;
+                padding: 1px;
+                border-radius: 25px;
+                background-color: #60bf6d;
+                transition: background-color 0.3s ease, color 0.3s ease;
+                cursor: pointer;
+                display: inline-block;
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 1px;
+                font-size: 14px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                border: none;
+                outline: none;
+                width: 110px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+            }
+
+            .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+                color: #fff;
+                background-color: #3b9656;
+            }
+
+            .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+                background-image: none;
+            }
+
+            .btn-success.disabled, .btn-success[disabled], fieldset[disabled] .btn-success, .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .btn-success.disabled.active, .btn-success[disabled].active, fieldset[disabled] .btn-success.active {
+                background-color: #93e0a6;
+            }
+
+            .btn-danger1 {
+                color: #fff;
+                text-decoration: none;
+                padding: 1px;
+                border-radius: 25px;
+                background-color: #ffa0a0;
+                transition: background-color 0.3s ease, color 0.3s ease;
+                cursor: pointer;
+                display: inline-block;
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 1px;
+                font-size: 14px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                border: none;
+                outline: none;
+                width: 110px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                box-sizing: border-box
+            }
+
+            .btn-danger {
+                color: #fff;
+                text-decoration: none;
+                padding: 1px;
+                border-radius: 25px;
+                background-color: #ffa0a0;
+                transition: background-color 0.3s ease, color 0.3s ease;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 1px;
+                font-size: 14px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                border: none;
+                outline: none;
+                width: 110px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                box-sizing: border-box
+            }
+
+
+            .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+                color: #fff;
+                background-color: #e67878;
+            }
+
+            .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+                background-image: none;
+            }
+
+            .btn-danger.disabled, .btn-danger[disabled], fieldset[disabled] .btn-danger, .btn-danger.disabled:hover, .btn-danger[disabled]:hover, fieldset[disabled] .btn-danger:hover, .btn-danger.disabled:focus, .btn-danger[disabled]:focus, fieldset[disabled] .btn-danger:focus, .btn-danger.disabled:active, .btn-danger[disabled]:active, fieldset[disabled] .btn-danger:active, .btn-danger.disabled.active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger.active {
+                background-color: #ffc5c5;
+            }
+
+            @media only screen and (max-width: 768px) {
+                .search-form {
+                    width: 140px;
+                    padding-right: 100px;
+                }
+
+                .logo-img {
+                    content: url('/static/images/logou.png');
+                }
+            }
+
+            a.fas2 {
+                margin-right: 0px;
+            }
+
+            .navbar-input {
+                width: 100px;
+            }
+
+
+            @media only screen and (max-width: 768px) {
+                a.fas2 {
+                    margin-right: 0px;
+                }
+
+                a.logo {
+                    height: 50px;
+                }
+
+                .search-form {
+                    height: 36px;
+                }
+
+                .fa-search {
+                    background: white;
+                }
+
+                .iul {
+                    background: white;
+                }
+
+                .header .search-form {
+                    display: block;
+                    top: 0%;
+                    position: relative;
+                    width: 120px;
+                    height: 36px;
+                }
+
+                .navbar-input {
+                    width: 72px;
+                }
+
+                .search-form {
+                    width: 50px;
+                }
+
+                .search-form {
+                    display: block;
+                }
+
+                /* Design parameters */
+                .header .search-form {
+                    background-color: #ffffff;
+                    border: none;
+                    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+                    padding: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .navbar-input {
+                    font-size: 14px;
+                    color: #666666;
+                    padding: 5px;
+                    border: none;
+                    outline: none;
+                    width: 100%;
+                }
+
+                .navbar-input::placeholder {
+                    color: #bbbbbb;
+                    content: "CACA";
+                }
+
+                a.fas1 {
+                    margin-right: 2rem;
+                }
+
+                .search-form {
+                    width: 100px;
+
+                }
+
+                .marla {
+                    margin-right: 10px;
+                }
+
+                #search-btn {
+                    display: block;
+                    cursor: pointer;
+                }
+
+                .small-search-form {
+                    display: none;
+                    position: absolute;
+                    top: 50px;
+                    right: 10px;
+                    width: 80%;
+                    max-width: 300px;
+                    background-color: #fff;
+                    border-radius: 5px;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                    z-index: 999;
+                }
+
+                .small-search-form input[type="search"] {
+                    width: 140px;
+                    padding: 10px;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 16px;
+                }
+
+                .small-search-form button[type="submit"] {
+                    display: block;
+                    width: 140px;
+                    padding: 10px;
+                    border: none;
+                    border-radius: 5px;
+                    background-color: #4CAF50;
+                    color: #fff;
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+
+                .navbar-input {
+                    height: 2rem;
+                }
+
+                .search-form {
+                    height: 36px;
+                }
+
+                .header {
+                    height: 9rem;
+                }
+
+                .header {
+                    padding: 2.5rem 1rem;
+                    height: 9rem;
+                }
+
+                .search-form {
+                    width: 160px;
+                    height: 36px;
+                }
+
+                .navbar-input {
+                    font-size: 1.6rem;
+                    width: 100%;
+                }
+
+                .search-form {
+
+                }
+
+                .header .search-form label {
+                    font-size: 1.7rem;
+                }
+
+                .header .search-form a {
+                    font-size: 100rem;
+                }
+
+                .logo-img {
+                    padding-bottom: 10px;
+                }
+            }
+
+            .logo img {
+                height: 6.6rem;
+            }
+
+            .search-form {
+                width: 100px;
+            }
+
+            .navbar-input {
+                width: 100%;
+            }
+        </style>
+        <link rel="icon" type="image/x-icon" href="/static/images/logou.png">
+    </head>
+
+
+    <style>
+
+        body {
+            background-color: #f7f7f7;
+        }
+
+        #navbar {
+            background-color: #000000;
+            color: white;
+        }
+
+        .row1 {
+            padding-top: 10px;
+            padding-right: 50px
+        }
+
+        .row2 {
+            padding-bottom: 20px
+        }
+
+        .navbar-input {
+            padding: 11px 16px;
+            border-radius: 2px 0 0 2px;
+            border: 0 none;
+            outline: 0 none;
+            font-size: 15px;
+            color: #000;
+        }
+
+        .navbar-button {
+            background-color: #F1F1F1;
+            border: 1px solid #0c8fc1;
+            border-radius: 0 2px 2px 0;
+            color: #ffffff;
+            padding: 10px 0;
+            height: 43px;
+            cursor: pointer;
+        }
+
+        .cart-button {
+            background-color: #00bfff;
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            height: 40px;
+            letter-spacing: 0.5px;
+            padding: 0 20px;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .cart-button:hover {
+            background-color: #0080ff;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .cart-svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            fill: #fff;
+        }
+
+        .upper-links {
+            display: inline-block;
+            padding: 0 11px;
+            line-height: 23px;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 0;
+            color: inherit;
+            border: none;
+            outline: none;
+            font-size: 12px
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 0px
+        }
+
+        .dropdown:hover {
+            background-color: #fff
+        }
+
+        .dropdown:hover .links {
+            color: #000
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block
+        }
+
+        .dropdown .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            display: none;
+            background-color: #fff;
+            color: #333;
+            left: 0px;
+            border: 0;
+            border-radius: 0;
+            box-shadow: 0 4px 8px -3px #555454;
+            margin: 0;
+            padding: 0px
+        }
+
+        .links {
+            color: #fff;
+            text-decoration: none
+        }
+
+        .links:hover {
+            color: #fff;
+            text-decoration: none
+        }
+
+        .profile-links {
+            font-size: 12px;
+            font-family: 'Roboto', sans-serif;
+            border-bottom: 1px solid #e9e9e9;
+            box-sizing: border-box;
+            display: block;
+            padding: 0 11px;
+            line-height: 23px
+        }
+
+        .profile-li {
+            padding-top: 2px
+        }
+
+        .largenav {
+            display: none
+        }
+
+        .smallnav {
+            display: block
+        }
+
+        .smallsearch {
+            margin-left: 15px;
+            margin-top: 15px
+        }
+
+        .menu {
+            cursor: pointer
+        }
+
+        .language-select select {
+            font-size: 16px;
+            padding: 10px;
+            width: 100px;
+            border: none;
+            border-radius: 3px;
+            background-color: #f2f2f2;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"><path fill="%23333" d="M27.9 8.1c-1-1-2.6-1-3.6 0L16 16.4 8.9 9.1c-1-1-2.6-1-3.6 0s-1 2.6 0 3.6L14.3 18l-6.4 6.4c-1 1-1 2.6 0 3.6.5.5 1.2.8 1.8.8s1.3-.3 1.8-.8L16 19.6l7.1 7.1c.5.5 1.2.8 1.8.8s1.3-.3 1.8-.8c1-1 1-2.6 0-3.6L17.7 18l6.2-6.3c1-.9 1-2.5 0-3.5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            cursor: pointer;
+        }
+
+        .language-select select:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        }
+
+
+        @media screen and (min-width: 768px) {
+            .largenav {
+                display: block
+            }
+
+            .smallnav {
+                display: none
+            }
+
+            .smallsearch {
+                margin: 0px
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                width: 100%;
+            }
+        }
+
+        .product-container {
+            width: 450px;
+        }
+
+        @media only screen and (max-width: 15cm) {
+            #navbar {
+                height: 8000px;
+                padding: 4.8rem;
+            }
+
+            .navbar-input {
+                height: 60px;
+                padding: 20px 16px;
+            }
+
+            .navbar-button {
+                height: 60px;
+                padding: 20px 0;
+            }
+
+            .cart-button {
+                height: 50px;
+                font-size: 12px;
+                font-weight: 600;
+                padding: 0 15px;
+            }
+
+            .cart-svg {
+                width: 14px;
+                height: 14px;
+                margin-right: 6px;
+            }
+
+            .upper-links {
+                line-height: 50px;
+                font-size: 14px;
+                padding: 0 20px;
+            }
+
+            .dropdown .dropdown-menu {
+                top: 80px;
+            }
+
+            .profile-links {
+                line-height: 40px;
+                padding: 0 20px;
+                font-size: 14px;
+            }
+
+            .header {
+                padding: 4000px;
+            }
+
+            .logo {
+                height: 150px;
+            }
+
+            .search-form {
+                height: 80px;
+            }
+
+            .navbar-input {
+                width: 460px;
+                height: 92px;
+            }
+
+            .header .icons a, .header .icons div {
+                height: 8.5rem;
+                width: 6.5rem;
+                line-height: 4.5rem;
+                text-align: center;
+                background: #f5f5f5;
+                color: #222;
+                cursor: pointer;
+                font-size: 1.8rem;
+                margin-left: 0.3rem;
+                border-radius: 0.5rem;
+            }
+        }
+
+        /* Set a max-width to prevent the navbar from expanding too much */
+        #navbar {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #000000;
+            color: white;
+        }
+
+        /* Increase padding for smaller screens */
+        @media (max-width: 768px) {
+            #navbar {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Increase the size of the logo for smaller screens */
+        .logo {
+            font-size: 30px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 24px;
+                margin-right: 0;
+            }
+        }
+
+        /* Increase the size of the search bar for smaller screens */
+        .navbar-input {
+            padding: 11px 16px;
+            border-radius: 2px 0 0 2px;
+            border: 0 none;
+            outline: 0 none;
+            font-size: 15px;
+            color: #000;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Increase the size of the search button for smaller screens */
+        .navbar-button {
+            background-color: #F1F1F1;
+            border: 1px solid #0c8fc1;
+            border-radius: 0 2px 2px 0;
+            color: #ffffff;
+            padding: 10px;
+            height: 43px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        /* Add margin to the cart button */
+        .cart-button {
+            margin-left: 10px;
+        }
+
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <!-- header section starts  -->
+
+
+    <header class="header">
+        <a href="/#" class="logo">
+            <img src="/static/images/logo-bun.png" style="max-width: 450px" alt="">
+        </a>
+
+
+        <style>
+            .search-form {
+                width: 530px;
+            }
+
+            @media only screen and (max-width: 768px) {
+                .search-form {
+                    width: 140px;
+                    padding-right: 100px;
+                    height: 400rem;
+                }
+
+                .logo img {
+                    content: url('/static/images/logou.png');
+                    padding-left: 0px;
+                    height: 6.6rem;
+                }
+            }
+        </style>
+
+        <form action="/search" class="search-form" method="get">
+            <input class="navbar-input" type="search" id="search-box"
+                   value="{% if search_text %}{{ search_text }}{% endif %}" placeholder="Search..." name="query"
+                   id="query">
+            <button type="submit" class="iul">
+                <label for="search-box" class="fas fa-search"></label>
+            </button>
+        </form>
+
+
+        <div class="icons">
+            <a id="menu-btn" class="nu fas fa-bars menu-btn"></a>
+            {% if request.user.is_authenticated %}
+                <a href="/my-profile" class="nu fas fa-user"></a>
+            {% else %}
+                <a href="/customerlogin" class="nu fas fa-user"></a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+                <a href="/cart" class="nu fas1 fa-shopping-cart marla">
+                    {% if product_count_in_cart > 0 %}
+                        <span class="item-number">{{ product_count_in_cart }}</span>
+                    {% endif %}
+                </a>
+            {% else %}
+                <a href="/cart" class="nu fas fa-shopping-cart fas1">
+                    {% if 'cart' in request.session and request.session.cart|length > 0 %}
+                        <span class="item-number cart-number appear pink">{{ request.session.total_quantity }}</span>
+                    {% endif %}
+                </a>
+            {% endif %}
+        </div>
+        <style>
+            .item-number {
+                border-radius: 3px;
+                background-color: rgb(207 37 37 / 92%);
+                height: 20px;
+                padding: 3px 6px;
+                font-weight: 500;
+                display: inline-block;
+                color: #fff;
+                line-height: 12px;
+                margin-left: 10px;
+            }
+
+            .item-number {
+                position: absolute;
+                background-color: #f4f4f4; /* Pale color */
+                margin-left: -6px;
+                margin-top: 3px;
+                color: #e7c0c8; /* Light pink */
+                padding: 3px 6px;
+                border-radius: 55%;
+                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                font-size: 10px;
+                height: 16px;
+            }
+
+            .item-number.pink {
+                color: black; /* Pink */
+            }
+
+            .item-number.grey {
+                color: #b7b7b7; /* Grey */
+            }
+
+            .item-number.dark-grey {
+                color: #666666; /* Dark grey */
+            }
+        </style>
+
+    </header>
+
+    <br><br><br><br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="smalls">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th></th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in products %}
+                            <tr>
+                                <td>{{ p.name }}</td>
+                                <td><img src="{% static p.product_image.url %}" class="imagein2"></td>
+                                <td>{{ p.price }}</td>
+                                <td>{{ p.quantity }}</td>
+                                <td>{{ p.total }}</td>
+
+                                <td><a href="{% url 'remove-from-cart' p.id %}" class="btn btn-danger btn-sm">
+                                    <div class="ics">X</div>
+                                </a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <h3>Total: ${{ total }}</h3>
+                    <a href="{% url 'customer-address' %}" class="cart-button">Checkout </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .imagein2 {
+            max-width: 450px;
+            max-height: 300px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .table {
+                font-size: 50%;
+            }
+
+            .imagein2 {
+                width: 10rem;
+            }
+
+            .btn-danger {
+                width: 5rem;
+                height: 2rem;
+            }
+
+            .ics {
+                width: 20px;
+                height: 20px;
+                margin-bottom: 20px;
+            }
+
+            a {
+                font-size: 1rem;
+            !important;
+            }
+
+            .nu {
+                font-size: 1rem;
+            }
+        }
+
+        .iul {
+            background: #f5f5f5;
+        }
+
+        .fa-search {
+            background: #f5f5f5;
+        }
+
+        a.fas1 {
+            margin-right: 7rem;
+            font-size: 20px;
+            color: hotpink;
+        }
+
+        .marla {
+            margin-right: 100px;
+        }
+
+        .header .search-form {
+            width: 30%;
+        }
+
+        .navbar-input {
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+
+            a.logo {
+                height: 50px;
+                margin-right: 0px;
+                padding-left: 0px;
+            }
+
+            .search-form {
+                height: 36px;
+            }
+
+            .fa-search {
+                background: white;
+            }
+
+            .iul {
+                background: white;
+            }
+
+            .header .search-form {
+                display: block;
+                top: 0%;
+                position: relative;
+                width: 160px;
+                height: 36px;
+            }
+
+            .navbar-input {
+                width: 72px;
+            }
+
+            .search-form {
+                width: 120px;
+            }
+
+            .search-form {
+                display: block;
+            }
+
+            /* Design parameters */
+            .header .search-form {
+                background-color: #ffffff;
+                border: none;
+                box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+                padding: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .navbar-input {
+                font-size: 14px;
+                color: #666666;
+                padding: 5px;
+                border: none;
+                outline: none;
+                width: 100%;
+            }
+
+            .navbar-input::placeholder {
+                color: #bbbbbb;
+                content: "CACA";
+            }
+
+            a.fas1 {
+                margin-right: 0rem;
+            }
+
+            .search-form {
+                width: 160px;
+                height: 36px;
+
+            }
+
+            .navbar-input {
+                height: 30px;
+            }
+
+            .marla {
+                margin-right: 10px;
+            }
+
+            #search-btn {
+                display: block;
+                cursor: pointer;
+            }
+
+            .small-search-form {
+                display: none;
+                position: absolute;
+                top: 50px;
+                right: 10px;
+                width: 80%;
+                max-width: 300px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                z-index: 999;
+            }
+
+            .small-search-form input[type="search"] {
+                width: 140px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+            .small-search-form button[type="submit"] {
+                display: block;
+                width: 140px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                background-color: #4CAF50;
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+            .header .search-form {
+                width: 160px;
+                height: 36px;
+                top: 0%;
+                position: relative;
+                left: 0;
+            }
+
+        }
+
+        .header {
+            padding: 2.5rem 1rem;
+        }
+
+        .logo img {
+            height: 6.6rem;
+        }
+
+        .header {
+            margin-right: 0px;
+            margin-left: 0px;
+            position: initial;
+        }
+
+ .cart-button {
   background-color: #E6E6E6;
   border: none;
   border-radius: 20px;
@@ -98,406 +1142,19 @@
   text-decoration: none;
   color: #FFFFFF;
 }
-
-
-
-.item-number:empty:after {
-  content: "0";
+ .icons a{
+    text-decoration: none;
 }
-
-
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
+.ics{
+    align-content: center;
+    vertical-align: center;
 }
-
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-.button2 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-.button2:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-.btn-success {
-  color: #fff;
-  text-decoration: none;
-  padding: 1px;
-  border-radius: 25px;
-  background-color: #60bf6d;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: pointer;
-  display: inline-block;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 1px;
-  font-size: 14px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: none;
-  outline: none;
-  width: 110px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-}
-
-.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-  color: #fff;
-  background-color: #3b9656;
-}
-
-.btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-  background-image:none;
-}
-
-.btn-success.disabled, .btn-success[disabled], fieldset[disabled] .btn-success, .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .btn-success.disabled.active, .btn-success[disabled].active, fieldset[disabled] .btn-success.active {
-  background-color: #93e0a6;
-}
-
-.btn-danger1 {
-  color: #fff;
-  text-decoration: none;
-  padding: 1px;
-  border-radius: 25px;
-  background-color: #ffa0a0;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: pointer;
-  display: inline-block;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 1px;
-  font-size: 14px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: none;
-  outline: none;
-  width: 110px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  box-sizing: border-box  
-}
-
-.btn-danger {
-  color: #fff;
-  text-decoration: none;
-  padding: 1px;
-  border-radius: 25px;
-  background-color: #ffa0a0;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 1px;
-  font-size: 14px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: none;
-  outline: none;
-  width: 110px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  box-sizing: border-box  
-}
-
-
-
-.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
-  color: #fff;
-  background-color: #e67878;
-}
-
-.btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
-  background-image:none;
-}
-
-.btn-danger.disabled, .btn-danger[disabled], fieldset[disabled] .btn-danger, .btn-danger.disabled:hover, .btn-danger[disabled]:hover, fieldset[disabled] .btn-danger:hover, .btn-danger.disabled:focus, .btn-danger[disabled]:focus, fieldset[disabled] .btn-danger:focus, .btn-danger.disabled:active, .btn-danger[disabled]:active, fieldset[disabled] .btn-danger:active, .btn-danger.disabled.active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger.active {
-  background-color: #ffc5c5;
-}
-
-    @media only screen and (max-width: 768px) {
-        .search-form{
-            width: 140px;
-            padding-right: 100px;
-        }
-        .logo-img{
-            content: url('/static/images/logou.png');
-        }
-        }
-          a.fas2 {
-              margin-right: 0px;
-          }
-          .navbar-input{
-              width: 100px;
-          }
-
-
-           @media only screen and (max-width: 768px) {
-               a.fas2{
-                   margin-right: 0px;
-               }
-      a.logo{
-          height: 50px;
-      }
-
-      .search-form{
-          height: 36px;
-      }
-
-      .fa-search{
-          background: white;
-      }
-      .iul{
-          background: white;
-      }
-      .header .search-form {
-    display: block;
-    top: 0%;
-    position: relative;
-    width: 120px;
-          height: 36px;
-  }
-  .navbar-input {
-    width: 72px;
-  }
-  .search-form {
-    width: 50px;
-  }
-  .search-form {
-    display: block;
-  }
-
-  /* Design parameters */
-  .header .search-form {
-    background-color: #ffffff;
-    border: none;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .navbar-input {
-    font-size: 14px;
-    color: #666666;
-    padding: 5px;
-    border: none;
-    outline: none;
-    width: 100%;
-  }
-  .navbar-input::placeholder {
-    color: #bbbbbb;
-      content: "CACA";
-  }
-      a.fas1{
-          margin-right: 2rem;
-      }
-    .search-form {
-      width: 100px;
-
-    }
-      .marla{
-          margin-right: 10px;
-      }
-    #search-btn {
-      display: block;
-      cursor: pointer;
-    }
-    .small-search-form {
-      display: none;
-      position: absolute;
-      top: 50px;
-      right: 10px;
-      width: 80%;
-      max-width: 300px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      z-index: 999;
-    }
-    .small-search-form input[type="search"] {
-      width: 140px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    .small-search-form button[type="submit"] {
-      display: block;
-      width: 140px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #4CAF50;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .navbar-input{
-        height: 2rem;
-    }
-    .search-form{
-        height: 36px;
-    }
-    .icons{
-        width: 48%;
-    }
-    .header{
-        height: 9rem;
-    }
-    .header {
-    padding: 2.5rem 1rem;
-    height: 9rem;
-}
-    .search-form{
-        width: 160px;
-        height: 36px;
-    }
-    .navbar-input{
-        font-size: 1.6rem;
-        width: 100%;
-    }
-    .search-form{
-
-    }
-    .header .search-form label{
-        font-size: 1.7rem;
-    }
-    .header .search-form a{
-        font-size: 100rem;
-    }
-    .logo-img{
-        padding-bottom: 10px;
-    }
-  }
-  .logo img{
-      height: 6.6rem;
-  }
-  .search-form{
-      width: 100px;
-  }
-    .navbar-input{
-        width: 100%;
-    }
-</style>
-<link rel="icon" type="image/x-icon" href="/static/images/logou.png">
-</head>
-<br><br><br><br>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-    <div class="smalls">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Product</th>
-              <th></th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for p in products %}
-          <tr>
-            <td>{{ p.name }}</td>
-              <td><img src="{% static p.product_image.url %}" class="imagein2"></td>
-            <td>{{ p.price }}</td>
-            <td>{{ p.quantity }}</td>
-            <td>{{ p.total}}</td>
-
-          <td><a href="{% url 'remove-from-cart' p.id %}" class="btn btn-danger btn-sm"><div class="ics">X</div></a></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <h3>Total: ${{ total }}</h3>
-      <a href="{% url 'customer-address' %}" class="cart-button">Checkout   </a>
-    </div>
-  </div>
-  </div>
-</div>
-    <style>
-    .item-number {
-    position: absolute;
-    background-color: #f4f4f4; /* Pale color */
-    margin-left: -6px;
-    margin-top: 3px;
-    color: #e7c0c8; /* Light pink */
-    padding: 3px 6px;
-    border-radius: 55%;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.item-number.pink {
-    color: black; /* Pink */
-}
-.item-number.grey {
-    color: #b7b7b7; /* Grey */
-}
-
-.item-number.dark-grey {
-    color: #666666; /* Dark grey */
-}
-    .imagein2{
-        width: 250px;
-        height: 250px;
-    }
-            @media only screen and (max-width: 768px) {
-               .table {
-    font-size: 50%;
-                 }
-                .imagein2{
-                    width: 10rem;
-                }
-                .btn-danger{
-                    width: 5rem;
-                    height: 2rem;
-                }
-                .ics{
-                    width: 20px;
-                    height: 20px;
-                    margin-bottom: 20px;
-                }
-                a{
-                    font-size: 1rem; !important;
-                }
-                .nu{
-                    font-size: 1rem;
-                }
-            }
     </style>
-<br><br><br>
-<div style="text-align: center;">
+    <br><br><br>
+    <div style="text-align: center;">
 
-</div>
+    </div>
 
 
-<br><br><br><br><br>
+    <br><br><br><br><br>
 {% endblock content %}
