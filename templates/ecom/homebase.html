@@ -790,13 +790,16 @@ let intervalId = setInterval(nextSlide, 3000);
 
         <div class="box">
             <h3>extra links</h3>
-            <a href="/my_order" class="link"> <i class="fas fa-angle-right"></i> my order </a>
-            <a href="/cart" class="link"> <i class="fas fa-angle-right"></i> my cart </a>
-            <a href="/aboutus" class="link"><i class="fas fa-angle-right"></i> about us </a>
+            <a href="/my_order" class="link" style="text-decoration: none"> <i class="fas fa-angle-right"></i> my order </a>
+            <a href="/cart" class="link" style="text-decoration: none"> <i class="fas fa-angle-right"></i> my cart </a>
+            <a href="/aboutus" class="link" style="text-decoration: none"><i class="fas fa-angle-right"></i> about us </a>
     <button id="en" class="toggle-button active">English</button>
     <button id="ro" class="toggle-button">Romanian</button>
 
     <style>
+        a{
+            text-decoration: none;
+        }
     .toggle-container {
       display: flex;
       justify-content: center;
@@ -871,10 +874,10 @@ function saveLanguage(event) {
             <p><i class="fas fa-envelope"></i> support@criodex.com </p>
             <p><i class="fas fa-map"></i> Chisinau , nam idee unde </p>
             <div class="share">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-instagram"></a>
-                <a href="#" class="fab fa-linkedin"></a>
+                <a href="#" class="fab fa-facebook-f" style="text-decoration: none"></a>
+                <a href="#" class="fab fa-twitter" style="text-decoration: none"></a>
+                <a href="#" class="fab fa-instagram" style="text-decoration: none"></a>
+                <a href="#" class="fab fa-linkedin" style="text-decoration: none"></a>
             </div>
         </div>
 
@@ -888,6 +891,14 @@ function saveLanguage(event) {
         </div>
 
     </div>
+<style>
+    .link{
+        text-decoration: none;
+    }
+    #en:hover{
+        background-color: pink;
 
+    }
+</style>
 
 </section>
