@@ -170,67 +170,6 @@
                 background-color: #93e0a6;
             }
 
-            .btn-danger1 {
-                color: #fff;
-                text-decoration: none;
-                padding: 1px;
-                border-radius: 25px;
-                background-color: #ffa0a0;
-                transition: background-color 0.3s ease, color 0.3s ease;
-                cursor: pointer;
-                display: inline-block;
-                text-transform: uppercase;
-                font-weight: bold;
-                letter-spacing: 1px;
-                font-size: 14px;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                border: none;
-                outline: none;
-                width: 110px;
-                height: 40px;
-                line-height: 40px;
-                text-align: center;
-                box-sizing: border-box
-            }
-
-            .btn-danger {
-                color: #fff;
-                text-decoration: none;
-                padding: 1px;
-                border-radius: 25px;
-                background-color: #ffa0a0;
-                transition: background-color 0.3s ease, color 0.3s ease;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-transform: uppercase;
-                font-weight: bold;
-                letter-spacing: 1px;
-                font-size: 14px;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                border: none;
-                outline: none;
-                width: 110px;
-                height: 40px;
-                line-height: 40px;
-                text-align: center;
-                box-sizing: border-box
-            }
-
-
-            .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
-                color: #fff;
-                background-color: #e67878;
-            }
-
-            .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
-                background-image: none;
-            }
-
-            .btn-danger.disabled, .btn-danger[disabled], fieldset[disabled] .btn-danger, .btn-danger.disabled:hover, .btn-danger[disabled]:hover, fieldset[disabled] .btn-danger:hover, .btn-danger.disabled:focus, .btn-danger[disabled]:focus, fieldset[disabled] .btn-danger:focus, .btn-danger.disabled:active, .btn-danger[disabled]:active, fieldset[disabled] .btn-danger:active, .btn-danger.disabled.active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger.active {
-                background-color: #ffc5c5;
-            }
 
             @media only screen and (max-width: 768px) {
                 .search-form {
@@ -896,9 +835,12 @@
                                 <td>{{ p.quantity }}</td>
                                 <td>{{ p.total }}</td>
 
-                                <td><a href="{% url 'remove-from-cart' p.id %}" class="btn btn-danger btn-sm">
-                                    <div class="ics">X</div>
-                                </a></td>
+                                <td>
+                                    <a href="{% url 'remove-from-cart' p.id %}"
+                                       class="btn-remove-from-cart">
+                                         <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -910,12 +852,18 @@
         </div>
     </div>
     <style>
+    .fa-trash{
+        font-size: 25px;
+    }
         .imagein2 {
             max-width: 450px;
             max-height: 300px;
         }
 
         @media only screen and (max-width: 768px) {
+            .fa-trash{
+                font-size: 150%;
+            }
             .table {
                 font-size: 50%;
             }
@@ -924,10 +872,6 @@
                 width: 10rem;
             }
 
-            .btn-danger {
-                width: 5rem;
-                height: 2rem;
-            }
 
             .ics {
                 width: 20px;
@@ -1117,38 +1061,47 @@
             position: initial;
         }
 
- .cart-button {
-  background-color: #E6E6E6;
-  border: none;
-  border-radius: 20px;
-  color: #5F5F5F;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 500;
-  height: 40px;
-  letter-spacing: 0.5px;
-  padding: 0 20px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: background-color 0.3s ease-in-out;
-}
+        .cart-button {
+            background-color: #E6E6E6;
+            border: none;
+            border-radius: 20px;
+            color: #5F5F5F;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            height: 40px;
+            letter-spacing: 0.5px;
+            padding: 0 20px;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease-in-out;
+        }
 
-.cart-button:hover {
-  background-color: #FFC0CB;
-  text-decoration: none;
-  color: #FFFFFF;
-}
- .icons a{
-    text-decoration: none;
-}
-.ics{
-    align-content: center;
-    vertical-align: center;
-}
+        .cart-button:hover {
+            background-color: #FFC0CB;
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        .icons a {
+            text-decoration: none;
+        }
+
+        .ics {
+            align-content: center;
+            vertical-align: center;
+        }
+    .fa-trash{
+        color: grey;
+    }
+    .fa-trash:hover{
+        color: black;
+    }
+
     </style>
     <br><br><br>
     <div style="text-align: center;">

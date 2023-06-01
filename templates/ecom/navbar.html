@@ -454,8 +454,95 @@
 </style>
 
 </header>
+    <nav class="navbar">
+        <div id="close-navbar" class="fas fa-times"></div>
+        <a href="#home" style="text-decoration: none" onclick="closeNavbar()">home</a>
+        <a href="#shop" style="text-decoration: none" onclick="closeNavbar()">shop</a>
+        <a href="/aboutus" style="text-decoration: none" onclick="closeNavbar()">About us</a>
+        <a href="https://www.instagram.com/criodex.md/?theme=dark" style="text-decoration: none" onclick="closeNavbar()">Instagram</a>
+    </nav>
+<script>
+        function closeNavbar() {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.remove('active');
+    }
 
+
+        document.querySelector('#menu-btn').onclick = () => {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.toggle('active');
+    }
+
+    document.querySelector('#close-navbar').onclick = () => {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.remove('active');
+    }
+</script>
 <style>
+.navbar {
+    text-decoration: none;
+  position: fixed;
+  top: 0;
+  left: -110%;
+  z-index: 1010;
+  height: 100%;
+  width: 100%;
+  background: url(../static/images/navbar-bg.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding-right: 15%;
+}
+
+.navbar.active {
+  left: 0;
+}
+
+.navbar #close-navbar {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  height: 5rem;
+  width: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  background: #fff;
+  color: #222;
+  cursor: pointer;
+  font-size: 3rem;
+}
+
+.navbar #close-navbar:hover {
+  color: #fff;
+  background: #e84393;
+}
+
+.navbar a {
+  font-size: 4rem;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: lighter;
+}
+
+.navbar a:hover {
+  color: #e84393;
+  letter-spacing: .2rem;
+}
+
+
 
     .iul {
         background: #f5f5f5;

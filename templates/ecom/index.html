@@ -873,7 +873,8 @@
 
 
     <!-- products data end -->
-
+<section id="shop" class="sfam">
+</section>
 {% if products %}
   <h3 class="section-title">{{ word }}</h3>
   <div class="card-container">
@@ -965,4 +966,25 @@
         }
 
 </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        var isNavbarActive = sessionStorage.getItem('navbarActive');
+
+        if (!isNavbarActive) {
+            var navbar = document.querySelector('.navbar');
+            navbar.classList.add('active');
+            sessionStorage.setItem('navbarActive', true);
+        }
+    });
+
+    document.querySelector('#menu-btn').onclick = () => {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.toggle('active');
+    }
+
+    document.querySelector('#close-navbar').onclick = () => {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.remove('active');
+    }
+    </script>
 {% endblock content %}
