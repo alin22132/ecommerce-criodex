@@ -1,268 +1,293 @@
 <!DOCTYPE html>
 {% load widget_tweaks %}
 <html lang="en" dir="ltr">
-  <head>
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
 
-        <!-- custom css file link  -->
-        <link rel="stylesheet" href="../../static/css/style.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="../../static/css/style.css">
 
     <meta charset="utf-8">
     <title>C R I O D E X</title>
     <link rel="icon" type="image/x-icon" href="/static/images/logou.png">
 
 
-
     <style media="screen">
-      body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    /* background: linear-gradient(to right, #b92b27, #1565c0) */
-}
-
-.box {
-    width: 100%;
-    padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background: #3E454C;
-    text-align: center;
-    transition: 0.25s;
-    margin-top: 100px;
-    border-radius: 50px;
-}
-
-.box input[type="text"],
-.box input[type="password"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #ffffff;
-    padding: 10px 10px;
-    width: 100%;
-    max-width: 250px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s
-}
-
-.box h1 {
-    color: white;
-    /* text-transform: uppercase; */
-    font-weight: 500
-}
-
-.box input[type="text"]:focus,
-.box input[type="password"]:focus {
-    width: 300px;
-    border-color: #d3d3d3
-}
-
-.box input[type="submit"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #2ecc71;
-    padding: 14px 40px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer
-}
-
-.box input[type="submit"]:hover {
-    background: #2ecc71
-}
-
-.forgot {
-    text-decoration: underline
-}
-
-ul.social-network {
-    list-style: none;
-    display: inline;
-    margin-left: 0 !important;
-    padding: 0
-}
-
-ul.social-network li {
-    display: inline;
-    margin: 0 5px
-}
-
-.social-network a.icoFacebook:hover {
-    background-color: #3B5998
-}
-
-.social-network a.icoTwitter:hover {
-    background-color: #33ccff
-}
-
-.social-network a.icoGoogle:hover {
-    background-color: #BD3518
-}
-
-.social-network a.icoFacebook:hover i,
-.social-network a.icoTwitter:hover i,
-.social-network a.icoGoogle:hover i {
-    color: #fff
-}
-
-a.socialIcon:hover,
-.socialHoverClass {
-    color: #44BCDD
-}
-
-.social-circle li a {
-    display: inline-block;
-    position: relative;
-    margin: 0 auto 0 auto;
-    border-radius: 50%;
-    text-align: center;
-    width: 50px;
-    height: 50px;
-    font-size: 20px
-}
-
-.social-circle li i {
-    margin: 0;
-    line-height: 50px;
-    text-align: center
-}
-
-.social-circle li a:hover i,
-.triggeredHover {
-    transform: rotate(360deg);
-    transition: all 0.2s
-}
-
-.social-circle i {
-    color: #fff;
-    transition: all 0.8s;
-    transition: all 0.8s
-}
-  /* Additional Styles for Responsiveness */
-      @media (max-width: 767px) {
-        .box {
-          margin-top: 50px;
-            position: initial;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            /* background: linear-gradient(to right, #b92b27, #1565c0) */
         }
-      }
 
-      @media (max-width: 480px) {
         .box {
-          padding: 20px;
+            width: 100%;
+            padding: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: #3E454C;
+            text-align: center;
+            transition: 0.25s;
+            margin-top: 100px;
+            border-radius: 50px;
         }
 
         .box input[type="text"],
         .box input[type="password"] {
-          max-width: 200px;
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #ffffff;
+            padding: 10px 10px;
+            width: 100%;
+            max-width: 250px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s
         }
-      }
+
+        .box h1 {
+            color: white;
+            /* text-transform: uppercase; */
+            font-weight: 500
+        }
+
+        .box input[type="text"]:focus,
+        .box input[type="password"]:focus {
+            width: 300px;
+            border-color: #d3d3d3
+        }
+
+        .box input[type="submit"] {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #2ecc71;
+            padding: 14px 40px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer
+        }
+
+        .box input[type="submit"]:hover {
+            background: #2ecc71
+        }
+
+        .forgot {
+            text-decoration: underline
+        }
+
+        ul.social-network {
+            list-style: none;
+            display: inline;
+            margin-left: 0 !important;
+            padding: 0
+        }
+
+        ul.social-network li {
+            display: inline;
+            margin: 0 5px
+        }
+
+        .social-network a.icoFacebook:hover {
+            background-color: #3B5998
+        }
+
+        .social-network a.icoTwitter:hover {
+            background-color: #33ccff
+        }
+
+        .social-network a.icoGoogle:hover {
+            background-color: #BD3518
+        }
+
+        .social-network a.icoFacebook:hover i,
+        .social-network a.icoTwitter:hover i,
+        .social-network a.icoGoogle:hover i {
+            color: #fff
+        }
+
+        a.socialIcon:hover,
+        .socialHoverClass {
+            color: #44BCDD
+        }
+
+        .social-circle li a {
+            display: inline-block;
+            position: relative;
+            margin: 0 auto 0 auto;
+            border-radius: 50%;
+            text-align: center;
+            width: 50px;
+            height: 50px;
+            font-size: 20px
+        }
+
+        .social-circle li i {
+            margin: 0;
+            line-height: 50px;
+            text-align: center
+        }
+
+        .social-circle li a:hover i,
+        .triggeredHover {
+            transform: rotate(360deg);
+            transition: all 0.2s
+        }
+
+        .social-circle i {
+            color: #fff;
+            transition: all 0.8s;
+            transition: all 0.8s
+        }
+
+        /* Additional Styles for Responsiveness */
+        @media (max-width: 767px) {
+            .box {
+                margin-top: 50px;
+                position: initial;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .box {
+                padding: 20px;
+            }
+
+            .box input[type="text"],
+            .box input[type="password"] {
+                max-width: 200px;
+            }
+        }
     </style>
-  </head>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  <body>
-    {% include "ecom/navbar.html" %}
-    <div class="container">
+</head>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf16V4mAAAAAB85EwLsICl2QPG8gz1QnUcoGn_w"></script>
+<body>
+{% include "ecom/navbar.html" %}
+<div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <form class="box" method="post" enctype="multipart/form-data">
-                  {% csrf_token %}
-                    <h1>Customer Sign Up</h1>
-                    
-                      {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
-                        {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
-                          {% render_field userForm.username class="form-control" placeholder="Username" %}
-                            {% render_field userForm.password class="form-control" placeholder="Password" %}
-                              {% render_field customerForm.address class="form-control" placeholder="Address" %}
-                                {% render_field customerForm.mobile class="form-control" placeholder="Contact" %}
-                                  {% render_field customerForm.profile_pic class="form-control" placeholder="Profile pic" %}
-                    <div class="g-recaptcha" data-sitekey="6Lc9U18mAAAAACU0UIsx8l6wjHnuWUPIrEE5B2VJ"></div>
-                  
-                     <input type="submit" name="" value="Create">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <form class="box" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <h1>Customer Sign Up</h1>
+                                    {% if custom_message %}
+                                        <p class="ero">{{ custom_message }}</p>
+                                    {% endif %}
+                                    {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
+                                    {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
+                                    {% render_field userForm.username class="form-control" placeholder="Username" %}
+                                    {% render_field userForm.password class="form-control" placeholder="Password" %}
+                                    {% render_field customerForm.address class="form-control" placeholder="Address" %}
+                                    {% render_field customerForm.mobile class="form-control" placeholder="Contact" %}
+                                    {% render_field customerForm.profile_pic class="form-control" placeholder="Profile pic" %}
 
-                </form>
+                                    <input type="submit" name="" value="Create" onclick="onClick(event)">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-    <script>
-    function onSubmit(event) {
-        event.preventDefault();
+<script>
+  function onClick(e) {
+    e.preventDefault();
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6Lc9U18mAAAAADQWXSU41W0RPzwyuh9JYy47j0fc', { action: 'submit' }).then(function(token) {
+        // Add your logic to submit the token to your backend server here
+        // You can use AJAX or a form submission to send the token to the server
+        // for further verification and processing
+      });
+    });
+  }
+</script>
+<style>
+  .ero{
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
 
-        var captchaResponse = grecaptcha.getResponse();
-        if (captchaResponse.length === 0) {
-            // CAPTCHA not completed
-            alert("Please complete the CAPTCHA.");
-            return;
-        }
+.ero:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 
-        // Proceed with form submission
-        event.target.submit();
+.ero:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+
+    .icons a {
+        text-decoration: none;
     }
 
-    document.querySelector('.box').addEventListener('submit', onSubmit);
-</script>
-    <style>
-           .icons a{
-    text-decoration: none;
-}
-            .item-number {
-                border-radius: 3px;
-                background-color: rgb(207 37 37 / 92%);
-                height: 20px;
-                padding: 3px 6px;
-                font-weight: 500;
-                display: inline-block;
-                color: #fff;
-                line-height: 12px;
-                margin-left: 10px;
-            }
+    .item-number {
+        border-radius: 3px;
+        background-color: rgb(207 37 37 / 92%);
+        height: 20px;
+        padding: 3px 6px;
+        font-weight: 500;
+        display: inline-block;
+        color: #fff;
+        line-height: 12px;
+        margin-left: 10px;
+    }
 
-            .item-number {
-                position: absolute;
-                background-color: #f4f4f4; /* Pale color */
-                margin-left: -6px;
-                margin-top: 3px;
-                color: #e7c0c8; /* Light pink */
-                padding: 3px 6px;
-                border-radius: 55%;
-                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-                font-size: 10px;
-                height: 16px;
-            }
+    .item-number {
+        position: absolute;
+        background-color: #f4f4f4; /* Pale color */
+        margin-left: -6px;
+        margin-top: 3px;
+        color: #e7c0c8; /* Light pink */
+        padding: 3px 6px;
+        border-radius: 55%;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        font-size: 10px;
+        height: 16px;
+    }
 
-            .item-number.pink {
-                color: black; /* Pink */
-            }
+    .item-number.pink {
+        color: black; /* Pink */
+    }
 
-            .item-number.grey {
-                color: #b7b7b7; /* Grey */
-            }
+    .item-number.grey {
+        color: #b7b7b7; /* Grey */
+    }
 
-            .item-number.dark-grey {
-                color: #666666; /* Dark grey */
-            }
-    </style>
+    .item-number.dark-grey {
+        color: #666666; /* Dark grey */
+    }
+</style>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br>
 {% include "ecom/footer.html" %}
-  </body>
+</body>
 </html>

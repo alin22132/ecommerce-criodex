@@ -1,29 +1,12 @@
 import json
+from tempfile import template
 from threading import Timer
 
 import requests
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import Group
-from django.core.mail import send_mail
-from django.db.models import Sum
-from django.http import HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
-
-from . import forms, models
-from .logger import logger
-from django.shortcuts import get_object_or_404
-from .models import CartItem
-from maib_gateway.maib_client import MaibClient
-import json
-from threading import Timer
-
-import requests
-from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db.models import Sum
 from django.http import HttpResponseRedirect
@@ -58,23 +41,49 @@ def adminclick_view(request):
     return HttpResponseRedirect('adminlogin')
 
 
+from django.contrib.auth import login
+from django.contrib.auth.models import Group
+
+
 def customer_signup_view(request):
-    userForm = forms.CustomerUserForm()
-    customerForm = forms.CustomerForm()
-    mydict = {'userForm': userForm, 'customerForm': customerForm}
     if request.method == 'POST':
         userForm = forms.CustomerUserForm(request.POST)
         customerForm = forms.CustomerForm(request.POST, request.FILES)
+
         if userForm.is_valid() and customerForm.is_valid():
-            user = userForm.save()
+            username = userForm.cleaned_data['username']
+
+            # Check if the username is already taken
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Username is already taken. Please choose a different one.')
+                return redirect('customersignup')
+
+            user = userForm.save(commit=False)
             user.set_password(user.password)
             user.save()
+
             customer = customerForm.save(commit=False)
             customer.user = user
+
+            if 'profile_pic' in request.FILES:
+                customer.profile_pic = request.FILES['profile_pic']
+            else:
+                customer.profile_pic = 'path/to/def.jpg'
+
             customer.save()
+
             my_customer_group = Group.objects.get_or_create(name='CUSTOMER')
             my_customer_group[0].user_set.add(user)
-        return HttpResponseRedirect('customerlogin')
+
+            login(request, user)
+
+            return redirect('customer-home')
+    else:
+        userForm = forms.CustomerUserForm()
+        customerForm = forms.CustomerForm()
+
+    mydict = {'userForm': userForm, 'customerForm': customerForm, 'custom_message': 'User already exists with such name'}
+
     return render(request, 'ecom/customersignup.html', context=mydict)
 
 
