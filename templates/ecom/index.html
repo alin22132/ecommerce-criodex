@@ -971,9 +971,11 @@
         var isNavbarActive = sessionStorage.getItem('navbarActive');
 
         if (!isNavbarActive) {
-            var navbar = document.querySelector('.navbar');
-            navbar.classList.add('active');
-            sessionStorage.setItem('navbarActive', true);
+            setTimeout(() => {
+                var navbar = document.querySelector('.navbar');
+                navbar.classList.add('active');
+                sessionStorage.setItem('navbarActive', true);
+            }, 1000); // Delay in milliseconds (1 second)
         }
     });
 
