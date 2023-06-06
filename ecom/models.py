@@ -19,6 +19,9 @@ class Customer(models.Model):
     def __str__(self):
         return self.user.first_name
 
+    def get_username(self):
+        return self.user.username
+
 
 class Product(models.Model):
     name = models.CharField(max_length=40)

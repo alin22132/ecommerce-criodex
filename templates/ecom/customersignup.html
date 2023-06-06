@@ -189,7 +189,7 @@
                                     {% csrf_token %}
                                     <h1>Customer Sign Up</h1>
                                     {% if custom_message %}
-                                        <p class="ero">{{ custom_message }}</p>
+                                        <p class="ero" id="ero">{{ custom_message }}</p>
                                     {% endif %}
                                     {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
                                     {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
@@ -197,7 +197,9 @@
                                     {% render_field userForm.password class="form-control" placeholder="Password" %}
                                     {% render_field customerForm.address class="form-control" placeholder="Address" %}
                                     {% render_field customerForm.mobile class="form-control" placeholder="Contact" %}
+                                    <p style="color:lightgrey">Photo:</p>
                                     {% render_field customerForm.profile_pic class="form-control" placeholder="Profile pic" %}
+                                    <p style="color: lightgrey; opacity: 0.3">(leave blank for standart photo)</p>
 
                                     <input type="submit" name="" value="Create" onclick="onClick(event)">
                                 </form>
@@ -210,37 +212,38 @@
     </div>
 </div>
 <script>
-  function onClick(e) {
-    e.preventDefault();
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6Lc9U18mAAAAADQWXSU41W0RPzwyuh9JYy47j0fc', { action: 'submit' }).then(function(token) {
-        // Add your logic to submit the token to your backend server here
-        // You can use AJAX or a form submission to send the token to the server
-        // for further verification and processing
+
+    /*function onClick(e) {
+      e.preventDefault();
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6Lc9U18mAAAAADQWXSU41W0RPzwyuh9JYy47j0fc', { action: 'submit' }).then(function(token) {
+          // Add your logic to submit the token to your backend server here
+          // You can use AJAX or a form submission to send the token to the server
+          // for further verification and processing
+        });
       });
-    });
-  }
+    }*/
 </script>
 <style>
-  .ero{
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease-in-out;
-}
+    .ero {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.3s ease-in-out;
+    }
 
-.ero:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
+    .ero:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
 
-.ero:focus {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  outline: none;
-}
+    .ero:focus {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        outline: none;
+    }
 
     .icons a {
         text-decoration: none;

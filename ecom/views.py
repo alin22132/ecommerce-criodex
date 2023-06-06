@@ -12,9 +12,12 @@ from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import login
+from django.contrib.auth.models import Group
 
 from maib_gateway.maib_client import MaibClient
 from . import forms, models
+from .forms import CustomerUserForm
 from .logger import logger
 from .models import CartItem
 
@@ -41,22 +44,26 @@ def adminclick_view(request):
     return HttpResponseRedirect('adminlogin')
 
 
-from django.contrib.auth import login
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 
 
 def customer_signup_view(request):
+    custom_message = ''
     if request.method == 'POST':
         userForm = forms.CustomerUserForm(request.POST)
         customerForm = forms.CustomerForm(request.POST, request.FILES)
 
+        logger.info('dsas')
+
         if userForm.is_valid() and customerForm.is_valid():
+            logger.info('dsas 1')
             username = userForm.cleaned_data['username']
 
-            # Check if the username is already taken
+            # Check if a user with the same username already exists
             if User.objects.filter(username=username).exists():
-                messages.error(request, 'Username is already taken. Please choose a different one.')
-                return redirect('customersignup')
+                error_message = 'Username is already taken. Please choose a different one.'
+                mydict = {'userForm': userForm, 'customerForm': customerForm, 'error_message': error_message}
+                return render(request, 'ecom/customersignup.html', context=mydict)
 
             user = userForm.save(commit=False)
             user.set_password(user.password)
@@ -78,16 +85,19 @@ def customer_signup_view(request):
             login(request, user)
 
             return redirect('customer-home')
+        logger.info('dsas2')
+        custom_message = 'Username is already taken. Please choose a different one.'
     else:
         userForm = forms.CustomerUserForm()
         customerForm = forms.CustomerForm()
 
-    mydict = {'userForm': userForm, 'customerForm': customerForm, 'custom_message': 'User already exists with such name'}
+    mydict = {'userForm': userForm, 'customerForm': customerForm,
+              'custom_message': custom_message}
 
     return render(request, 'ecom/customersignup.html', context=mydict)
 
 
-# -----------for checking user iscustomer
+# -----------for checking user customer
 def is_customer(user):
     return user.groups.filter(name='CUSTOMER').exists()
 
