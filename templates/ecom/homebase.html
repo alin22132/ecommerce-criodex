@@ -715,7 +715,34 @@ let intervalId = setInterval(nextSlide, 3000);
     <br>
     <br>
     <center>
-        <img src="/static/images/shop1 .png" class="imagineshop">
+        <span id="changingWord"> S H O P</span>
+    <style>
+        #changingWord {
+    color: #AA336A;
+    background: linear-gradient(black, gray);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: color 0.5s ease;
+    font-size: 60px;
+            font-size: 120px;
+}
+        @media only screen and (max-width: 600px){
+            #changingWord{
+                font-size: 80px;
+            }
+        }
+
+#changingWord {
+    color: #AA336A ;
+    transition: color 0.5s ease;
+}
+
+#changingWord.darken {
+    color: #23050e;
+}
+
+    </style>
     </center>
     <section class="category">
 

@@ -756,7 +756,7 @@
                 <a href="/customerlogin" class="nu fas fa-user"></a>
             {% endif %}
             {% if request.user.is_authenticated %}
-                <a href="/cart" class="nu fas1 fa-shopping-cart marla">
+                <a href="/cart" class="nu fas fa-shopping-cart marla">
                     {% if product_count_in_cart > 0 %}
                         <span class="item-number">{{ product_count_in_cart }}</span>
                     {% endif %}

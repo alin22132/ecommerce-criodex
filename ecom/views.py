@@ -53,8 +53,6 @@ def customer_signup_view(request):
         userForm = forms.CustomerUserForm(request.POST)
         customerForm = forms.CustomerForm(request.POST, request.FILES)
 
-        logger.info('dsas')
-
         if userForm.is_valid() and customerForm.is_valid():
             logger.info('dsas 1')
             username = userForm.cleaned_data['username']
@@ -85,7 +83,6 @@ def customer_signup_view(request):
             login(request, user)
 
             return redirect('customer-home')
-        logger.info('dsas2')
         custom_message = 'Username is already taken. Please choose a different one.'
     else:
         userForm = forms.CustomerUserForm()
@@ -194,7 +191,7 @@ def admin_add_product_view(request):
     return render(request, 'ecom/admin_add_products.html', {'productForm': productForm})
 
 
-# TODO: Make the sort buttons on main page sort by cattegory or make a category finder type shit.
+# TODO✓: Make the sort buttons on main page sort by cattegory or make a category finder type shit.
 @login_required(login_url='adminlogin')
 def delete_product_view(request, pk):
     product = models.Product.objects.get(id=pk)

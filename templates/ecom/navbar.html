@@ -461,77 +461,69 @@
         <a href="https://www.instagram.com/criodex.md/?theme=dark" style="text-decoration: none" onclick="closeNavbar()">Instagram</a>
     </nav>
 <script>
-        function closeNavbar() {
-        var navbar = document.querySelector('.navbar');
-        navbar.classList.remove('active');
-    }
+  function closeNavbar() {
+    var navbar = document.querySelector('.navbar');
+    navbar.classList.remove('active');
+  }
 
+  document.querySelector('#menu-btn').onclick = () => {
+    var navbar = document.querySelector('.navbar');
+    navbar.classList.toggle('active');
+  }
 
-        document.querySelector('#menu-btn').onclick = () => {
-        var navbar = document.querySelector('.navbar');
-        navbar.classList.toggle('active');
-    }
-
-    document.querySelector('#close-navbar').onclick = () => {
-        var navbar = document.querySelector('.navbar');
-        navbar.classList.remove('active');
-    }
+  document.querySelector('#close-navbar').onclick = () => {
+    var navbar = document.querySelector('.navbar');
+    navbar.classList.remove('active');
+  }
 </script>
 <style>
-    #close-navbar{
-        border-radius: 10px;
-    }
-.navbar {
+   #close-navbar {
+    border-radius: 10px;
+  }
+
+  .navbar {
     text-decoration: none;
-  position: fixed;
-  top: 0;
-  left: -110%;
-  z-index: 1010;
-  height: 100%;
-  width: 100%;
-  background: url(../static/images/navbar-bg.png) no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 1rem;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  padding-right: 15%;
-}
+    position: fixed;
+    top: 0;
+    left: -110%;
+    z-index: 1010;
+    height: 100%;
+    width: 100%;
+    background: url(../static/images/navbar-bg.png) no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-flow: column;
+    align-items: flex-end;
+    padding-right: 15%;
+    transition: left 0.3s ease-in-out; /* Added transition property */
+  }
 
-.navbar.active {
-  left: 0;
-}
+  .navbar.active {
+    left: 0;
+  }
 
-.navbar #close-navbar {
-  position: absolute;
-  top: 3rem;
-  right: 3rem;
-  height: 5rem;
-  width: 5rem;
-  line-height: 5rem;
-  text-align: center;
-  background: #fff;
-  color: #222;
-  cursor: pointer;
-  font-size: 3rem;
-}
+  .navbar #close-navbar {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    height: 5rem;
+    width: 5rem;
+    line-height: 5rem;
+    text-align: center;
+    background: #fff;
+    color: #222;
+    cursor: pointer;
+    font-size: 3rem;
+    transition: color 0.3s ease-in-out, background 0.3s ease-in-out; /* Added transition properties */
+  }
 
-.navbar #close-navbar:hover {
-  color: #fff;
-  background: #e84393;
-}
-
+  .navbar #close-navbar:hover {
+    color: #fff;
+    background: #e84393;
+  }
 .navbar a {
   font-size: 4rem;
   text-transform: uppercase;

@@ -187,7 +187,7 @@
                             <div class="card">
                                 <form class="box" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    <h1>Customer Sign Up</h1>
+                                    <h1 class="assaas">Sign Up</h1>
                                     {% if custom_message %}
                                         <p class="ero" id="ero">{{ custom_message }}</p>
                                     {% endif %}
@@ -198,9 +198,11 @@
                                     {% render_field customerForm.address class="form-control" placeholder="Address" %}
                                     {% render_field customerForm.mobile class="form-control" placeholder="Contact" %}
                                     <p style="color:lightgrey">Photo:</p>
-                                    {% render_field customerForm.profile_pic class="form-control" placeholder="Profile pic" %}
+                                <div class="profile-pic-input">
+                                    {% render_field customerForm.profile_pic class="form-control profile-pic-input" placeholder="Profile pic" %}
+                                 <label for="profilePicInput" class="profile-pic-input-label">Choose a Profile Picture</label>
                                     <p style="color: lightgrey; opacity: 0.3">(leave blank for standart photo)</p>
-
+                                </div>
                                     <input type="submit" name="" value="Create" onclick="onClick(event)">
                                 </form>
                             </div>
@@ -211,6 +213,37 @@
         </div>
     </div>
 </div>
+<style>
+       .profile-pic-input {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile-pic-input input[type="file"] {
+    font-size: 0.9em;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .profile-pic-input-label {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .profile-pic-input-label:hover {
+    background-color: #e6e6e6;
+  }
+</style>
 <script>
 
     /*function onClick(e) {
