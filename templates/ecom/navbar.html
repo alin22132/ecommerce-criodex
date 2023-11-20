@@ -1,9 +1,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
 
 <!-- custom css file link  -->
 
@@ -18,7 +20,7 @@
 <style>
 
     body {
-        background-color: #f7f7f7;
+        background-color: white;
     }
 
     #navbar {
@@ -283,9 +285,6 @@
             height: 150px;
         }
 
-        .search-form {
-            height: 80px;
-        }
 
         .navbar-input {
             width: 460px;
@@ -369,201 +368,615 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../../static/css/style.css">
 <!-- header section starts  -->
-
-
 <header class="header">
-    <a href="/#" class="logo">
-        <img src="/static/images/logo-bun.png" style="max-width: 450px" alt="">
-    </a>
+    <div class="icons-container">
+        <div class="icons-left">
+            <a id="menu-btn" class="fas fa-bars menu-btn" style="text-decoration: none; padding-left: 10px"></a>
+            <div class="menu-text-container" style="padding-bottom: 2px">
+                <span class="menu-text" style="font-weight: 800">Menu</span>
+            </div>
+        </div>
+        <a href="/#" class="logo">
+            <img src="/static/images/logo-bun.png" alt="">
+        </a>
+        <div class="icons-right">
+            <a href="/cart" class="fas fa-shopping-cart marla" style="text-decoration: none">
+                <span class="item-number cart-number appear pink">{{ product_count_in_cart }}</span>
+            </a>
+        </div>
+    </div>
+</header>
 
 
-    <style>
-        .search-form {
-            width: 530px;
-        }
-
-        @media only screen and (max-width: 768px) {
-            .search-form {
-                width: 140px;
-                padding-right: 100px;
-                height: 400rem;
-            }
-
-            .logo img {
-                content: url('/static/images/logou.png');
-                padding-left: 0px;
-                height: 6.6rem;
-            }
-        }
-    </style>
-
-    <form action="/search" class="search-form" method="get">
-        <input class="navbar-input" type="search" id="search-box"
-               value="{% if search_text %}{{ search_text }}{% endif %}" placeholder="Search..." name="query"
-               id="query">
-        <button type="submit" class="iul">
-            <label for="search-box" class="fas fa-search"></label>
-        </button>
-    </form>
-
-
-    <div class="icons">
-    <a id="menu-btn" class="nu fas fa-bars menu-btn" style="text-decoration: none"></a>
-    {% if request.user.is_authenticated %}
-      <a href="/my-profile" class="nu fas fa-user" style="text-decoration: none"></a>
-    {% else %}
-      <a href="/customerlogin" class="nu fas fa-user" style="text-decoration: none"></a>
-    {% endif %}
-    {% if request.user.is_authenticated %}
-    <a href="/cart" class="nu fas1 fa-shopping-cart marla" style="text-decoration: none">
-        {% if product_count_in_cart > 0 %}
-            <span class="item-number">{{ product_count_in_cart }}</span>
-        {% endif %}
-    </a>
-{% else %}
-    <a href="/cart" class="nu fas fa-shopping-cart fas1" style="text-decoration: none">
-        {% if 'cart' in request.session and request.session.cart|length > 0 %}
-             <span class="item-number cart-number appear pink">{{ request.session.total_quantity }}</span>
-        {% endif %}
-    </a>
-{% endif %}
-  </div>
 <style>
-.item-number {
-    position: absolute;
-    background-color: #f4f4f4; /* Pale color */
-    margin-left: -6px;
-    margin-top: 3px;
-    color: #e7c0c8; /* Light pink */
-    padding: 3px 6px;
-    border-radius: 55%;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
 
-.item-number.pink {
-    color: black; /* Pink */
-}
-.item-number.grey {
-    color: #b7b7b7; /* Grey */
-}
+    .icons-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
 
-.item-number.dark-grey {
-    color: #666666; /* Dark grey */
-}
+    .icons-left,
+    .icons-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .icons-left a,
+    .icons-right a {
+        display: flex;
+        align-items: center;
+        color: #555555;
+        font-size: 18px;
+        transition: color 0.3s ease;
+        text-decoration: none;
+    }
+
+    .icons-left a:hover,
+    .icons-right a:hover {
+        color: #000000;
+    }
+
+    .menu-text-container {
+        display: flex;
+        align-items: center;
+        margin-left: 5px;
+    }
+
+    .menu-text {
+        margin: 0;
+        font-weight: 500;;
+    }
+
+    .logo-container {
+        width: 120px; /* Adjust the width as needed */
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .logo img {
+            content: url('../static/images/logou.png');
+            max-width: 110px;
+            padding-right: 39.66px;
+        }
+
+        .icons-left a,
+        .icons-right a {
+            font-size: 16px;
+        }
+    }
+
+    .menu-btn {
+        transition: transform 0.3s ease;
+    }
+
+
+    .item-number {
+        position: initial;
+        background-color: #2a2727; /* Pale color */
+        margin-left: -6px;
+        margin-top: -14px;
+        color: #e7c0c8; /* Light pink */
+        padding: 2px 4px; /* Adjust the padding to make the outer circle smaller */
+        border-radius: 50%; /* Use a value of 50% for a perfect circle */
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+
+    .item-number.pink {
+        color: whitesmoke; /* Pink */
+    }
+
+    .item-number.grey {
+        color: #b7b7b7; /* Grey */
+    }
+
+    .item-number.dark-grey {
+        color: #666666; /* Dark grey */
+    }
 
 </style>
 </header>
-    <nav class="navbar">
-        <div id="close-navbar" class="fas fa-times"></div>
-        <a href="#home" style="text-decoration: none" onclick="closeNavbar()">home</a>
-        <a href="#shop" style="text-decoration: none" onclick="closeNavbar()">shop</a>
-        <a href="/aboutus" style="text-decoration: none" onclick="closeNavbar()">About us</a>
-        <a href="https://www.instagram.com/criodex.md/?theme=dark" style="text-decoration: none" onclick="closeNavbar()">Instagram</a>
-    </nav>
-<script>
-  function closeNavbar() {
-    var navbar = document.querySelector('.navbar');
-    navbar.classList.remove('active');
-  }
+<nav class="navbar">
+    <div class="close-button">
+        <svg xmlns="http://www.w3.org/2000/svg" style="padding-top: 0px; position: relative; top: 1.5px" width="10"
+             height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+        <span style="font-weight: 700">Close</span></div>
+    <br>
 
-  document.querySelector('#menu-btn').onclick = () => {
-    var navbar = document.querySelector('.navbar');
-    navbar.classList.toggle('active');
-  }
+    <!-- Search Form -->
+    <form action="/search" class="search-form" method="get">
+        <div class="search-container">
+            <input class="navbar-input" type="search" id="search-box"
+                   value="{% if search_text %}{{ search_text }}{% endif %}" placeholder="Search..." name="query"
+                   id="query" style="border: none">
+            <button type="submit" class="iul">
+                <label for="search-box" class="material-symbols-outlined"></label>
+                <svg xmlns="http://www.w3.org/2000/svg" style="color: grey;" width="16" height="16" fill="currentColor"
+                     class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+        </div>
+    </form>
 
-  document.querySelector('#close-navbar').onclick = () => {
-    var navbar = document.querySelector('.navbar');
-    navbar.classList.remove('active');
-  }
-</script>
+    <!-- Navigation Links -->
+    <a href="#home" onclick="closeNavbar()">Home</a>
+    <a href="#categories" class="categories-link" onclick="toggleCategories()">
+        <span>CATEGORIES</span>
+        <div class="arrow-button" style="padding-bottom: 7px;">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </a>
+    <ul class="categories-options"
+        style="width: 100%; padding-left: 0px; padding-right: 0px; margin-top: 0px; margin-bottom: 0px; padding-bottom: 0px; padding-top: 0px;">
+        <a href="{% url 'products-by-category' 'others' %}" class="box">
+            <li class="category-option" style="margin-top: -1rem; border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+                <img src="/static/images/category-1.png" alt="" width="20" height="20">
+                Others
+            </li>
+        </a>
+        <a href="{% url 'products-by-category' 'makeup' %}" class="box">
+            <li class="category-option" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+                <img src="/static/images/category-2.png" alt="" width="20" height="20">
+                makeup
+            </li>
+        </a>
+        <a href="{% url 'products-by-category' 'powder' %}" class="box">
+            <li class="category-option" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+                <img src="/static/images/category-3.png" alt="" width="20" height="20">
+                powder
+            </li>
+        </a>
+        <a href="{% url 'products-by-category' 'lotions' %}" class="box">
+            <li class="category-option" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+                <img src="/static/images/category-4.png" alt="" width="20" height="20">
+                lotions
+            </li>
+        </a>
+        <a href="{% url 'products-by-category' 'lipstick' %}" class="box">
+            <li class="category-option" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+                <img src="/static/images/category-5.png" alt="" width="20" height="20">
+                lipstick
+            </li>
+        </a>
+        <a href="{% url 'products-by-category' 'parfume' %}" class="box">
+            <li class="category-option" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+                <img src="/static/images/category-67.png" alt="" width="20" height="20">
+                Parfume
+            </li>
+        </a>
+    </ul>
+
+
+    <a href="#shop" onclick="closeNavbar()">Shop</a>
+    <a href="/aboutus" onclick="closeNavbar()">About Us</a>
+    <a href="https://www.instagram.com/criodex.md/?theme=dark" onclick="closeNavbar()">Instagram</a>
+    <a href="/customerlogin" style="text-decoration: none">
+        <i class="fa-regular fa-user" style="color: black; padding-right: 5px"></i> Login/Register
+    </a>
+</nav>
+
+
+<div class="overlay"></div>
+
 <style>
-   #close-navbar {
-    border-radius: 10px;
-  }
+    .fas.fa-search.fas3 {
+        color: #999999
+    }
 
-  .navbar {
-    text-decoration: none;
-    position: fixed;
-    top: 0;
-    left: -110%;
-    z-index: 1010;
-    height: 100%;
-    width: 100%;
-    background: url(../static/images/navbar-bg.png) no-repeat;
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-flow: column;
-    align-items: flex-end;
-    padding-right: 15%;
-    transition: left 0.8s ease-in-out; /* Added transition property */
-  }
+    .navbar span {
+        font-family: "League Spartan", Sans-serif;
+        letter-spacing: 0.5px;
+    }
 
-  .navbar.active {
-    left: 0;
-  }
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: -55%;
+        height: 100%;
+        width: 55%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-right: 0rem;
+        z-index: 1010;
+        border-top: 2px solid #ddd;
+        border-bottom: 2px solid #ddd;
+        transition: left 0.3s ease;
+        justify-content: initial;
+        padding-top: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-  .navbar #close-navbar {
-    position: absolute;
-    top: 3rem;
-    right: 3rem;
-    height: 5rem;
-    width: 5rem;
-    line-height: 5rem;
-    text-align: center;
-    background: #fff;
-    color: #222;
-    cursor: pointer;
-    font-size: 3rem;
-    transition: color 1s ease-in-out, background 1s ease-in-out; /* Added transition properties */
-  }
-
-  .navbar #close-navbar:hover {
-    color: #fff;
-    background: #e84393;
-  }
+    .navbar.active {
+        left: 0;
+    }
 
 
-.navbar a {
-  font-size: 4rem;
-  text-transform: uppercase;
-  color: #fff;
-  font-weight: lighter;
-}
+    .close-button {
+        font-family: 'Arial', sans-serif;
+        font-size: 1.2rem;
+        font-weight: lighter;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 999;
+    }
 
-.navbar a:hover {
-  color: #e84393;
-  letter-spacing: .2rem;
-}
+    .close-button span {
+        margin-right: 0.5rem;
+    }
 
 
+    body {
+        background-color: white;
+    }
+
+    .navbar a {
+        font-family: 'Arial', sans-serif;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 1);
+        text-align: left;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Adjusted border color and thickness */
+        width: 100%; /* Set width to 100% */
+        margin-top: 0;
+        padding-bottom: 17px;
+        padding-top: 10px;
+        padding-left: 20px;
+    }
+
+
+    .navbar.active {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+        display: none;
+        z-index: 1000;
+    }
+
+    .navbar.active + .overlay {
+        display: block;
+    }
+
+
+    @media only screen and (max-width: 768px) {
+        .fa-search {
+            font-size: 15px;
+        }
+
+
+    }
+
+    .categories-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    .categories-link .arrow-button {
+        width: 30px;
+        height: calc(100% - 2px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .categories-link .arrow-button i {
+        transition: transform 0.3s ease;
+    }
+
+    .categories-options {
+        display: none;
+        margin-top: 0.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .categories-options a {
+        font-size: 1.3rem;
+        margin-top: 0.3rem;
+        padding: 0.2rem 0;
+        color: rgba(0, 0, 0, 0.8);
+    }
+
+    .categories-link.active .arrow-button i {
+        transform: rotate(90deg);
+    }
+
+    .categories-link.active + .categories-options {
+        display: block;
+    }
+
+    .categories-options a {
+        font-size: 1.3rem;
+        margin-top: 0.3rem;
+        padding: 0.2rem 0;
+        color: rgba(0, 0, 0, 0.8);
+    }
+
+    .categories-link.active ~ .categories-options a {
+        font-size: 1.2rem;
+        margin-top: 0.2rem;
+        padding: 0.1rem 0;
+        color: gray;
+        letter-spacing: .1rem;
+        transition: color 0.3s ease, letter-spacing 0.3s ease;
+    }
+
+    .navbar a {
+        font-family: "League Spartan", Sans-serif;
+        letter-spacing: 0.5px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 1);
+        text-align: left;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Adjusted border color and thickness */
+        width: 100%; /* Set width to 100% */
+        margin-top: 0;
+        padding-bottom: 17px;
+        padding-top: 10px;
+        padding-left: 20px;
+        transition: background-color 0.3s ease, color 0.3s ease, margin-top 0.3s ease; /* Added transition for margin-top */
+    }
+
+    /* Additional styles for categories options */
+    .categories-options a {
+        font-size: 1.2rem;
+        margin-top: 0.2rem;
+        padding: 0.1rem 0;
+    }
+
+    .categories-link.active ~ .categories-options a {
+        font-size: 1.2rem;
+        margin-top: 0.2rem;
+        padding: 0.1rem 0;
+    }
+
+    .categories-link.active ~ .categories-options a:hover {
+        color: gray;
+        letter-spacing: .2rem;
+    }
+
+    .categories-link:not(.active) span {
+        color: black;
+        letter-spacing: initial;
+    }
+
+    .categories-link:not(.active) span {
+        transition: 0.3s ease;
+    }
+
+
+    /* For the list items  */
+    .categories-options ul {
+        width: 100%;
+    }
+
+    .categories-options li {
+        font-size: 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        width: 100%;
+        padding: 0.5rem 1rem;
+        height: 40px;
+        padding-bottom: 17px;
+        padding-top: 18px;
+        padding-left: 20px;
+        height: 55px;
+
+    }
+
+    .categories-options li:last-child {
+        border-bottom: none;
+    }
+
+    .categories-options {
+        max-height: 30px;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        font-size: 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        width: 100%;
+        padding: 0.5rem 1rem;
+
+
+    }
+
+    .categories-options.show {
+        max-height: 500px; /* Adjust the value based on the height of the list */
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .category-option {
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .categories-options.show .category-option {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.1s;
+    }
+
+
+</style>
+<script>
+    function toggleCategories() {
+        const categoriesLink = document.querySelector('.categories-link');
+        const categoriesOptions = document.querySelector('.categories-options');
+        const optionItems = document.querySelectorAll('.category-option');
+
+        categoriesLink.classList.toggle('active');
+        categoriesOptions.classList.toggle('show');
+
+        if (categoriesOptions.classList.contains('show')) {
+            optionItems.forEach((item, index) => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(-20px)';
+
+                setTimeout(() => {
+                    item.style.opacity = 1;
+                    item.style.transform = 'translateY(0)';
+                }, 100 * (index + 1));
+            });
+        } else {
+            optionItems.forEach((item) => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(-20px)';
+            });
+        }
+    }
+
+
+</script>
+
+<style>
+    .search-container {
+        display: flex;
+        align-items: center;
+        background-color: transparent;
+        height: 55px; /* Adjust the height value as desired */
+        flex: 1; /* Add this line to make the search container expand to fill available space */
+    }
+
+    .navbar-input {
+        flex: 1; /* Allow the input to grow and fill the remaining space */
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #000; /* Adjust the border color as desired */
+        width: 100%; /* Add this line to make the input occupy the full width */
+        padding-top: 20px;
+    }
 
     .iul {
-        background: #f5f5f5;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+
+    .search-form {
+        border-top: 1px solid #ccc; /* Adjust the border color as desired */
+        border-bottom: 1px solid #ccc; /* Adjust the border color as desired */
+        height: 65px; /* Adjust the height value as desired */
+        border-right: none;
+        border-left: none;
+        font-size: 1.7rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .search-form {
+        position: initial;
+        top: 20px; /* Adjust the top margin as desired */
+        left: 0;
+        width: 100%;
+    }
+
+    .fas.fa-search {
+        font-size: 20px; /* Adjust the font weight to make it thinner */
+        background-color: transparent;
+        padding-right: 6px;
+    }
+
+    .iul {
+        background-color: transparent;
+        padding-right: 10px;
+        padding-top: 6px;
+        font-size: 1.5rem;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .fa-search {
+            font-size: 15px;
+        }
+
+    }
+</style>
+
+<script>
+    function closeNavbar() {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.remove('active');
+    }
+
+    document.querySelector('#menu-btn').onclick = () => {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.add('active');
+    }
+
+    document.querySelector('.close-button').onclick = () => {
+        var navbar = document.querySelector('.navbar');
+        navbar.classList.remove('active');
+    }
+</script>
+
+
+<style>
+    .navbar {
+        background-image: none;
     }
 
     .fa-search {
         background: #f5f5f5;
     }
 
-    a.fas1 {
-        margin-right: 7rem;
-        font-size: 20px;
-        color: hotpink;
-    }
 
     .marla {
         margin-right: 100px;
     }
 
-    .header .search-form {
+    .header {
         width: 30%;
     }
 
     .navbar-input {
         width: 100%;
+        padding-left: 20px;
     }
 
     @media only screen and (max-width: 768px) {
@@ -574,19 +987,13 @@
             padding-left: 0px;
         }
 
-        .search-form {
-            height: 36px;
-        }
 
         .fa-search {
             background: white;
         }
 
-        .iul {
-            background: white;
-        }
 
-        .header .search-form {
+        .header {
             display: block;
             top: 0%;
             position: relative;
@@ -596,19 +1003,13 @@
 
         .navbar-input {
             width: 72px;
+            padding-left: 20px;
         }
 
-        .search-form {
-            width: 120px;
-        }
-
-        .search-form {
-            display: block;
-        }
 
         /* Design parameters */
-        .header .search-form {
-            background-color: #ffffff;
+        .header {
+            background-color: white;
             border: none;
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
             padding: 5px;
@@ -620,7 +1021,6 @@
         .navbar-input {
             font-size: 14px;
             color: #666666;
-            padding: 5px;
             border: none;
             outline: none;
             width: 100%;
@@ -635,11 +1035,6 @@
             margin-right: 0rem;
         }
 
-        .search-form {
-            width: 160px;
-            height: 36px;
-
-        }
 
         .navbar-input {
             height: 30px;
@@ -693,18 +1088,24 @@
         padding: 2.5rem 1rem;
     }
 
-    .logo img {
-        height: 6.6rem;
-    }
 
     .header {
         margin-right: 0px;
         margin-left: 0px;
         position: initial;
     }
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        box-shadow: none; /* Add this line to remove the box shadow */
+        background-color: white;;
+    }
+
 </style>
-
-
+<br><br>
 <!-- navbar section  -->
 
 <script>

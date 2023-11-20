@@ -8,6 +8,14 @@
 
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+        <link rel="stylesheet" href="path/to/owl.carousel.min.css">
+        <link rel="stylesheet" href="path/to/owl.theme.default.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+        <!-- Owl Carousel JavaScript -->
+        <script src="path/to/owl.carousel.min.js"></script>
 
         <!-- custom css file link  -->
         <link rel="stylesheet" href="../../static/css/style.css?v=13">
@@ -867,81 +875,249 @@
 
         /* Desktop view */
 
+        html {
+            background-color: white;
+        }
 
+        body {
+            background-color: white;
+        }
     </style>
     <body>
 
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <style>
+
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            margin-left: 6px;
+            margin-right: 6px;
+            background-color: #f4f4f4;
+        }
+
+        .product-image {
+            width: 150px; /* Adjust the width as desired */
+            height: 158px; /* Increase the height by 40% */
+            object-fit: cover;
+        }
+
+        .product-name {
+            margin-top: 15px; /* Increase the margin as desired */
+            font-weight: 700; /* Set the font weight to 700 for slightly smaller */
+            font-size: 18px; /* Adjust the font size as desired */
+            font-family: 'League Spartan', sans-serif; /* Use the 'League Spartan' font */
+        }
+
+        .product-price {
+            margin-top: 15px; /* Adjust the margin as desired */
+            font-size: 14px; /* Adjust the font size as desired */
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .add-to-cart-button {
+            margin-top: auto; /* Push the button to the bottom */
+            width: 70%; /* Adjust the width as desired */
+            padding: fpx 16px; /* Adjust the padding as desired */
+            background-color: black; /* Set the background color as transparent */
+            color: white;
+            text-decoration: none;
+            border: 2px solid #000; /* Add a slightly visible black border */
+            font-size: 14px; /* Adjust the font size as desired */
+            font-family: 'League Spartan', sans-serif; /* Use the 'League Spartan' font */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition properties for animation */
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #000; /* Change the hover background color to black */
+            color: #fff; /* Change the text color to white */
+            transform: scale(1.05); /* Add a scale transform on hover for animation */
+        }
+
+        .cart-item {
+            width: 150px; /* Same as product image width */
+            height: 100%; /* Full height of product card */
+            background-color: transparent; /* Set the background color for cart item */
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 3px;
+        }
+
+
+                @media only screen and (max-width: 768px){
+            .product-card{
+                width: 157px;
+            }
+        }
+
+    </style>
+
+
+    <div style="padding-bottom: 20px; padding-left: 15px; margin-left: auto; padding-right: 15px"> Shop our Featured Products: </div>
+    <div class="owl-carousel owl-theme" id="product-carousel">
+        {% for p in products %}
+            <div class="product-card">
+                <img class="product-image" src="{% static p.product_image.url %}" alt="product pic">
+                <h3 class="product-name">{{ p.name }}</h3> <!-- Display the product name -->
+                <span class="product-price">${{ p.price }}</span>
+                <a class="add-to-cart-button" href="{% url 'add-to-cart' p.id %}">
+                    Add to Cart
+                </a>
+                <div class="cart-item"></div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+<script>
+  const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
+
+  addToCartButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const cartItem = button.nextElementSibling;
+      button.innerHTML = '<i class="fas fa-shopping-cart" style="text-decoration: none"></i> <span style="text-decoration: none">+1</span>';
+      button.style.backgroundColor = '#f4f4f4';
+      button.style.color = '#000';
+      button.style.textDecoration = 'none'; // Remove underline from button
+      button.style.transform = 'translateX(10px)';
+      setTimeout(() => {
+        button.innerHTML = 'Add To Cart';
+        button.style.backgroundColor = 'white';
+        button.style.color = '#000';
+        button.style.textDecoration = 'none'; // Remove underline from button
+        button.style.transform = 'translateX(0)';
+      }, 800);
+    });
+  });
+</script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#product-carousel").owlCarousel({
+                items: 2, // Display 2 items at once
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 2.5,
+                        margin: 25
+                    },
+                    480: {
+                        items: 2
+                    },
+                    768: {
+                        items: 3
+                    },
+                    1200: {
+                        items: 4
+                    }
+                }
+            });
+        });
+    </script>
+
+
     <!-- products data end -->
-<section id="shop" class="sfam">
-</section>
-{% if products %}
-  <h3 class="section-title">{{ word }}</h3>
-  <div class="card-container">
-    {% for p in products %}
-      <div class="card">
-        <div class="card-image">
-          <img src="{% static p.product_image.url %}" alt="product pic">
+    <section id="shop" class="sfam">
+   <p class="main-heading" style="color: black; -webkit-text-fill-color: black; letter-spacing: -3px; word-spacing: 0em; text-transform: none; font-size: 35px; line-height: 0.95em"> we make everything better</p>
+
+
+    <style>
+    </style>
+    </section>
+    {% if products %}
+        <h3 class="section-title">{{ word }}</h3>
+        <div class="card-container">
+            {% for p in products %}
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{% static p.product_image.url %}" alt="product pic">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">{{ p.name }}</h3>
+                        <p class="card-description">{{ p.description }}</p>
+                        <div class="card-price">
+                            <span class="price">${{ p.price }}</span>
+                            {% if request.user.is_authenticated %}
+                                <a class="btn-add-to-cart" href="{% url 'add-to-cart' p.id %}">
+                            {% else %}
+                                <a class="btn-add-to-cart" href="{% url 'add-to-cart' p.id %}">
+                            {% endif %}
+                            <i class="fa fa-shopping-cart"></i> Add to cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:"4" %}
+                    <div class="break"></div>
+                {% endif %}
+            {% endfor %}
         </div>
-        <div class="card-info">
-          <h3 class="card-title">{{ p.name }}</h3>
-          <p class="card-description">{{ p.description }}</p>
-          <div class="card-price">
-            <span class="price">${{ p.price }}</span>
-            {% if request.user.is_authenticated %}
-              <a class="btn-add-to-cart" href="{% url 'add-to-cart' p.id %}">
-            {% else %}
-              <a class="btn-add-to-cart" href="{% url 'add-to-cart' p.id %}">
-            {% endif %}
-              <i class="fa fa-shopping-cart"></i> Add to cart
-            </a>
-          </div>
-        </div>
-      </div>
-      {% if forloop.counter|divisibleby:"4" %}
-        <div class="break"></div>
-      {% endif %}
-    {% endfor %}
-  </div>
 
-<style>
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1900px; /* make the container wider */
-    margin: 0 auto; /* center the container */
-      background-color: whitesmoke;
-  }
-    html{
-        background-color: whitesmoke;
-    }
-  .card {
-    width: calc(25% - 20px);
-    margin-bottom: 40px;
-    max-width: 380px; /* make the card wider */
-  }
+        <style>
+            .card-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                max-width: 1900px; /* make the container wider */
+                margin: 0 auto; /* center the container */
+                background-color: whitesmoke;
+            }
 
-  @media (max-width: 767px) {
-    .card {
-      width: 100%;
-    }
-  }
+            html {
+                background-color: white;
+            }
 
-  .break {
-    flex-basis: 100%;
-    height: 0;
-  }
-  .icons a{
-    text-decoration: none;
-}
+            .card {
+                width: calc(25% - 20px);
+                margin-bottom: 40px;
+                max-width: 380px; /* make the card wider */
+            }
 
-</style>
+            @media (max-width: 767px) {
+                .card {
+                    width: 100%;
+                }
+            }
 
-{% else %}
-  <h3 class="section-title" style="text-align:center; color:#3E454C;">No Search Found</h3>
-{% endif %}
+            .break {
+                flex-basis: 100%;
+                height: 0;
+            }
+
+            .icons a {
+                text-decoration: none;
+            }
+
+        </style>
+
+    {% else %}
+        <h3 class="section-title" style="text-align:center; color:#3E454C;">No Search Found</h3>
+    {% endif %}
 
     </body>
     </html>
@@ -950,43 +1126,45 @@
 
     </script>
     <br>
-<style>
-#ro:hover{
-    background-color: pink;
-    color: whitesmoke;
+    <style>
+        #ro:hover {
+            background-color: pink;
+            color: whitesmoke;
 
-}
-.link{
-    text-decoration: none;
-}
-      .btn-add-to-cart:hover {
+        }
+
+        .link {
+            text-decoration: none;
+        }
+
+        .btn-add-to-cart:hover {
             background-color: #ff5252;
             color: white;
             border-color: #3E454C;
         }
 
-</style>
+    </style>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        var isNavbarActive = sessionStorage.getItem('navbarActive');
+        document.addEventListener('DOMContentLoaded', () => {
+            var isNavbarActive = sessionStorage.getItem('navbarActive');
 
-        if (!isNavbarActive) {
-            setTimeout(() => {
-                var navbar = document.querySelector('.navbar');
-                navbar.classList.add('active');
-                sessionStorage.setItem('navbarActive', true);
-            }, 1100); // Delay in milliseconds (1,5 second)
+            if (!isNavbarActive) {
+                setTimeout(() => {
+                    var navbar = document.querySelector('.navbar');
+                    navbar.classList.add('active');
+                    sessionStorage.setItem('navbarActive', true);
+                }, 1100); // Delay in milliseconds (1,5 second)
+            }
+        });
+
+        document.querySelector('#menu-btn').onclick = () => {
+            var navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('active');
         }
-    });
 
-    document.querySelector('#menu-btn').onclick = () => {
-        var navbar = document.querySelector('.navbar');
-        navbar.classList.toggle('active');
-    }
-
-    document.querySelector('#close-navbar').onclick = () => {
-        var navbar = document.querySelector('.navbar');
-        navbar.classList.remove('active');
-    }
+        document.querySelector('#close-navbar').onclick = () => {
+            var navbar = document.querySelector('.navbar');
+            navbar.classList.remove('active');
+        }
     </script>
 {% endblock content %}

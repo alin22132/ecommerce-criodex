@@ -18,6 +18,7 @@ html {
   overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+  background-color: white;
 }
 
 html::-webkit-scrollbar {
@@ -167,7 +168,7 @@ section {
   border-radius: .5rem;
 }
 
-.header .icons a:hover,
+.header .icons,
 .header .icons div:hover {
   background: #e84393;
   color: #fff;
@@ -221,10 +222,6 @@ section {
   font-size: 3rem;
 }
 
-.navbar #close-navbar:hover {
-  color: #fff;
-  background: #e84393;
-}
 
 .navbar a {
   font-size: 4rem;
@@ -234,8 +231,8 @@ section {
 }
 
 .navbar a:hover {
-  color: #e84393;
-  letter-spacing: .2rem;
+  color: rgba(0,0,0,0.7);
+  letter-spacing: .1rem;
 }
 
 .home {
